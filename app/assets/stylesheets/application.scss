@@ -13,8 +13,16 @@
  */
 
 // Custom bootstrap variables must be set or imported *before* bootstrap.
- @import "bootstrap";
+@import "bootstrap";
 
- .page-content {
+.page-content {
    margin: 10px 25px;
- }
+}
+
+.container {
+   display: flex;
+}
+
+.col-6 {
+  align-content: center;
+}
