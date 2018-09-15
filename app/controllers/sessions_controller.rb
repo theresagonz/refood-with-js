@@ -4,7 +4,6 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: params[:email])
-    binding.pry
     if !user
       flash[:error] = "Email not found. Please try again."
       render :new

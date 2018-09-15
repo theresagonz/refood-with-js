@@ -6,12 +6,14 @@ class UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
   end
 
   def create
     user = User.new(user_params)
-    if user.save
+    if user.valid?
+      user.build_giver
+      user.build_receiver
+      user.save
       redirect_to '/index'
     else
       flash[:error] = user.errors.full_messages.uniq
