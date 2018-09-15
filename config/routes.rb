@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
+  get '/index' => 'users#show'
   get 'sessions/destroy'
   get 'welcome/home'
   resources :offers
