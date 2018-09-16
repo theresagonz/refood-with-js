@@ -30,13 +30,14 @@ class OffersController < ApplicationController
       redirect_to offer_path(offer)
     else
       flash[:error] = offer.errors.full_messages
-      binding.pry
       @offer = Offer.find_by(id: params[:id])
       render :edit
     end
   end
 
   def destroy
+    Offer.find_by(id: params[:id]).delete
+    redirect_to index_path
   end
 
   private
