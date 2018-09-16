@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController
-  layout "welcome"
+  layout "application_login_link"
 
   def home
   end

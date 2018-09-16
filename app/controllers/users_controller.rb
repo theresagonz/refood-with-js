@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  layout "application_no_login_link", only: [:new]
+  before_action :require_login, only: [:show]
+
   def index
   end
     

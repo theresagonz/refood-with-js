@@ -1,1 +1,8 @@
 <h1>Welcome <%= current_user.name %>!</h1>
+
+<h3><%= link_to "Offer extra food", new_offer_path %></h3>
+
+<%= link_to "Find food", offers_path %>
+<h3>Current offers</h3>
+
+<h3>Expired offers</h3>
