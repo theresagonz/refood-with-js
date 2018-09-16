@@ -38,6 +38,12 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'bootstrap', '~> 4.0.0'
 
+gem 'momentjs-rails', '~> 2.20.1'
+
+gem 'bootstrap4-datetime-picker-rails'
+
+gem 'jquery-rails', '~> 4.2.0'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

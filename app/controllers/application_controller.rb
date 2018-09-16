@@ -9,8 +9,6 @@ class ApplicationController < ActionController::Base
   def require_login
     redirect_to login_path if !session[:user_id]
   end
-
-  
   
   helper_method :current_user, :require_login
 end
