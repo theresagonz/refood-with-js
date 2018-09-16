@@ -7,3 +7,5 @@
   <li>Expiration: <%= @offer.expiration %></li>
   <li>Fulfilled: <%= @offer.fulfilled ? "yes" : "no" %>
 </ul>
+
+<%= button_to "Edit offer", edit_offer_path(@offer), class: "btn btn-primary", method: "get" %>
