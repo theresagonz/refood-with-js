@@ -1,14 +1,24 @@
+<% if flash[:error] %>
+  <% flash[:error].each do |error| %>
+    <div class="alert alert-danger">
+      <%= error %>
+    </div>
+  <% end %>
+<% end %>
+
 <h1>Make a Request</h1>
 <h3><%= link_to @offer.title, offer_path(@offer) %></h3>
-<h5>From: <%= @offer.giver.user.name %></h5>
-<p>Pick up by: <%= format_date(@offer.expiration) %></p>
+<h6>Pick up by: <%= format_date(@offer.expiration) %></h6>
+<h6>From: <%= @offer.giver.user.name %></h6>
+
+<br>
 
 <%= form_tag "/offers/#{@offer.id}/requests" do %>
   <div class="form-group">
     <%= text_area_tag 'request[message]', '', class: 'form-control', placeholder: 'Provide a message about when you can pick up or ask a question' %>
   </div>
 
-  <p>Contact me at:</p>
+  <p>Contact me at (at least one is required):</p>
   <div class='form-group'>
     <%= label_tag :email %>
     <%= text_field_tag 'request[receiver_email]', current_user.email, class: 'form-control' %>

@@ -1,2 +1,24 @@
-<h1>Requests#show</h1>
-<p>Find me in app/views/requests/show.html.erb</p>
+<% if flash[:error] %>
+  <%= flash[:error].each do |error| %>
+    <div class="alert alert-danger">
+      <%= error %>
+    </div>
+  <% end %>
+<% end %>
+
+
+<h1>Request</h1>
+<h3><%= link_to @offer.title, offer_path(@offer) %></h3>
+<h5>From: <%= @offer.giver.user.name %></h5>
+<p>Pick up by: <%= format_date(@offer.expiration) %></p>
+<br>
+<h3>Request by: <%= @request.receiver.user.name %></h3>
+<ul>
+  <li>Message: <%= @request.message %></li>
+  <% if @request.receiver_email.present? %>
+    <li>Email: <%= @request.receiver_email %></li>
+  <% end %>
+  <% if @request.receiver_phone.present? %>
+    <li>Phone: <%= @request.receiver_phone %></li>
+  <% end %>
+</ul>

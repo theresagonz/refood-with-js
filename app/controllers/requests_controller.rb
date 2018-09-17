@@ -7,12 +7,20 @@ class RequestsController < ApplicationController
     request = Request.new(request_params)
     request.offer_id = params[:offer_id]
     request.receiver_id = current_user.id
-    request.save
-    offer = Offer.find(params[:offer_id])
-    redirect_to offer_request_path(offer, request)
+    
+    if request.save
+      offer = Offer.find(params[:offer_id])
+      redirect_to offer_request_path(offer, request)
+    else
+      flash[:error] = request.errors.full_messages
+      @offer = Offer.find_by(id: params[:offer_id])
+      render :new
+    end
   end
 
   def show
+    @offer = Offer.find_by(id: params[:offer_id])
+    @request = Request.find_by(id: params[:id])
   end
 
   def index
