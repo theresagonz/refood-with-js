@@ -11,3 +11,6 @@
 <%= button_to "Edit offer", edit_offer_path(@offer), class: "btn btn-primary", method: "get" %>
 
 <%= button_to "Delete offer", offer_path(@offer),method: "delete", class: "btn btn-danger", data: { confirm: "Are you sure you want to delete this offer?"} %>
+
+
+<%= button_to "Make request", new_offer_request_path(@offer), method: "get", class: "btn btn-success" %>

@@ -1,2 +1,22 @@
 <h1>Make a Request</h1>
-<p>Find me in app/views/requests/new.html.erb</p>
+<h3><%= link_to @offer.title, offer_path(@offer) %></h3>
+<h5>From: <%= @offer.giver.user.name %></h5>
+<p>Pick up by: <%= format_date(@offer.expiration) %></p>
+
+<%= form_tag "/offers/#{@offer.id}/requests" do %>
+  <div class="form-group">
+    <%= text_area_tag 'request[message]', '', class: 'form-control', placeholder: 'Provide a message about when you can pick up or ask a question' %>
+  </div>
+
+  <p>Contact me at:</p>
+  <div class='form-group'>
+    <%= label_tag :email %>
+    <%= text_field_tag 'request[receiver_email]', current_user.email, class: 'form-control' %>
+  </div>
+  <div class='form-group'>
+    <%= label_tag :phone %>
+    <%= text_field_tag 'request[receiver_phone]', current_user.phone, class: 'form-control' %>
+  </div>
+  <%= hidden_field_tag :offer_id %>
+  <%= submit_tag "Submit request", class: "btn btn-primary" %>
+<% end %>

@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 2018_09_15_151021) do
     t.integer "offer_id"
     t.integer "receiver_id"
     t.text "message"
+    t.string "receiver_email"
+    t.string "receiver_phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
