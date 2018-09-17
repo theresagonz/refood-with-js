@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_16_212220) do
+ActiveRecord::Schema.define(version: 2018_09_15_151021) do
 
   create_table "givers", force: :cascade do |t|
     t.integer "user_id"
@@ -29,21 +29,23 @@ ActiveRecord::Schema.define(version: 2018_09_16_212220) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "offers_receivers", force: :cascade do |t|
-    t.integer "offer_id"
-    t.integer "receiver_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "receivers", force: :cascade do |t|
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "requests", force: :cascade do |t|
+    t.integer "offer_id"
+    t.integer "receiver_id"
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
+    t.string "username"
     t.string "password_digest"
     t.string "type"
     t.string "name"
@@ -55,6 +57,7 @@ ActiveRecord::Schema.define(version: 2018_09_16_212220) do
     t.integer "zip_code"
     t.string "phone"
     t.boolean "show_address"
+    t.boolean "show_phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

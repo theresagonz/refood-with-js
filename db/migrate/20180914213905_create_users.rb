@@ -2,6 +2,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :users do |t|
       t.string :email
+      t.string :username
       t.string :password_digest
       t.string :type
       t.string :name
@@ -13,6 +14,7 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.integer :zip_code
       t.string :phone
       t.boolean :show_address
+      t.boolean :show_phone
 
       t.timestamps
     end

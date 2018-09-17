@@ -5,7 +5,7 @@ class CreateOffers < ActiveRecord::Migration[5.2]
       t.string :title
       t.text :description
       t.string :availability
-      t.datetime :expiration
+      t.string :expiration
       t.boolean :fulfilled
 
       t.timestamps

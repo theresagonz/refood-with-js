@@ -4,8 +4,6 @@ class OffersController < ApplicationController
   end
 
   def create
-    binding.pry
-
     offer = current_user.giver.offers.build(offer_params)
     if offer.save
       redirect_to offer_path(offer)

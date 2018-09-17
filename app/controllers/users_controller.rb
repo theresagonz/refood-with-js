@@ -17,6 +17,8 @@ class UsersController < ApplicationController
       user.build_giver
       user.build_receiver
       user.save
+
+      session[:user_id] = user.id
       redirect_to '/index'
     else
       flash[:error] = user.errors.full_messages.uniq
@@ -36,6 +38,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :name, :zip_code, :password, :password_confirmation)
+    params.require(:user).permit(:email, :name, :username, :zip_code, :password, :password_confirmation)
   end
 end

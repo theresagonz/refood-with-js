@@ -5,6 +5,7 @@
   <li>Availability: <%= @offer.availability %></li>
   <li>Expiration: <%= @expiration %></li>
   <li>Fulfilled: <%= @offer.fulfilled ? "yes" : "no" %>
+  <li>User: <%= @offer.giver.user.name %></li>
 </ul>
 
 <%= button_to "Edit offer", edit_offer_path(@offer), class: "btn btn-primary", method: "get" %>
