@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
   def require_login
     redirect_to login_path if !session[:user_id]
   end
+
+  def format_date(string)
+    Time.strptime(string, '%m/%d/%Y %H:%M %p').strftime("%A, %B %d, %Y, %l:%M %P")
+  end
   
-  helper_method :current_user, :require_login
+  helper_method :current_user, :require_login, :format_date
 end

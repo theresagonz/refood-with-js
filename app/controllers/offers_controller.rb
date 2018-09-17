@@ -5,7 +5,7 @@ class OffersController < ApplicationController
 
   def create
     binding.pry
-    
+
     offer = current_user.giver.offers.build(offer_params)
     if offer.save
       redirect_to offer_path(offer)
@@ -21,6 +21,7 @@ class OffersController < ApplicationController
     
   def show
     @offer = Offer.find_by(id: params[:id])
+    @expiration = format_date(@offer.expiration)
   end
 
   def edit
