@@ -8,6 +8,7 @@ class RequestsController < ApplicationController
   def create
     request = Request.new(request_params)
     request.offer_id = params[:offer_id]
+    request.receiver = current_user.receiver
 
     if request.save
       offer = Offer.find(params[:offer_id])

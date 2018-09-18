@@ -7,5 +7,7 @@ class WelcomeController < ApplicationController
   end
 
   def index
+    @offers = current_user.giver.offers
+    @requests = current_user.receiver.requests
   end
 end
