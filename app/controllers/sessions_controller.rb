@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   layout "application_no_login_link"
+  before_action :require_login, only: [:destroy]
   
   def new
   end

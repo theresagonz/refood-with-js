@@ -5,14 +5,21 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
+
+  def logged_in
+    !!session[:user_id]
+  end
   
   def require_login
-    redirect_to login_path if !session[:user_id]
+    if !logged_in
+      flash[:error] = ["Please sign up or log in"]
+      redirect_to signup_path if !logged_in
+    end
   end
 
   def format_date(string)
     Time.strptime(string, '%m/%d/%Y %H:%M %p').strftime("%A, %B %d, %Y, %l:%M %P")
   end
   
-  helper_method :current_user, :require_login, :format_date
+  helper_method :current_user, :logged_in, :require_login, :format_date
 end

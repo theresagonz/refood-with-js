@@ -1,4 +1,6 @@
 class OffersController < ApplicationController
+  before_action :require_login
+
   def new
     @offer = Offer.new
   end

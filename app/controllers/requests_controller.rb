@@ -1,4 +1,6 @@
 class RequestsController < ApplicationController
+  before_action :require_login
+
   def new
     @offer = Offer.find_by(id: params[:offer_id])
   end
