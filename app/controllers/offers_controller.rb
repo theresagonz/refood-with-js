@@ -1,5 +1,6 @@
 class OffersController < ApplicationController
   before_action :require_login
+  before_action :redirect_to_index_if_not_authorized, only: [:edit, :update, :destroy]
 
   def new
     @offer = Offer.new

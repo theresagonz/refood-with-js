@@ -1,3 +1,11 @@
+<% if flash[:error] %>
+  <% flash[:error].each do |error| %>
+    <div class="alert alert-danger">
+      <%= error %>
+    </div>
+  <% end %>
+<% end %>
+
 <h1><%= @offer.title %></h1>
 
 <ul>

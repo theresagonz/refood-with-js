@@ -17,8 +17,8 @@ users.each do |user|
   new_user.save
 end
 
-new_offer = User.first.giver.offers.build(title: "Box of apples from my orchard", description: "Around 20 fuji apples in a box", availability: "Arrange for pickup anytime this weekend", expiration: "12/25/2018 1:30 PM")
+new_offer = User.first.giver.offers.build(title: "Box of apples", description: "Around 20 fuji apples in a box from my apple tree", availability: "Arrange for pickup anytime this weekend", expiration: "12/25/2018 1:30 PM")
 new_offer.save
 
-new_request = User.last.receiver.requests.build(message: "I can pick up around 4:30!")
+new_request = User.last.receiver.requests.build(offer_id: message: "I can pick up around 4:30!", receiver_email: "sue@sue.com")
 new_request.save

@@ -1,10 +1,11 @@
-<h1>Welcome <%= current_user.name %>!</h1>
+<% if flash[:error] %>
+  <% flash[:error].each do |error| %>
+    <div class="alert alert-danger">
+      <%= error %>
+    </div>
+  <% end %>
+<% end %>
 
-<h3><%= link_to "Offer extra food", new_offer_path %></h3>
+<h3><%= link_to "Create new food offer", new_offer_path %></h3>
 
 <h3><%= link_to "Find food", offers_path %></h3>
-<br>
-<br>
-<h3>Open offers</h3>
-
-<h3>Expired offers</h3>

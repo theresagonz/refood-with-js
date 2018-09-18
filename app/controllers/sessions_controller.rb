@@ -1,7 +1,8 @@
 class SessionsController < ApplicationController
   layout "application_no_login_link"
   before_action :require_login, only: [:destroy]
-  
+  before_action :redirect_to_index_if_logged_in, only: [:new, :create]
+
   def new
   end
 

@@ -17,6 +17,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def redirect_to_index_if_not_authorized
+    if params[:offer_id] != current_user.id
+      flash[:error] = ["Hey, that's not your offer"]
+      redirect_to index_path
+    end
+  end
+
+  def redirect_to_index_if_logged_in
+    if logged_in
+      redirect_to index_path
+    end
+  end
+
   def format_date(string)
     Time.strptime(string, '%m/%d/%Y %H:%M %p').strftime("%A, %B %d, %Y, %l:%M %P")
   end
