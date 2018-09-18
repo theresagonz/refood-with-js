@@ -6,6 +6,12 @@
   <% end %>
 <% end %>
 
+<% if flash[:message] %>
+  <div class="alert alert-success">
+    <%= flash[:message] %>
+  </div>
+<% end %>
+
 <h3><%= link_to "Create new food offer", new_offer_path %></h3>
 
 <h3><%= link_to "Find food", offers_path %></h3>

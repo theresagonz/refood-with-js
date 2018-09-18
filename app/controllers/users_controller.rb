@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   end
 
   def new
+    @user = User.new
   end
 
   def create
@@ -28,9 +29,18 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find_by(id: params[:id])
   end
 
   def update
+    @user = User.find_by(id: params[:id])
+    if @user.update(user_params)
+      flash[:message] = "Profile successfully updated"
+      redirect_to '/index'
+    else
+      flash[:error] = @user.errors.full_messages
+      render 'edit'
+    end
   end
 
   def destroy
@@ -39,6 +49,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:email, :name, :username, :zip_code, :password, :password_confirmation)
+    params.require(:user).permit(:email, :name, :username, :address, :address2, :city, :state, :zip_code, :phone, :password, :password_confirmation)
   end
 end
