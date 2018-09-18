@@ -7,7 +7,7 @@ class RequestsController < ApplicationController
     request = Request.new(request_params)
     request.offer_id = params[:offer_id]
     request.receiver_id = current_user.id
-    
+
     if request.save
       offer = Offer.find(params[:offer_id])
       redirect_to offer_request_path(offer, request)
@@ -24,6 +24,8 @@ class RequestsController < ApplicationController
   end
 
   def index
+    @offer = Offer.find_by(id: params[:offer_id])
+    @requests = Request.where("offer_id = ?", params[:offer_id])
   end
 
   def edit
