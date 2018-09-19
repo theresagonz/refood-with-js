@@ -9,11 +9,14 @@ Rails.application.routes.draw do
   delete '/logout' => 'sessions#destroy'
   
   get '/index' => 'welcome#index'
+
+  get '/auth/google_oauth2/callback' => 'sessions#create_with_google'
+
   
   resources :offers do
     resources :requests
   end
-  
+
   resources :users
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

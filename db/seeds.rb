@@ -20,5 +20,6 @@ end
 new_offer = User.first.giver.offers.build(title: "Box of apples", description: "Around 20 fuji apples in a box from my apple tree", availability: "Arrange for pickup anytime this weekend", expiration: "12/25/2018 1:30 PM")
 new_offer.save
 
-new_request = User.last.receiver.requests.build(offer_id: message: "I can pick up around 4:30!", receiver_email: "sue@sue.com")
+new_request = User.last.receiver.requests.build(message: "I can pick up around 4:30!", receiver_email: "sue@sue.com")
+new_request.offer_id = new_offer.id
 new_request.save

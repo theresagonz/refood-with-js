@@ -9,8 +9,6 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  # validates :phone, 
-  validates :zip_code, presence: true, length: { is: 5 }
   validates :password, presence: true, allow_nil: true
   validates :password_confirmation, presence: true, allow_nil: true
 
