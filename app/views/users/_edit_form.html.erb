@@ -1,27 +1,39 @@
 <%= form_for @user do |f| %>
-  <div class="form-group">
-    <%= f.text_field :email, class: "form-control", placeholder: "Email" %>
-  </div>
-    <div class="form-group">
-    <%= f.text_field :name,  class: "form-control", placeholder: "Display name" %>
-  </div>
-    <div class="form-group">
-    <%= f.text_field :address, class: "form-control", placeholder: "Address" %>
-  </div>
-  <div class="form-group">
-    <%= f.text_field :address2, class: "form-control", placeholder: "Address Line 2" %>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= f.label :name, "Display name" %>
+      <%= f.text_field :name,  class: "form-control" %>
+    </div>
+    <div class="form-group col-md-6">
+      <%= f.label :email %>
+      <%= f.text_field :email, class: "form-control" %>
+    </div>
   </div>
   <div class="form-group">
-    <%= f.text_field :city, class: "form-control", placeholder: "City" %>
-  </div>
-  <div>
-    <%= f.select :state, us_states %>
+    <%= f.label :phone_number %>
+    <%= f.text_field :phone, class: "form-control", autofocus: true %>
   </div>
   <div class="form-group">
-    <%= f.text_field :zip_code, class: "form-control", placeholder: "Zip code" %>
+    <%= f.label :address %>
+    <%= f.text_field :address, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.text_field :phone, class: "form-control", placeholder: "Phone number" %>
+    <%= f.label :address2, "Address line 2" %>
+    <%= f.text_field :address2, class: "form-control" %>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <%= f.label :city %>
+      <%= f.text_field :city, class: "form-control" %>
+    </div>
+    <div class="form-group col-md-3">
+      <%= f.label :state %>
+      <%= f.select :state, us_states, {}, {class: "form-control"} %>
+    </div>
+    <div class="form-group col-md-3">
+      <%= f.label :zip_code %>
+      <%= f.text_field :zip_code, class: "form-control" %>
+    </div>
   </div>
   <%= f.submit "Update profile", class: "btn btn-primary" %>
 <% end %>
