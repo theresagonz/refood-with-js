@@ -11,7 +11,7 @@ class OffersController < ApplicationController
     if offer.save
       redirect_to offer_path(offer)
     else
-      flash[:error] = user.errors.full_messages
+      flash.now[:error] = user.errors.full_messages
       render :new
     end
   end
@@ -35,7 +35,7 @@ class OffersController < ApplicationController
     if offer.save
       redirect_to offer_path(offer)
     else
-      flash[:error] = offer.errors.full_messages
+      flash.now[:error] = offer.errors.full_messages
       @offer = Offer.find_by(id: params[:id])
       render :edit
     end

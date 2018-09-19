@@ -1,10 +1,4 @@
-<% if flash[:error] %>
-  <% flash[:error].each do |error| %>
-    <div class="alert alert-danger">
-      <%= error %>
-    </div>
-  <% end %>
-<% end %>
+<%= render 'layouts/flash_error' %>
 
 <h1>Make a Request</h1>
 <h3><%= link_to @offer.title, offer_path(@offer) %></h3>

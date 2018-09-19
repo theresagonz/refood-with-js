@@ -14,7 +14,7 @@ class RequestsController < ApplicationController
       offer = Offer.find(params[:offer_id])
       redirect_to offer_request_path(offer, request)
     else
-      flash[:error] = request.errors.full_messages
+      flash.now[:error] = request.errors.full_messages
       @offer = Offer.find_by(id: params[:offer_id])
       render :new
     end

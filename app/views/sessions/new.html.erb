@@ -1,8 +1,4 @@
-<% if flash[:error] %>
-  <div class="alert alert-danger">
-    <%= flash[:error] %>
-  </div>
-<% end %>
+<%= render 'layouts/flash_error' %>
 
 <h1>Log In</h1>
 

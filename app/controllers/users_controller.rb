@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  layout "application_no_login_link", only: [:new]
+  layout "application_no_login_link", only: [:new, :create]
   before_action :require_login, except: [:new, :create]
   before_action :redirect_to_index_if_logged_in, only: [:new, :create]
 
@@ -23,7 +23,8 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect_to '/index'
     else
-      flash[:error] = user.errors.full_messages.uniq
+      flash.now[:error] = user.errors.full_messages.uniq
+      @user = User.new
       render :new
     end
   end
@@ -38,8 +39,8 @@ class UsersController < ApplicationController
       flash[:message] = "Profile successfully updated"
       redirect_to '/index'
     else
-      flash[:error] = @user.errors.full_messages
-      render 'edit'
+      flash.now[:error] = @user.errors.full_messages
+      render :edit
     end
   end
 
