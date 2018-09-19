@@ -17,7 +17,9 @@ Rails.application.routes.draw do
     resources :requests
   end
 
-  resources :users
+  resources :users do
+    get 'new-signup' => 'users#signup_prompt'
+  end
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -21,26 +21,26 @@ class SessionsController < ApplicationController
   end
 
   def create_with_google
-    user = User.find_by(email: auth[:email]) 
-    if user
-      session[:user_id] = user.try(:id)
+    @user = User.find_by(email: auth[:email]) 
+    if @user
+      session[:user_id] = @user.try(:id)
+      redirect_to index_path
     else
-      user = User.new(email: auth[:email], name: auth[:first_name], password: SecureRandom.urlsafe_base64(n=6))
-      if user.save
-        user.build_giver
-        user.build_receiver
-        user.save
-        session[:user_id] = user.try(:id)
+      @user = User.new(email: auth[:email], name: auth[:first_name], password: SecureRandom.urlsafe_base64(n=6))
+      if @user.save
+        @user.build_giver
+        @user.build_receiver
+        @user.save
+
+        session[:user_id] = @user.try(:id)
+        flash.now[:message] = "Welcome to Refood!"
+        render :'users/signup_prompt'
       else
         flash.now[:error] = ["There was a problem with your Google login"
         ]
         render :'users/new'
       end
     end
-    
-    @offers = current_user.giver.offers
-    @requests = current_user.receiver.requests
-    redirect_to index_path
   end
 
   def destroy

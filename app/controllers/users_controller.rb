@@ -14,16 +14,17 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)
-    if user.valid?
-      user.build_giver
-      user.build_receiver
-      user.save
-
-      session[:user_id] = user.id
-      redirect_to '/index'
+    @user = User.new(user_params)
+    if @user.valid?
+      @user.build_giver
+      @user.build_receiver
+      @user.save
+      
+      flash.now[:message] = "Welcome to Refood!"
+      session[:user_id] = @user.id
+      render :'signup_prompt'
     else
-      flash.now[:error] = user.errors.full_messages.uniq
+      flash.now[:error] = @user.errors.full_messages.uniq
       @user = User.new
       render :new
     end
