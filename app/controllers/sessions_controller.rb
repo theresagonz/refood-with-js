@@ -21,16 +21,25 @@ class SessionsController < ApplicationController
   end
 
   def create_with_google
-    user = User.find_or_create_by(email: auth[:info][:email]) do |user|
-      user.name = auth[:info][:first_name]
-      user.password = SecureRandom.urlsafe_base64(n=6)
+    user = User.find_by(email: auth[:email]) 
+    if user
+      session[:user_id] = user.try(:id)
+    else
+      user = User.new(email: auth[:email], name: auth[:first_name], password: SecureRandom.urlsafe_base64(n=6))
+      if user.save
+        user.build_giver
+        user.build_receiver
+        user.save
+        session[:user_id] = user.try(:id)
+      else
+        flash[:error] = ["There was a problem with your Google credentials. Please try again."
+        ]
+        render :'users/new'
+      end
     end
-    user.build_giver
-    user.build_receiver
-    user.save
-    session[:user_id] = user.try(:id)
-    # @offers = current_user.giver.offers
-    # @requests = current_user.receiver.requests
+    
+    @offers = current_user.giver.offers
+    @requests = current_user.receiver.requests
     redirect_to index_path
   end
 
@@ -42,6 +51,6 @@ class SessionsController < ApplicationController
   private
 
     def auth
-      request.env['omniauth.auth']
+      request.env['omniauth.auth'][:info]
     end
 end
