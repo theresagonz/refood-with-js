@@ -34,7 +34,7 @@ class SessionsController < ApplicationController
 
         session[:user_id] = @user.try(:id)
         flash.now[:message] = "Welcome to Refood!"
-        render :'users/signup_prompt'
+        render :'users/add_info'
       else
         flash.now[:error] = ["There was a problem with your Google login"
         ]
