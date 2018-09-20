@@ -17,9 +17,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def redirect_to_index_if_not_authorized
-    if params[:offer_id] != current_user.id
-      flash[:error] = ["Hey, that's not your offer"]
+  def redirect_to_index_if_not_authorized(params_id, resource)
+    if params[params_id].to_i != current_user.id
+      flash[:error] = ["Hey, that's not your #{resource}"]
+      redirect_to index_path
+    end
+  end
+
+  def redirect_to_index_if_not_authorized_to_edit_request
+    if Request.find_by(id: params[:id]).receiver.user != current_user.id
+      flash[:error] = ["Hey, that's not your request"]
       redirect_to index_path
     end
   end

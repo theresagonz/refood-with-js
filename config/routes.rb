@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get '/auth/google_oauth2/callback' => 'sessions#create_with_google'
 
   
-  resources :offers do
+  resources :offers, skip:true do
     resources :requests
   end
 

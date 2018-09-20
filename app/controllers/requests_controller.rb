@@ -1,5 +1,6 @@
 class RequestsController < ApplicationController
   before_action :require_login
+  before_action :redirect_to_index_if_not_authorized_to_edit_request, only: [:edit, :update, :destroy]
 
   def new
     @offer = Offer.find_by(id: params[:offer_id])
@@ -41,7 +42,7 @@ class RequestsController < ApplicationController
 
   private
 
-  def request_params
-    params.require(:request).permit(:message, :receiver_email, :receiver_phone)
-  end
+    def request_params
+      params.require(:request).permit(:message, :receiver_email, :receiver_phone)
+    end
 end
