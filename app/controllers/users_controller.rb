@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   end 
 
   def update
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(id: params[:id]) || current_user
     if @user.update(user_params)
       flash[:message] = "Profile successfully updated"
       redirect_to '/index'
