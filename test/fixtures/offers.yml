@@ -1,14 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
+  headline: MyString
   description: MyText
   availability: MyString
   expiration: 2018-09-15 10:28:32
   fulfilled: false
 
 two:
-  title: MyString
+  headline: MyString
   description: MyText
   availability: MyString
   expiration: 2018-09-15 10:28:32

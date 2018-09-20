@@ -1,7 +1,7 @@
 <%= render 'layouts/flash_error' %>
 
 <h1>Request</h1>
-<h3><%= link_to @offer.title, offer_path(@offer) %></h3>
+<h3><%= link_to @offer.headline, offer_path(@offer) %></h3>
 <h5>From: <%= @offer.giver.user.name %></h5>
 <p>Pick up by: <%= format_date(@offer.expiration) %></p>
 <br>

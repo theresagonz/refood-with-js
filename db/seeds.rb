@@ -7,9 +7,80 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 users = [
-  {name: 'Joe', username: 'joe', email: 'joe@joe.com', password: '123', password_confirmation: '123', zip_code: 12345}, {name: 'Sue', username: 'sue', email: 'sue@sue.com', password: '123', password_confirmation: '123', zip_code: 80223}
+  {
+    name: 'Joe',
+    email: 'joe@joe.com',
+    address: '95 Bannock St',
+    city: 'Denver', state: 'CO',
+    zip_code: 80223,
+    phone: 1234567890,
+    password: '123',
+    password_confirmation: '123'
+  },
+  {
+    name: 'Sue',
+    email: 'sue@sue.com',
+    address: '241 W 113th St',
+    city: 'New York',
+    state: 'NY',
+    zip_code: 10026,
+    phone: 1234567899,
+    password: '123',
+    password_confirmation: '123'
+  },
+  {
+    name: 'James Franco',
+    email: 'j@j.com',
+    address: '241 W 113th St',
+    city: 'New York',
+    state: 'NY',
+    zip_code: 10026,
+    phone: 1234567899,
+    password: '123',
+    password_confirmation: '123'
+  }
 ]
 
+offers = [
+  {
+    giver_id: 1,
+    headline: "Box of apples",
+    description: "Around 20 fuji apples from a happy little tree",
+    location: "",
+    availability: "Anytime this weekend",
+    expiration: "9/25/2018 1:30 PM"
+  },
+  {
+    giver_id: 2,
+    headline: "Pan of veg lasagna from catered lunch",
+    description: "One large pan of spinach lasagna, hot n ready",
+    location: "1 Wall St",
+    expiration: "9/20/2018 6:30 PM"
+  },
+  {
+    giver_id: 2,
+    headline: "Five boxes mac n cheese, blue box",
+    description: "Gluten free now, cheesy mac needs new home",
+    location: "241 W 113th St, New York, NY 10026",
+    availability: "evenings after 7",
+    expiration: "2/28/19 11:59 PM"
+  }
+]
+
+requests = [
+  {
+    offer_id: 2,
+    message: "I can pick up around 4:30! Please text your address",
+    receiver_phone: "9175555555",
+    receiver_email: "sue@sue.com"
+  },
+  {
+    offer_id: 1,
+    message: "Would it be possible to grab just half of these? I could stop by tomorrow early afternoon. I have a bag.",
+    receiver_email: "sue@sue.com"
+  }
+]
+    
 users.each do |user|
   new_user = User.new(user)
   new_user.build_giver
@@ -17,9 +88,10 @@ users.each do |user|
   new_user.save
 end
 
-new_offer = User.first.giver.offers.build(title: "Box of apples", description: "Around 20 fuji apples in a box from my apple tree", availability: "Arrange for pickup anytime this weekend", expiration: "12/25/2018 1:30 PM")
-new_offer.save
+offers.each do |offer|
+  Offer.create(offer)
+end
 
-new_request = User.last.receiver.requests.build(message: "I can pick up around 4:30!", receiver_email: "sue@sue.com")
-new_request.offer_id = new_offer.id
-new_request.save
+requests.each do |request|
+  Request.create(request)
+end

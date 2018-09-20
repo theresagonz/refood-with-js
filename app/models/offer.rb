@@ -3,5 +3,5 @@ class Offer < ApplicationRecord
   has_many :requests
   has_many :receivers, through: :requests
 
-  validates :title, presence: true
+  validates :headline, presence: true
 end

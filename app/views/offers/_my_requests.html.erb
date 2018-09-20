@@ -2,7 +2,7 @@
   <h3>My requests</h3>
   <ul>
   <% @requests.each do |request| %>
-    <li><%= link_to request.offer.title, offer_request_path(request.offer, request) %></li>
+    <li><%= link_to request.offer.headline, offer_request_path(request.offer, request) %></li>
   <% end %>
   </ul>
 <% end %>

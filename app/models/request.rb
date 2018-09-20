@@ -1,6 +1,6 @@
 class Request < ApplicationRecord
-  belongs_to :receiver
   belongs_to :offer
+  has_many :receivers
   has_one :giver, through: :offer
 
   validates :message, presence: true
