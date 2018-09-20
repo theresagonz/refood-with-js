@@ -13,11 +13,11 @@ Rails.application.routes.draw do
   get '/auth/google_oauth2/callback' => 'sessions#create_with_google'
 
   
-  resources :offers, skip:true do
+  resources :offers, skip: true do
     resources :requests
   end
 
-  resources :users do
+  resources :users, except: [:edit] do
     get 'new-signup' => 'users#signup_prompt'
   end
 

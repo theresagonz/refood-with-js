@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :offers, through: :giver
   has_many :requests, through: :receiver
   has_secure_password
+  # accepts_nested_attributes_for :requests
 
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }

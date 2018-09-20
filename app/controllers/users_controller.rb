@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   layout "application_no_login_link", only: [:new, :create]
   before_action :require_login, except: [:new, :create]
-  before_action only: [:edit, :update, :destroy] do
+  before_action only: [:update, :destroy] do
     redirect_to_index_if_not_authorized('id', 'profile')
   end
 
