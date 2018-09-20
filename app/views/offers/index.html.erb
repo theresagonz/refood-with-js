@@ -1,10 +1,13 @@
 <% if @offers.present? %>
-  <h1>All offers</h1>
-  <ul>
-    <% @offers.each do |offer| %>
-      <li><%= link_to offer.title, offer %></li>
-    <% end %>
-  </ul>
+  <h1>Current offers</h1>
+
+  <ul class="list-group">
+  <% @offers.each do |offer| %>
+    <li class="list-group-item">
+      <%= link_to offer.title, offer %> posted <%= time_ago(offer) %> ago
+    </li>
+  <% end %>
+
 <% else %>
   <h1>Sorry, no current offers</h1>
 <% end %>
