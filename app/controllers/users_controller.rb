@@ -22,9 +22,9 @@ class UsersController < ApplicationController
       @user.build_receiver
       @user.save
       
-      flash.now[:message] = "Welcome to Refood!"
+      flash.now[:message] = "Hi #{@user.name}! Welcome to Refood!"
       session[:user_id] = @user.id
-      render :'signup_prompt'
+      render :'add_info'
     else
       flash.now[:error] = @user.errors.full_messages.uniq
       @user = User.new
@@ -33,11 +33,15 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find_by(id: params[:id]) || current_user
-  end 
+    @user = current_user
+  end
+
+  def add_info
+    @user = current_user
+  end
 
   def update
-    @user = User.find_by(id: params[:id]) || current_user
+    @user = current_user
     if @user.update(user_params)
       flash[:message] = "Profile successfully updated"
       redirect_to '/index'
@@ -47,12 +51,12 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
+  def delete
   end
 
   private
 
-  def user_params
-    params.require(:user).permit(:email, :name, :username, :address, :address2, :city, :state, :zip_code, :phone, :password, :password_confirmation)
-  end
+    def user_params
+      params.require(:user).permit(:email, :name, :username, :address, :address2, :city, :state, :zip_code, :phone, :password, :password_confirmation)
+    end
 end
