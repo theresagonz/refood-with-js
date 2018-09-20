@@ -6,20 +6,6 @@
 <h3><%= link_to "Find food", offers_path %></h3>
 
 <br>
-<% if @offers.present? %>
-  <h3>My offers</h3>
-  <ul>
-  <% @offers.each do |offer| %>
-    <li><%= link_to offer.title, offer_path(offer) %></li>
-  <% end %>
-  </ul>
-<% end %>
 
-<% if @requests.present? %>
-  <h3>My requests</h3>
-  <ul>
-  <% @requests.each do |request| %>
-    <li><%= link_to request.offer.title, offer_request_path(request.offer, request) %></li>
-  <% end %>
-  </ul>
-<% end %>
+<%= render 'offers/my_offers' %>
+<%= render 'offers/my_requests' %>

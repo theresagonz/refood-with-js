@@ -1,0 +1,8 @@
+<% if @offers.present? %>
+  <h3>My offers</h3>
+  <ul>
+  <% @offers.each do |offer| %>
+    <li><%= link_to offer.title, offer_path(offer) %></li>
+  <% end %>
+  </ul>
+<% end %>
