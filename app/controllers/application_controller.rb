@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_to_index_if_not_authorized_to_edit_request
-    if Request.find_by(id: params[:id]).receiver.user != current_user.id
+    if Request.find_by(id: params[:id]).requestor.user != current_user.id
       flash[:error] = ["Hey, that's not your request"]
       redirect_to index_path
     end

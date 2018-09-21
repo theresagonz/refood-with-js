@@ -1,6 +1,7 @@
 class Request < ApplicationRecord
+  belongs_to :requestor
   belongs_to :offer
-  has_many :receivers
+  has_one :user, through: :requestor
   has_one :giver, through: :offer
 
   validates :message, presence: true
@@ -9,7 +10,7 @@ class Request < ApplicationRecord
   private
 
     def email_or_phone
-      if receiver_phone.blank? && receiver_email.blank?
+      if requestor_phone.blank? && requestor_email.blank?
         errors.add(:base, "Please provide an email address or password")
       end
     end

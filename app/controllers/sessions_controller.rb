@@ -29,6 +29,7 @@ class SessionsController < ApplicationController
       @user = User.new(email: auth[:email], name: auth[:first_name], password: SecureRandom.urlsafe_base64(n=6))
       if @user.save
         @user.build_giver
+        @user.build_requestor
         @user.build_receiver
         @user.save
 

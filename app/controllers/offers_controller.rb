@@ -24,7 +24,8 @@ class OffersController < ApplicationController
     
   def show
     @offer = Offer.find_by(id: params[:id])
-    @request = Request.where(offer: @offer, receiver: current_user).first
+    @request = Request.where(offer: @offer, requestor: current_user.requestor)
+    if @request
     @expiration = format_date(@offer.expiration)
   end
 

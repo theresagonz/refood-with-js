@@ -19,6 +19,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.valid?
       @user.build_giver
+      @user.build_requestor
       @user.build_receiver
       @user.save
       

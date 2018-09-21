@@ -3,8 +3,9 @@ require 'uri'
 class User < ApplicationRecord
   has_one :giver
   has_one :receiver
+  has_one :requestor
   has_many :offers, through: :giver
-  has_many :requests, through: :receiver
+  has_many :requests, through: :requestor
   has_secure_password
   # accepts_nested_attributes_for :requests
 

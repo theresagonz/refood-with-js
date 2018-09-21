@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_15_151021) do
+ActiveRecord::Schema.define(version: 2018_09_21_013237) do
 
   create_table "givers", force: :cascade do |t|
     t.integer "user_id"
@@ -36,12 +36,18 @@ ActiveRecord::Schema.define(version: 2018_09_15_151021) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "requestors", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "requests", force: :cascade do |t|
     t.integer "offer_id"
-    t.integer "receiver_id"
+    t.integer "requestor_id"
     t.text "message"
-    t.string "receiver_email"
-    t.string "receiver_phone"
+    t.string "requestor_email"
+    t.string "requestor_phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -57,7 +63,7 @@ ActiveRecord::Schema.define(version: 2018_09_15_151021) do
     t.string "address2"
     t.string "city"
     t.string "state"
-    t.integer "zip_code"
+    t.string "zip_code"
     t.string "phone"
     t.boolean "show_address"
     t.boolean "show_phone"

@@ -9,7 +9,7 @@ class RequestsController < ApplicationController
   def create
     request = Request.new(request_params)
     request.offer_id = params[:offer_id]
-    request.receiver = current_user.receiver
+    request.requestor = current_user.requestor
 
     if request.save
       offer = Offer.find(params[:offer_id])
@@ -43,6 +43,6 @@ class RequestsController < ApplicationController
   private
 
     def request_params
-      params.require(:request).permit(:message, :receiver_email, :receiver_phone)
+      params.require(:request).permit(:message, :requestor_email, :requestor_phone)
     end
 end

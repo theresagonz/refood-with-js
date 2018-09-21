@@ -3,12 +3,12 @@
   <% @requests.each do |request| %>
     <li class="list-group-item">
       <%= link_to request.message, offer_request_path(@offer, request) %><br>  
-      Name: <%= request.receiver.user.name %><br>
-      <% if request.receiver_email.present? %>
-        Email: <%= request.receiver_email %><br>
+      Name: <%= request.requestor.user.name %><br>
+      <% if request.requestor_email.present? %>
+        Email: <%= request.requestor_email %><br>
       <% end %>
-      <% if request.receiver_phone.present? %>
-        Phone: <%= request.receiver_phone %><br>
+      <% if request.requestor_phone.present? %>
+        Phone: <%= request.requestor_phone %><br>
       <% end %>
     </li>
   <% end %>

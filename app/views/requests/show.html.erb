@@ -5,13 +5,13 @@
 <h5>From: <%= @offer.giver.user.name %></h5>
 <p>Pick up by: <%= format_date(@offer.expiration) %></p>
 <br>
-<h3>Request by: <%= @request.receiver.user.name %></h3>
+<h3>Request by: <%= @request.user.name %></h3>
 <ul>
   <li>Message: <%= @request.message %></li>
-  <% if @request.receiver_email.present? %>
-    <li>Email: <%= @request.receiver_email %></li>
+  <% if @request.requestor_email.present? %>
+    <li>Email: <%= @request.requestor_email %></li>
   <% end %>
-  <% if @request.receiver_phone.present? %>
-    <li>Phone: <%= @request.receiver_phone %></li>
+  <% if @request.requestor_phone.present? %>
+    <li>Phone: <%= @request.requestor_phone %></li>
   <% end %>
 </ul>
