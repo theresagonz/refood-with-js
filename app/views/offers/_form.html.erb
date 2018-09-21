@@ -17,7 +17,7 @@
   <div class="form-group">
   <%= f.label :latest_pickup %>
     <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-      <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" name="offer[expiration]"/>
+      <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" name="offer[expiration]" value="<%= @offer.expiration %>"/>
       <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
         <div class="input-group-text"><i class="fa fa-calendar"></i>
         </div>

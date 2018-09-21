@@ -51,7 +51,7 @@ offers = [
     expiration: "9/25/2018 1:30 PM"
   },
   {
-    giver_id: 2,
+    giver_id: 3,
     headline: "Pan of veg lasagna from catered lunch",
     description: "One large pan of spinach lasagna, hot n ready",
     location: "1 Wall St",
@@ -80,6 +80,12 @@ requests = [
     requestor_id: 3,
     message: "Would it be possible to grab just half of these? I could stop by tomorrow early afternoon. I have a bag.",
     requestor_email: "j@j.com"
+  },
+  {
+    offer_id: 2,
+    requestor_id: 1,
+    message: "I can pickup ASAP",
+    requestor_email: "joe@joe.com"
   }
 ]
     
