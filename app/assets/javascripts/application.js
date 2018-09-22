@@ -18,3 +18,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require tempusdominus-bootstrap-4.js
+//= require bootstrap
+
+$('.dropdown-toggle').dropdown()
