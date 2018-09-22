@@ -3,15 +3,18 @@
 <h1><%= @offer.headline %></h1>
 <h4><%= @offer.description %></h4>
 
-<div class="grey-text left-padding">
-  <div><b>Availability: </b><%= @offer.availability %></div>
-  <div><b>Time left: </b><%= time_left(@offer) %></div>
-  <div><b>Fulfilled: </b><%= @offer.fulfilled ? "yes" : "no" %></div>
-  <% if @offer.user != current_user %>
-  <br>
-    <%= render "contact_info" %>
-  <% end %>
+<div class="left-padding">
+  <b>Availability: </b><%= @offer.availability %><br>
+  <b>Time left: </b><%= time_left(@offer) %><br>
+  <b>Fulfilled: </b><%= @offer.fulfilled ? "yes" : "no" %><br>
 </div>
+
+ <% if @offer.user != current_user %>
+  <br>
+  <div class="lt-grey-box">
+    <%= render "contact_info" %>
+  </div>
+<% end %>
 
 <% if @offer.user == current_user %>
   <br>
