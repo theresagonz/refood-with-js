@@ -4,6 +4,7 @@ class RequestsController < ApplicationController
 
   def new
     @offer = Offer.find_by(id: params[:offer_id])
+    @request = Request.new
   end
 
   def create
@@ -32,6 +33,8 @@ class RequestsController < ApplicationController
   end
 
   def edit
+    @offer = Offer.find_by(id: params[:offer_id])
+    @request = Request.find_by(id: params[:id])
   end
 
   def update

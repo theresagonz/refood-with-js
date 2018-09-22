@@ -1,0 +1,21 @@
+<%= form_for [@offer, @request] do |f| %>
+  <div class="form-group">
+    <%= f.label :message, "Leave a message for #{@offer.user.name}" %>
+    <%= f.text_area :message, class: 'form-control', placeholder: 'Provide a message about when you can pick up or ask a question' %>
+  </div>
+  
+  <br>
+    
+  <p>Contact me at (at least one is required):</p>
+  <div class="form-group">
+    <%= f.label :requestor_email, "Email" %>
+    <%= f.text_field :requestor_email, value: "#{current_user.email}", class: 'form-control' %>
+    </div>
+  <div class="form-group">
+    <%= f.label :requestor_phone %>
+    <%= f.text_field :requestor_phone, value: "#{current_user.phone}", class: 'form-control' %>
+  </div>
+
+  <%= hidden_field_tag :offer_id %>
+  <%= submit_tag "Submit request", class: "btn btn-primary" %>
+<% end %>

@@ -21,7 +21,7 @@ module ApplicationHelper
     elsif minutes_ago.floor > 0
       time_string(minutes_ago) + " minutes"
     else
-      seconds_ago.floor + " seconds"
+      time_string(seconds_ago) + " seconds"
     end
   end
 

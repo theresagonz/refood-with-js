@@ -1,2 +1,9 @@
-<h1>Requests#edit</h1>
-<p>Find me in app/views/requests/edit.html.erb</p>
+<%= render 'layouts/flash_error' %>
+
+<h1>Edit Request</h1>
+<h3><%= link_to @offer.headline, offer_path(@offer) %></h3>
+<h6><b>Pick up expiration: </b><%= format_date(@offer.expiration) %></h6>
+
+<br>
+
+<%= render 'form' %>
