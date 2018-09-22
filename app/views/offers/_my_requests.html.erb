@@ -1,8 +1,10 @@
 <% if @requests.present? %>
+  <br>
   <h3>My requests</h3>
-  <ul>
+  
+  <ul class="list-group">
   <% @requests.each do |request| %>
-    <li><%= link_to request.offer.headline, offer_request_path(request.offer, request) %></li>
+    <li class="list-group-item"><%= link_to request.offer.headline, offer_request_path(request.offer, request) %></li>
   <% end %>
   </ul>
 <% end %>

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   
   get '/index' => 'welcome#index'  
 
-  resources :offers, skip: true do
+  resources :offers do
     resources :requests
   end
   

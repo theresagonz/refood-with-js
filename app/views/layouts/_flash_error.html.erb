@@ -1,6 +1,8 @@
 <% if flash[:error] %>
   <% flash[:error].each do |error| %>
     <div class="alert alert-danger">
+      <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+      <span class="sr-only">Error:</span>
       <%= error %>
     </div>
   <% end %>

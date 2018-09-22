@@ -19,4 +19,25 @@ module ApplicationHelper
       seconds_ago.floor + " seconds"
     end
   end
+
+  def time_left(offer)
+    expiration = Time.strptime(offer.expiration, '%m/%d/%Y %H:%M %p')
+    
+    seconds_left = expiration - Time.now
+    minutes_left = (seconds_left / 60) % 60
+    hours_left = (seconds_left / 60 / 60) % 24
+    days_left = (seconds_left / 60 / 60 / 24)
+    countdown = ''
+
+    if days_left > 0
+      countdown << time_string(days_left.floor) + " days "
+    end
+    if hours_left > 0
+      countdown << time_string(hours_left.floor) + " hours "
+    end
+    if minutes_left > 0
+      countdown << time_string(minutes_left.floor) + " minutes "
+    end
+  countdown
+  end
 end
