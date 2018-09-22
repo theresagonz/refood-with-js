@@ -7,8 +7,10 @@
   <div><b>Availability: </b><%= @offer.availability %></div>
   <div><b>Time left: </b><%= time_left(@offer) %></div>
   <div><b>Fulfilled: </b><%= @offer.fulfilled ? "yes" : "no" %></div>
+  <% if @offer.user != current_user %>
   <br>
-  <%= render "contact_info" %>
+    <%= render "contact_info" %>
+  <% end %>
 </div>
 
 <% if @offer.user == current_user %>

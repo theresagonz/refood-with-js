@@ -48,11 +48,6 @@ class ApplicationController < ActionController::Base
   def format_date(string)
     Time.strptime(string, '%m/%d/%Y %H:%M %p').strftime("%A, %B %d, %Y, %l:%M %P")
   end
-
-  def format_phone(string)
-    phone = string.insert 3, "-"
-    phone.insert 7, "-"
-  end
-  
-  helper_method :current_user, :logged_in, :require_login, :format_date, :format_phone
+ 
+  helper_method :current_user, :logged_in, :require_login, :format_date
 end

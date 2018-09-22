@@ -8,7 +8,6 @@
     <%= render 'address' %>
     <% if @offer.user.city.present? && @offer.user.state.present? && @offer.user.address.blank? %>
       <b>City: </b><%= @offer.user.city %>, <%= @offer.user.state %><br>
-
     <% end %>
-
   </div>
+  
