@@ -5,14 +5,16 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <%= favicon_link_tag 'beet.png' %>
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand text-light nav-item-left">Refood</a>
-      <div>
+      <%= image_tag "refood-logo-light.png", class: "logo nav-item-left" %>
+      <div class="navbar-right">
         <a class="nav-item-right" href="/login">Log in</a>
       </div>
     </nav>
