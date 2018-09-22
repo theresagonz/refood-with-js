@@ -1,17 +1,22 @@
 <%= render 'layouts/flash_error' %>
 
-<h1>Request</h1>
-<h3><%= link_to @offer.headline, offer_path(@offer) %></h3>
-<h5>From: <%= @offer.giver.user.name %></h5>
-<p>Pick up by: <%= format_date(@offer.expiration) %></p>
+<h1><%= link_to @offer.headline, offer_path(@offer) %></h1>
+<h5 class="grey-text"><b>Time left: </b><%= time_left(@offer) %></h5>
 <br>
-<h3>Request by: <%= @request.user.name %></h3>
-<ul>
-  <li>Message: <%= @request.message %></li>
+
+<h3>Your Request</h3>
+<div class="grey-text left-padding">
+  <div><b>Message: </b><%= @request.message %></div>
   <% if @request.requestor_email.present? %>
-    <li>Email: <%= @request.requestor_email %></li>
+    <b>Email: </b><%= @request.requestor_email %><br>
   <% end %>
   <% if @request.requestor_phone.present? %>
-    <li>Phone: <%= @request.requestor_phone %></li>
+    <b>Phone: </b><%= format_phone(@request.requestor_phone) %><br>
   <% end %>
-</ul>
+</div>
+
+<br>
+<div class="btn-group">
+  <%= link_to "Edit request", edit_offer_request_path, class: "btn btn-primary" %>
+  <%= button_to "Delete request", offer_request_path(@request), class: "btn btn-outline-danger btn-left-margin", method: "delete", data: { confirm: "Are you sure you want to delete this offer?"} %>
+</div>

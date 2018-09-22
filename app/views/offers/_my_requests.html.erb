@@ -7,7 +7,7 @@
     <li class="list-group-item">
       <%= link_to request.offer.headline, offer_request_path(request.offer, request) %><br>
       <%= request.user.city %>, <%= request.user.state %><br>
-      <span class="grey-text">requested <%= time_ago(request) %> ago</span></li>
+      <span class="small grey-text">requested <%= time_ago(request) %> ago</span></li>
   <% end %>
   </ul>
 <% end %>
