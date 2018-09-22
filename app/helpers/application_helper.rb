@@ -1,4 +1,9 @@
 module ApplicationHelper
+  def format_phone(string)
+    phone = string.insert 3, "-"
+    phone.insert 7, "-"
+  end
+ 
   def time_string(unit_count)
     unit_count.floor.to_s
   end

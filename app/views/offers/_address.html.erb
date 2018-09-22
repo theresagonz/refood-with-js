@@ -1,0 +1,7 @@
+<% if @offer.user.address.present? && @offer.user.city.present? && @offer.user.state.present? && @offer.user.zip_code.present?  %>
+  <b>Address: </b><%= @offer.user.address %><br>
+  <% if @offer.user.address2.present? %>
+    <%= @offer.user.address2 %><br>
+  <% end %>
+  <%= @offer.user.city %>, <%= @offer.user.state %> <%= @offer.user.zip_code %>
+<% end %>

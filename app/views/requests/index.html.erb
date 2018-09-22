@@ -3,7 +3,7 @@
   <% @requests.each do |request| %>
     <li class="list-group-item">
       <%= link_to request.message, offer_request_path(@offer, request) %><br>  
-      Name: <%= request.requestor.user.name %><br>
+      Name: <%= request.user.name %><br>
       <% if request.requestor_email.present? %>
         Email: <%= request.requestor_email %><br>
       <% end %>

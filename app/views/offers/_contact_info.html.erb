@@ -1,0 +1,14 @@
+  <div>
+    <b>Contact: </b><%= @offer.user.name %><br>
+    <b>Email: </b><%= link_to @offer.user.email, "mailto:#{@offer.user.email}" %><br>
+
+    <% if @offer.user.phone.present? %>
+      <b>Phone: </b><%= format_phone(@offer.user.phone) %><br>
+    <% end %>
+    <%= render 'address' %>
+    <% if @offer.user.city.present? && @offer.user.state.present? && @offer.user.address.blank? %>
+      <b>City: </b><%= @offer.user.city %>, <%= @offer.user.state %><br>
+
+    <% end %>
+
+  </div>
