@@ -3,7 +3,7 @@
 <h1><%= @offer.headline %></h1>
 <h4><%= @offer.description %></h4>
 
-<div class="text-grey left-padding">
+<div class="grey-text left-padding">
   <div><b>Availability: </b><%= @offer.availability %></div>
   <div><b>Time left: </b><%= time_left(@offer) %></div>
   <div><b>Fulfilled: </b><%= @offer.fulfilled ? "yes" : "no" %></div>

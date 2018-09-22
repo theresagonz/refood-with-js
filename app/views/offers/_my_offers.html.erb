@@ -4,7 +4,8 @@
 
   <ul class="list-group">
   <% @offers.each do |offer| %>
-      <li class="list-group-item"><%= link_to offer.headline, offer_path(offer) %> posted <%= time_ago(offer) %> ago</li>
+      <li class="list-group-item"><%= link_to offer.headline, offer_path(offer) %><br>
+      <span class="grey-text">posted <%= time_ago(offer) %> ago</span></li>
   <% end %>
   </ul>
 <% end %>
