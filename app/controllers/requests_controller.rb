@@ -38,6 +38,15 @@ class RequestsController < ApplicationController
   end
 
   def update
+    @offer = Offer.find_by(id: params[:offer_id])
+    @request = Request.find_by(id: params[:id])
+    if @request.update(request_params)
+      flash[:message] = 'Request successfully updated'
+      redirect_to offer_request_path(@offer, @request)
+    else
+      flash.now[:error] = @request.errors.full_messages.uniq
+      render :edit
+    end
   end
 
   def destroy
