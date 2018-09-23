@@ -52,7 +52,11 @@ class UsersController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
+    current_user.delete
+    session.delete :user_id
+    flash[:message] = "Account successfully removed. Come back anytime!"
+    redirect_to root_path
   end
 
   private
