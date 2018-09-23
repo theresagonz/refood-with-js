@@ -25,16 +25,20 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_to_index_if_not_authorized_to_edit_offer
-    # DON'T AUTHORIZE: if the edit is for a request, params will have an offer_id and an id
-    # AUTHORIZE: if the edit is for an offer, params will just have an id
-    # AUTHORIZE: if it's a requests index page, params will have just offer_id, no id
-
-    if !params[:offer_id] || params[:offer_id] && params[:id]
+    # if single offer
+    if !params[:offer_id]
+      binding.pry
       offer = Offer.find_by(id: params[:id])
-      if offer.user != current_user
-        flash[:error] = ["Hey, that's not your offer"]
-        redirect_to index_path
-      end
+    # if offer requests
+    elsif params[:offer_id] && !params[:id]
+      binding.pry
+      offer = Offer.find_by(id: params[:offer_id])
+    end
+
+    if offer && offer.user != current_user
+      binding.pry
+      flash[:error] = ["Hey, that's not your offer"]
+      redirect_to index_path
     end
   end
 
