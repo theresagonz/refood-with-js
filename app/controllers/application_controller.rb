@@ -31,7 +31,6 @@ class ApplicationController < ActionController::Base
 
     if !params[:offer_id] || params[:offer_id] && params[:id]
       offer = Offer.find_by(id: params[:id])
-      binding.pry
       if offer.user != current_user
         flash[:error] = ["Hey, that's not your offer"]
         redirect_to index_path

@@ -1,14 +1,15 @@
-<h1>Requests for <%= @offer.headline %></h1>
+<h1>All Requests</h1>
+<h3><%= link_to @offer.headline, offer_path(@offer) %></h3>
 <ul class="list-group">
   <% @requests.each do |request| %>
     <li class="list-group-item">
-      <%= link_to request.message, offer_request_path(@offer, request) %><br>  
-      Name: <%= request.user.name %><br>
+      <b>Message: </b><%= link_to request.message, offer_request_path(@offer, request) %><br>  
+      <b>From: </b><%= request.user.name %><br>
       <% if request.requestor_email.present? %>
-        Email: <%= request.requestor_email %><br>
+      <b>Email: </b><%= request.requestor_email %><br>
       <% end %>
       <% if request.requestor_phone.present? %>
-        Phone: <%= request.requestor_phone %><br>
+        <b>Phone: </b><%= format_phone(request.requestor_phone) %><br>
       <% end %>
     </li>
   <% end %>
