@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_21_013237) do
+ActiveRecord::Schema.define(version: 2018_09_24_181638) do
 
   create_table "givers", force: :cascade do |t|
     t.integer "user_id"
@@ -25,9 +25,11 @@ ActiveRecord::Schema.define(version: 2018_09_21_013237) do
     t.text "description"
     t.string "availability"
     t.string "expiration"
-    t.boolean "fulfilled"
+    t.boolean "fulfilled", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "deleted", default: false
+    t.boolean "expired", default: false
   end
 
   create_table "receivers", force: :cascade do |t|

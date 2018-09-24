@@ -7,7 +7,7 @@ class WelcomeController < ApplicationController
   end
 
   def index
-    @offers = current_user.offers
+    @offers = current_user.offers.where("deleted = ?", false)
     @requests = current_user.requests
   end
 end

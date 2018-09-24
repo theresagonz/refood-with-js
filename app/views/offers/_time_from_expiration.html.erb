@@ -1,4 +1,4 @@
-<% if expired(@offer) %>
+<% if expired?(@offer) %>
   <b>Expired: </b><%= time_from_expiration(@offer) %> ago<br>
 <% else %>
   <b>Pick up by: </b><%= format_date(@offer.expiration) %><br>

@@ -17,7 +17,7 @@ class OffersController < ApplicationController
   end
 
   def index
-    @offers = Offer.all
+    @offers = Offer.where("deleted = ?", false)
   end
     
   def show
@@ -42,8 +42,17 @@ class OffersController < ApplicationController
   end
 
   def destroy
-    Offer.find_by(id: params[:id]).delete
-    redirect_to index_path
+    offer = Offer.find_by(id: params[:id])
+    if offer.requests.present?
+      offer.deleted = true
+      offer.save
+      flash[:message] = "Offer successfully deleted"
+      redirect_to index_path
+    else
+      offer.delete 
+      flash[:message] = "Offer successfully deleted"
+      redirect_to index_path
+    end
   end
 
   private

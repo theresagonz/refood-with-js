@@ -13,13 +13,6 @@ module ApplicationHelper
     end
   end
 
-  def expired(offer)
-    # convert expiration string to datetime object
-    expiration = Time.strptime(offer.expiration, '%m/%d/%Y %H:%M %p')
-    # check if expiration is past
-    expiration < Time.now
-  end
-
   def time_ago(resource)
     seconds_ago = Time.now - resource.created_at
     minutes_ago = (seconds_ago/60).floor
