@@ -34,7 +34,7 @@ module ApplicationHelper
     elsif minutes_ago > 0
       time_units_string(minutes_ago, "minute")
     else
-      time_units_string(seconds_ago, "second")
+      time_units_string(seconds_ago.floor, "second")
     end
   end
 
