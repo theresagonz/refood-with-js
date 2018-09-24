@@ -54,6 +54,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def redirect_to_existing_request
+    offer = Offer.find_by(id: params[:offer_id])
+    request = Request.where("requestor_id = ? AND offer_id = ?", current_user.id, offer.id).first
+
+    if request
+      flash[:error] = ["You already have a request for this offer"]
+      redirect_to offer_request_path(offer, request)
+    end
+  end
+
   def format_date(string)
     Time.strptime(string, '%m/%d/%Y %H:%M %p').strftime("%A, %B %d, %Y, %l:%M %P")
   end

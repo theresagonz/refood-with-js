@@ -2,6 +2,7 @@ class RequestsController < ApplicationController
   before_action :require_login
   before_action :redirect_to_index_if_not_authorized_to_edit_request, only: [:edit, :update, :destroy]
   before_action :redirect_to_index_if_not_authorized_to_edit_offer, only: [:index]
+  before_action :redirect_to_existing_request, only: [:new, :create]
 
   def new
     @offer = Offer.find_by(id: params[:offer_id])

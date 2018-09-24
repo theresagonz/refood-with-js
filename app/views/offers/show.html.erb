@@ -4,6 +4,9 @@
 <h1><%= @offer.headline %></h1>
 <h4><%= @offer.description %></h4>
 
+<%= link_to "See requests for this offer", offer_requests_path(@offer) %>
+
+<br>
 <div class="left-padding">
   <% if @offer.availability.present? %>
     <b>Availability: </b><%= @offer.availability %><br>
