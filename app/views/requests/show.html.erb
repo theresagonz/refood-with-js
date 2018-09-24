@@ -2,7 +2,9 @@
 <%= render 'layouts/flash_message' %>
 
 <h1><%= link_to @offer.headline, offer_path(@offer) %></h1>
-<h5><b>Time left: </b><%= time_left(@offer) %></h5>
+<h5>
+  <%= render "offers/time_from_expiration" %>
+</h5>
 <br>
 
 <%= render 'show_request' %>

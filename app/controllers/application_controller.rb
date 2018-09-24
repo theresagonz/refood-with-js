@@ -25,18 +25,15 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_to_index_if_not_authorized_to_edit_offer
-    # if single offer
+    # if single offer route
     if !params[:offer_id]
-      binding.pry
       offer = Offer.find_by(id: params[:id])
-    # if offer requests
+    # if offer requests route
     elsif params[:offer_id] && !params[:id]
-      binding.pry
       offer = Offer.find_by(id: params[:offer_id])
     end
 
     if offer && offer.user != current_user
-      binding.pry
       flash[:error] = ["Hey, that's not your offer"]
       redirect_to index_path
     end
