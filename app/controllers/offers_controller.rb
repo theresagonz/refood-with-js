@@ -17,12 +17,12 @@ class OffersController < ApplicationController
   end
 
   def index
-    @offers = Offer.where("deleted = ?", false)
+    @offers = Offer.select { |o| !o.deleted }
   end
     
   def show
     @offer = Offer.find_by(id: params[:id])
-    @request = Request.where(offer: @offer, requestor: current_user.requestor).first
+    @request = Request.select { |r| r.offer == @offer && r.requestor == current_user.requestor }.first
     @expiration = format_date(@offer.expiration)
   end
 

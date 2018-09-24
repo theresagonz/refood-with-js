@@ -3,11 +3,12 @@ class WelcomeController < ApplicationController
   before_action :require_login, only: [:index]
   before_action :redirect_to_index_if_logged_in, only: [:home]
 
+
   def home
   end
 
   def index
-    @offers = current_user.offers.where("deleted = ?", false)
+    @offers = current_user.offers.select { |o| !o.expired && !o.deleted }
     @requests = current_user.requests
   end
 end

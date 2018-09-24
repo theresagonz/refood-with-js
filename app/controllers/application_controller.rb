@@ -64,24 +64,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def check_offer_expiration(offers_array)
-    offers_array.each do |offer|
-      if expired?(offer) < Time.now
-        offer.expired = true
-        offer.save
-      end
-    end
-  end
-
   def format_date(string)
     Time.strptime(string, '%m/%d/%Y %H:%M %p').strftime("%A, %B %d, %Y, %l:%M %P")
-  end
-
-  def expired?(offer)
-    # convert expiration string to datetime object
-    expiration = Time.strptime(offer.expiration, '%m/%d/%Y %H:%M %p')
-    # check if expiration is past
-    expiration.past?
   end
  
   helper_method :current_user, :logged_in, :require_login, :format_date, :expired?
