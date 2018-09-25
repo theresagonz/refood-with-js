@@ -32,7 +32,7 @@ class RequestsController < ApplicationController
 
   def index
     @offer = Offer.find_by(id: params[:offer_id])
-    @requests = Request.where("offer_id = ?", params[:offer_id])
+    @requests = Request.select { |r| r.offer == @offer }
   end
 
   def edit

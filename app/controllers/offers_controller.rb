@@ -19,6 +19,10 @@ class OffersController < ApplicationController
   def index
     @offers = Offer.select { |o| !o.deleted }
   end
+
+  def expired
+    @offers = Offer.select { |o| o.expired }
+  end
     
   def show
     @offer = Offer.find_by(id: params[:id])
