@@ -1,24 +1,15 @@
 <h1>All Requests</h1>
 <h3><%= link_to @offer.headline, offer_path(@offer) %></h3>
+
+<%# render form for offer with collection_check_box of requests. if request checked, request will be marked completed %>
 <% if @requests.present? %>
-  <ul class="list-group">
-  <% @requests.each do |request| %>
-    <li class="list-group-item">
-      <b>Message: </b><%= link_to request.message, offer_request_path(@offer, request) %><br>  
-      <b>From: </b><%= request.user.name %><br>
-      <% if request.requestor_email.present? %>
-        <b>Email: </b><%= request.requestor_email %><br>
-      <% end %>
-      <% if request.requestor_phone.present? %>
-        <b>Phone: </b><%= format_phone(request.requestor_phone) %><br>
-      <% end %>
-    </li>
+  <%= form_for @offer do |f| %>
+    <%= f.collection_check_boxes :id, @requests, :id, :message %>
+    <%= f.submit "Close offer"%>
   <% end %>
-  </ul>
 <% else %>
-<br>
+  <br>
   <h5>Currently no requests. Please check back later.</h5>
 <% end %>
-
 <br>
 <%= link_to "Back to index", '/index' %>

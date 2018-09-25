@@ -35,12 +35,33 @@ class OffersController < ApplicationController
   end
 
   def update
-    offer = current_user.giver.offers.build(offer_params)
-    if offer.save
-      redirect_to offer_path(offer)
+    # if params are coming from the offer edit form
+    # @offer will exist
+    @offer = Offer.find_by(id: params[:id])
+    binding.pry
+    # if params are coming from the offer requests form
+    # mark each of these requests competed
+    request_id_array = params[:offer][:id]
+    if request_id_array
+      request_id_array.each do |request_id|
+        if request_id.present?
+          request = Request.find_by(id: request_id)
+          request.completed = true
+          request.save
+        end
+      end
+      # if there's more than one request_id in the array
+      if request_id_array == [""]
+        flash[:message] = "Nothing marked picked up"
+      else
+        flash[:message] = "Thanks for being an awesome human!"
+      end
+      redirect_to '/index'
+    elsif @offer.update(offer_params)
+      flash[:message] = "Offer successfully updated"
+      redirect_to offer_path(@offer)
     else
       flash.now[:error] = offer.errors.full_messages
-      @offer = Offer.find_by(id: params[:id])
       render :edit
     end
   end
@@ -62,6 +83,6 @@ class OffersController < ApplicationController
   private
 
   def offer_params
-    params.require(:offer).permit(:headline, :description, :availability, :expiration, :fulfilled)
+    params.require(:offer).permit(:headline, :description, :availability, :expiration, :closed)
   end
 end

@@ -13,7 +13,7 @@
     <b>Availability: </b><%= @offer.availability %><br>
   <% end %>
   <%= render "time_from_expiration" %>
-  <b>Fulfilled: </b><%= @offer.fulfilled ? "yes" : "no" %><br>
+  <b>Open: </b><%= @offer.closed ? "no" : "yes" %><br>
 </div>
 
  <% if @offer.user != current_user %>
