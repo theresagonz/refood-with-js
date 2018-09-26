@@ -1,4 +1,4 @@
-class OfferDecorator < Draper::Decorator
+class OfferDecorator < ApplicationDecorator
   delegate_all
   # decorates :offer, :welcome
   

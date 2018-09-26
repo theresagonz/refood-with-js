@@ -12,7 +12,6 @@
   <% if @offer.availability.present? %>
     <b>Availability: </b><%= @offer.availability %><br>
   <% end %>
-  <%= render "time_from_expiration" %>
   <b>Open: </b><%= @offer.closed ? "no" : "yes" %><br>
 </div>
 

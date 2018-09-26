@@ -8,7 +8,7 @@ class WelcomeController < ApplicationController
   end
 
   def index
-    @offers = current_user.offers.select { |o| !o.expired && !o.deleted }
+    @offers = OfferDecorator.select { |o| o.user == current_user && !o.deleted }
     @requests = current_user.requests
   end
 end

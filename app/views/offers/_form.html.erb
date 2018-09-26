@@ -14,22 +14,6 @@
     <%= f.text_area :availability, placeholder: "Describe your availability for exchanging the food", class: 'form-control' %>
   </div>
 
-  <div class="form-group">
-  <%= f.label :latest_pickup %>
-    <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-      <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" name="offer[expiration]" value="<%= @offer.expiration %>"/>
-      <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-        <div class="input-group-text"><i class="fa fa-calendar"></i>
-        </div>
-      </div>
-    </div>
-    <script type="text/javascript">
-      $(function () {
-        $('#datetimepicker1').datetimepicker();
-      });
-    </script>
-  </div>
-
   <%= f.submit class: "btn btn-primary" %>
   <%= link_to "Cancel", '/index', class: "btn btn-secondary" %>
 <% end %>

@@ -68,5 +68,5 @@ class ApplicationController < ActionController::Base
     Time.strptime(string, '%m/%d/%Y %H:%M %p').strftime("%A, %B %d, %Y, %l:%M %P")
   end
  
-  helper_method :current_user, :logged_in, :require_login, :format_date, :expired?
+  helper_method :current_user, :logged_in, :require_login, :format_date
 end

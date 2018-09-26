@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   
   get '/index' => 'welcome#index'  
 
-  get '/offers/expired' => 'offers#expired'
+  # get '/offers/expired' => 'offers#expired'
   
   resources :offers do
     resources :requests

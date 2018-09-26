@@ -3,17 +3,12 @@
 <% if @offers.present? %>
   <ul class="list-group">
   <% @offers.each do |offer| %>
-    <% if !offer.expired %>
-      <li class="list-group-item">
-        <%= link_to offer.headline, offer %> posted <%= time_ago(offer) %> ago
-      </li>
-    <% end %>
+    <li class="list-group-item">
+      <%= link_to offer.headline, offer %> posted <%= time_ago(offer) %> ago
+    </li>
   <% end %>
 
 <% else %>
   <br>
   <h3>Sorry, no current offers. Check back soon!</h3>
 <% end %>
-
-<br>
-<h5><%= link_to "View expired offers", offers_expired_path %></h5>
