@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_25_153251) do
+ActiveRecord::Schema.define(version: 2018_09_26_020039) do
+
+  create_table "comments", force: :cascade do |t|
+    t.integer "giver_id"
+    t.integer "requestor_id"
+    t.text "comment_for_giver"
+    t.text "comment_for_requestor"
+  end
 
   create_table "givers", force: :cascade do |t|
     t.integer "user_id"
@@ -29,13 +36,6 @@ ActiveRecord::Schema.define(version: 2018_09_25_153251) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "deleted", default: false
-    t.boolean "expired", default: false
-  end
-
-  create_table "receivers", force: :cascade do |t|
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "requestors", force: :cascade do |t|

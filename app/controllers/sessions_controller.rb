@@ -30,7 +30,6 @@ class SessionsController < ApplicationController
       if @user.save
         @user.build_giver
         @user.build_requestor
-        @user.build_receiver
         @user.save
 
         session[:user_id] = @user.try(:id)

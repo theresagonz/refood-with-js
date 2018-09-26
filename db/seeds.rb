@@ -93,7 +93,6 @@ users.each do |user|
   new_user = User.new(user)
   new_user.build_giver
   new_user.build_requestor
-  new_user.build_receiver
   new_user.save
 end
 

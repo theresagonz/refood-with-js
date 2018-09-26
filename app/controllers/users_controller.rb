@@ -20,7 +20,6 @@ class UsersController < ApplicationController
     if @user.valid?
       @user.build_giver
       @user.build_requestor
-      @user.build_receiver
       @user.save
       
       flash.now[:message] = "Hi #{@user.name}! Welcome to Refood!"
