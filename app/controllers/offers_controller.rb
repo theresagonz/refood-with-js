@@ -23,7 +23,6 @@ class OffersController < ApplicationController
   def show
     @offer = Offer.find_by(id: params[:id])
     @request = Request.select { |r| r.offer == @offer && r.requestor == current_user.requestor }.first
-    @expiration = format_date(@offer.expiration)
   end
 
   def edit

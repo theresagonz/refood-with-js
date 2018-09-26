@@ -1,15 +1,26 @@
-<h1>All Requests</h1>
+<h1>Requests for:</h1>
 <h3><%= link_to @offer.headline, offer_path(@offer) %></h3>
+<div class="small">You posted on <%= format_date(@offer.created_at) %></div>
 
-<%# render form for offer with collection_check_box of requests. if request checked, request will be marked completed %>
+<br>
 <% if @requests.present? %>
-  <%= form_for @offer do |f| %>
-    <%= f.collection_check_boxes :id, @requests, :id, :message %>
-    <%= f.submit "Close offer"%>
-  <% end %>
+  <ul class="list-group">
+    <% @requests.each do |request| %>
+      <li class="list-group-item lt-grey-box"><b>Message: </b><%= request.message %><br>
+      <b>From: </b><%= request.user.name %><br>
+      <% if request.requestor_email.present? %>
+        <b>Email: </b><%= request.requestor_email %><br>
+      <% end %>
+      <% if request.requestor_phone.present? %>
+        <b>Phone: </b><%= request.requestor_phone %><br>
+      <% end %>
+      <b>Request date: </b><%= request.created_at.strftime("%A, %B %d, %Y, %l:%M %P") %><br></li>
+    <% end %>
+  </ul>
 <% else %>
   <br>
   <h5>Currently no requests. Please check back later.</h5>
 <% end %>
+
 <br>
 <%= link_to "Back to index", '/index' %>
