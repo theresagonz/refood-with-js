@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_26_020039) do
+ActiveRecord::Schema.define(version: 2018_09_27_125103) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "giver_id"
     t.integer "requestor_id"
     t.text "comment_for_giver"
     t.text "comment_for_requestor"
+    t.integer "offer_id"
   end
 
   create_table "givers", force: :cascade do |t|

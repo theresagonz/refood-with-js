@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
     elsif params[:offer_id] && !params[:id]
       offer = Offer.find_by(id: params[:offer_id])
     end
-
+    
     if offer && offer.user != current_user
       flash[:error] = ["Hey, that's not your offer"]
       redirect_to index_path

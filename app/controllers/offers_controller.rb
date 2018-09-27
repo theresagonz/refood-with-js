@@ -33,7 +33,6 @@ class OffersController < ApplicationController
     # if params are coming from the offer edit form
     # @offer will exist
     @offer = Offer.find_by(id: params[:id])
-    binding.pry
     # if params are coming from the offer requests form
     # mark each of these requests competed
     request_id_array = params[:offer][:id]

@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   resources :offers do
     resources :requests
   end
+
+  patch '/request/:id' => 'requests#complete'
   
   post '/comments' => 'comments#create'
   
