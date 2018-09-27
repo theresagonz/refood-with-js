@@ -6,15 +6,25 @@
 <% if @requests.present? %>
   <ul class="list-group">
     <% @requests.each do |request| %>
-      <li class="list-group-item lt-grey-box"><b>Message: </b><%= request.message %><br>
-      <b>From: </b><%= request.user.name %><br>
-      <% if request.requestor_email.present? %>
-        <b>Email: </b><%= request.requestor_email %><br>
-      <% end %>
-      <% if request.requestor_phone.present? %>
-        <b>Phone: </b><%= request.requestor_phone %><br>
-      <% end %>
-      <b>Request date: </b><%= request.created_at.strftime("%A, %B %d, %Y, %l:%M %P") %><br></li>
+      <li class="list-group-item lt-grey-box">
+        <b>Message: </b><%= request.message %><br>
+        <b>From: </b><%= request.user.name %><br>
+        <% if request.requestor_email.present? %>
+          <b>Email: </b><%= request.requestor_email %><br>
+        <% end %>
+        <% if request.requestor_phone.present? %>
+          <b>Phone: </b><%= format_phone(request.requestor_phone) %><br>
+        <% end %>
+        <b>Request date: </b><%= format_date(request.created_at) %><br>
+
+        <br>
+        <%= form_for @comment do |f| %>
+          <%= f.label :comment_for_requestor, "Leave a comment for #{request.user.name} (optional)" %>
+          <%= f.text_field :comment_for_requestor %>
+          <%= f.submit "Mark request completed", :class => "btn btn-success" %>
+        <% end %>
+      </li>
+    
     <% end %>
   </ul>
 <% else %>
