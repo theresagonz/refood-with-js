@@ -39,6 +39,9 @@
 <% end %>
 
 <br>
+<%= button_to "Close offer", offer_path(@offer), method: "patch" %>
+
+<br>
 <%= link_to "Completed requests", offer_completed_path %>
 <br>
 <%= link_to "Back to index", '/index' %>

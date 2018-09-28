@@ -31,33 +31,22 @@ class OffersController < ApplicationController
   end
 
   def update
-    # if params are coming from the offer edit form
-    # @offer will exist
     @offer = Offer.find_by(id: params[:id])
-    # if params are coming from the offer requests form
-    # mark each of these requests competed
-    request_id_array = params[:offer][:id]
-    if request_id_array
-      request_id_array.each do |request_id|
-        if request_id.present?
-          request = Request.find_by(id: request_id)
-          request.completed = true
-          request.save
-        end
-      end
-      # if there's more than one request_id in the array
-      if request_id_array == [""]
-        flash[:message] = "Nothing marked picked up"
-      else
-        flash[:message] = "Thanks for being an awesome human!"
-      end
-      redirect_to '/index'
-    elsif @offer.update(offer_params)
+    # if params are coming from the offer edit form
+    if params[:offer]
+      if @offer.update(offer_params)
       flash[:message] = "Offer successfully updated"
       redirect_to offer_path(@offer)
+      else
+        flash.now[:error] = offer.errors.full_messages
+        render :edit
+      end
+    # if params are coming from offer requests (close offer)
     else
-      flash.now[:error] = offer.errors.full_messages
-      render :edit
+      @offer.closed = true
+      @offer.save
+      flash[:message] = "Offer closed. Thanks for being an awesome human!"
+      redirect_to '/index'
     end
   end
 
