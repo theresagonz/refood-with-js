@@ -3,7 +3,7 @@
 
 <h1><%= @offer.headline %></h1>
 <h4><%= @offer.description %></h4>
-<div class="small">Posted <%= time_ago(@offer) %> ago</div><br>
+<div class="small">Posted on <%= format_date(@offer.created_at.localtime) %></div><br>
 
 <div class="left-padding">
   <% if @offer.availability.present? %>
@@ -28,7 +28,7 @@
   <% else %>
     <h3><%= link_to "#{@requests.count} open requests", offer_requests_path(@offer) %></h3>
   <% end %>
-  
+
   <br>
   <div class="btn-group">
     <%= link_to "Edit offer", edit_offer_path(@offer), class: "btn btn-primary" %>

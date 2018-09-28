@@ -1,6 +1,6 @@
 <%= render 'layouts/flash_message' %>
 
-<h1>Requests for:</h1>
+<h1>Open requests for:</h1>
 <h3><%= link_to @offer.headline, offer_path(@offer) %></h3>
 <div class="small">You posted on <%= format_date(@offer.created_at.localtime) %></div>
 
@@ -23,19 +23,18 @@
         <%= form_for request, url: "/request/#{request.id}" do |f| %>
           <%= f.hidden_field :completed, value: true %>
           <%= fields_for @comment do |ff| %>
-            <b><%= ff.label :comment_for_requestor, "Mark request completed" %></b>
             <%= ff.text_field :comment_for_requestor, class: "form-control", placeholder: "Leave a comment for #{request.user.name} (optional)" %>
             <%= ff.hidden_field :offer_id, value: @offer.id.to_i %>
           <% end %>
-          <%= f.submit "Item was picked up", :class => "btn btn-outline-success" %>
+          <%= f.submit "Mark request completed", :class => "btn btn-outline-success" %>
         <% end %>
       </li>
-    
     <% end %>
   </ul>
+  
 <% else %>
   <br>
-  <h5>Currently no requests. Please check back later.</h5>
+  <h5>Currently no open requests. Please check back later.</h5>
 <% end %>
 
 <br>

@@ -32,7 +32,7 @@ class RequestsController < ApplicationController
 
   def index
     @offer = Offer.find_by(id: params[:offer_id])
-    @requests = Request.select { |r| r.offer == @offer && r.completed == false }
+    @requests = @offer.requests.select { |r| r.completed == false }
     @comment = Comment.new
   end
 
