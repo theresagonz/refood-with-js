@@ -19,6 +19,10 @@ class OffersController < ApplicationController
   def index
     @offers = Offer.select { |o| !o.deleted }
   end
+
+  def closed
+    @offers = Offer.select { |o| o.giver_id == current_user.id && o.closed }
+  end
     
   def show
     @offer = Offer.find_by(id: params[:id])

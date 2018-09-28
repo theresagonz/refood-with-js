@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   # get '/offers/expired' => 'offers#expired'
   
+  get '/offers/closed' => 'offers#closed'
+  
   resources :offers do
     resources :requests
     get '/completed' => 'requests#completed'
@@ -25,6 +27,7 @@ Rails.application.routes.draw do
   patch '/request/:id' => 'requests#complete'
   
   post '/comments' => 'comments#create'
+
   
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
