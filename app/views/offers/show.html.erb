@@ -3,10 +3,7 @@
 
 <h1><%= @offer.headline %></h1>
 <h4><%= @offer.description %></h4>
-
-<% if @offer.user == current_user %>
-  <h5><%= link_to "See requests for this offer", offer_requests_path(@offer) %></h5>
-<% end %>
+<div class="small">Posted <%= time_ago(@offer) %> ago</div><br>
 
 <div class="left-padding">
   <% if @offer.availability.present? %>
@@ -23,6 +20,15 @@
 <% end %>
 
 <% if @offer.user == current_user %>
+  <br>
+  <% if @requests.count == 0 %>
+    <h3><%= link_to "#{@requests.count} open requests", offer_requests_path(@offer) %></h3>
+  <% elsif @requests.count == 1 %>
+    <h3><%= link_to "1 open request", offer_requests_path(@offer) %></h3>
+  <% else %>
+    <h3><%= link_to "#{@requests.count} open requests", offer_requests_path(@offer) %></h3>
+  <% end %>
+  
   <br>
   <div class="btn-group">
     <%= link_to "Edit offer", edit_offer_path(@offer), class: "btn btn-primary" %>

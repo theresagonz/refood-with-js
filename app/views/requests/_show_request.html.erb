@@ -1,5 +1,5 @@
-<div class="left-padding lt-grey-box">
-  <% if @request.user == current_user %>
+<% if @request.user == current_user %>
+  <div class="lt-grey-box">
     <h3>Your Request</h3>
     <b>Message: </b><%= @request.message %><br>
     
@@ -10,26 +10,32 @@
     <% if @request.requestor_phone.present? %>
       <b>Phone: </b><%= format_phone(@request.requestor_phone) %><br>
     <% end %>
-    </div>
+
+    <b>Requested: </b><%= format_date(@request.created_at.localtime) %><br>
+    <b>Completed: </b><%= @request.completed ? "yes" : "no" %>
+  </div>
     
-    <br>
-    <div class="btn-group">
-      <%= link_to "Edit request", edit_offer_request_path, class: "btn btn-primary" %>
-      <%= button_to "Delete request", offer_request_path(@request), class: "btn btn-outline-danger btn_left-margin", method: "delete", data: { confirm: "Are you sure you want to delete this request?"} %>
-    </div>
+  <br>
+  <div class="btn-group">
+    <%= link_to "Edit request", edit_offer_request_path, class: "btn btn-primary" %>
+    <%= button_to "Delete request", offer_request_path(@request), class: "btn btn-outline-danger btn_left-margin", method: "delete", data: { confirm: "Are you sure you want to delete this request?"} %>
+  </div>
 
-  <% else %>
-    <div class="left-padding lt-grey-box">
-      <h3>Request Info</h3>
-      <b>Message: </b><%= @request.message %><br>
-      <b>From: </b><%= @request.user.name %><br>
+<% else %>
+  <div class="lt-grey-box">
+    <h3>Request Info</h3>
+    <b>Message: </b><%= @request.message %><br>
+    <b>From: </b><%= @request.user.name %><br>
 
-      <% if @request.requestor_email.present? %>
-        <b>Email: </b><%= link_to @request.requestor_email, "mailto:#{@request.requestor_email}" %><br>
-      <% end %>
-      
-      <% if @request.requestor_phone.present? %>
-        <b>Phone: </b><%= format_phone(@request.requestor_phone) %>
-      <% end %>
-    </div>
-  <% end %>
+    <% if @request.requestor_email.present? %>
+      <b>Email: </b><%= link_to @request.requestor_email, "mailto:#{@request.requestor_email}" %><br>
+    <% end %>
+    
+    <% if @request.requestor_phone.present? %>
+      <b>Phone: </b><%= format_phone(@request.requestor_phone) %>
+    <% end %>
+
+    <b>Requested: </b><%= format_date(@request.created_at.localtime) %><br>
+    <b>Completed: </b><%= @request.completed ? "yes" : "no" %>
+  </div>
+<% end %>

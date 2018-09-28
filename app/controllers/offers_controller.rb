@@ -23,6 +23,7 @@ class OffersController < ApplicationController
   def show
     @offer = Offer.find_by(id: params[:id])
     @request = Request.select { |r| r.offer == @offer && r.requestor == current_user.requestor }.first
+    @requests = @offer.requests.select { |r| r.completed == false }
   end
 
   def edit

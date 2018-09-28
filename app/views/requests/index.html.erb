@@ -2,7 +2,7 @@
 
 <h1>Requests for:</h1>
 <h3><%= link_to @offer.headline, offer_path(@offer) %></h3>
-<div class="small">You posted on <%= format_date(@offer.created_at) %></div>
+<div class="small">You posted on <%= format_date(@offer.created_at.localtime) %></div>
 
 <br>
 <% if @requests.present? %>
@@ -17,19 +17,17 @@
         <% if request.requestor_phone.present? %>
           <b>Phone: </b><%= format_phone(request.requestor_phone) %><br>
         <% end %>
-        <b>Request date: </b><%= format_date(request.created_at) %><br>
+        <b>Request date: </b><%= format_date(request.created_at.localtime) %><br>
 
         <br>
-
         <%= form_for request, url: "/request/#{request.id}" do |f| %>
           <%= f.hidden_field :completed, value: true %>
           <%= fields_for @comment do |ff| %>
-            <%= ff.label :comment_for_requestor, "Leave a comment for #{request.user.name} (optional)" %>
-            <%= ff.text_field :comment_for_requestor %>
+            <b><%= ff.label :comment_for_requestor, "Mark request completed" %></b>
+            <%= ff.text_field :comment_for_requestor, class: "form-control", placeholder: "Leave a comment for #{request.user.name} (optional)" %>
             <%= ff.hidden_field :offer_id, value: @offer.id.to_i %>
           <% end %>
-          
-          <%= f.submit "Mark request completed", :class => "btn btn-success" %>
+          <%= f.submit "Item was picked up", :class => "btn btn-outline-success" %>
         <% end %>
       </li>
     

@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def time_ago(resource)
-    seconds_ago = Time.now - resource.created_at
+    seconds_ago = Time.now - resource.created_at.localtime
     minutes_ago = (seconds_ago/60).floor
     hours_ago = (minutes_ago/60).floor
     days_ago = (hours_ago/24).floor
