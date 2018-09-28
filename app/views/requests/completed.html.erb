@@ -6,35 +6,11 @@
   <ul class="list-group">
     <% @requests.each do |request| %>
       <li class="list-group-item lt-grey-box">
-        <b>Message: </b><%= request.message %><br>
-        <b>From: </b><%= request.user.name %><br>
-        <% if request.requestor_email.present? %>
-          <b>Email: </b><%= request.requestor_email %><br>
-        <% end %>
-        <% if request.requestor_phone.present? %>
-          <b>Phone: </b><%= format_phone(request.requestor_phone) %><br>
-        <% end %>
-        <b>Request date: </b><%= format_date(request.created_at.localtime) %><br>
-        <br>
-        <% if @offer.comments.find {|c| c.requestor_id == request.user.id} %>
-          <% comment = @offer.comments.find {|c| c.requestor_id == request.user.id} %>
-          <b>Your comment: </b><%= comment.comment_for_requestor %>
-        <% else %>
-          <%= form_for request, url: "/request/#{request.id}" do |f| %>
-            <%= f.hidden_field :completed, value: true %>
-            <%= fields_for @comment do |ff| %>
-              <%= ff.text_field :comment_for_requestor, class: "form-control", placeholder: "Leave a comment for #{request.user.name}" %>
-              <%= ff.hidden_field :offer_id, value: @offer.id.to_i %>
-            <% end %>
-            <%= f.submit "Submit", :class => "btn btn-outline-success" %>
-          <% end %>
-        <% end %>
+        <h4><%= link_to request.offer.headline, offer_request_path(request.offer, request) %></h4>
+        <div class="small">Requested <%= format_date(request.created_at.localtime) %></div>
       </li>
     <% end %>
   </ul>
-
-  <br>
-  <%= link_to "Open requests", offer_requests_path %>
 
 <% else %>
   <br>

@@ -41,6 +41,10 @@ class RequestsController < ApplicationController
     @requests = @offer.requests.select { |r| r.completed == true }
   end
 
+  def completed
+    @requests = current_user.requests.select { |r| r.completed == true}
+  end
+
   def edit
     @offer = Offer.find_by(id: params[:offer_id])
     @request = Request.find_by(id: params[:id])
