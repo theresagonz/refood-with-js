@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   
   resources :offers do
     resources :requests
+    get '/completed' => 'requests#completed'
   end
 
   patch '/request/:id' => 'requests#complete'

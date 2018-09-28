@@ -36,6 +36,11 @@ class RequestsController < ApplicationController
     @comment = Comment.new
   end
 
+  def completed
+    @offer = Offer.find_by(id: params[:offer_id])
+    @requests = @offer.requests.select { |r| r.completed == true }
+  end
+
   def edit
     @offer = Offer.find_by(id: params[:offer_id])
     @request = Request.find_by(id: params[:id])
