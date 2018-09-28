@@ -36,7 +36,7 @@ class RequestsController < ApplicationController
     @comment = Comment.new
   end
 
-  def completed
+  def offer_completed
     @offer = Offer.find_by(id: params[:offer_id])
     @requests = @offer.requests.select { |r| r.completed == true }
   end

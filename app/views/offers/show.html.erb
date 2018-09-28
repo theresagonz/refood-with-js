@@ -22,7 +22,7 @@
 <% if @offer.user == current_user %>
   <br>
   <% if @requests.count == 0 %>
-    <h3><%= link_to "#{@requests.count} open requests", offer_requests_path(@offer) %></h3>
+    <h3><%= link_to "No open requests", offer_requests_path(@offer) %></h3>
   <% elsif @requests.count == 1 %>
     <h3><%= link_to "1 open request", offer_requests_path(@offer) %></h3>
   <% else %>

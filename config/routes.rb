@@ -21,9 +21,10 @@ Rails.application.routes.draw do
   
   resources :offers do
     resources :requests
-    get '/completed' => 'requests#completed'
+    get '/completed' => 'requests#offer_completed'
   end
 
+  get '/requests/completed' => 'requests#completed'
   patch '/request/:id' => 'requests#complete'
   
   post '/comments' => 'comments#create'
