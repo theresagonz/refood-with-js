@@ -66,7 +66,7 @@ class RequestsController < ApplicationController
     request = Request.find_by(id: params[:id])
     request.update(request_params)
 
-    flash[:message] = "Thanks for being an awesome human!"
+    flash[:message] = "Thanks for giving!"
     redirect_to offer_requests_path(request.offer)
   end
 

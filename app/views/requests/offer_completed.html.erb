@@ -22,13 +22,11 @@
     <% end %>
   </ul>
 
-  <br>
-  <%= link_to "Open requests", offer_requests_path %>
-
 <% else %>
   <br>
-  <h5>Currently no completed requests</h5>
+  <h5>No completed requests</h5>
 <% end %>
 
 <br>
+<%= link_to "Open requests", offer_requests_path(@offer) %><br>
 <%= link_to "Back to index", '/index' %>

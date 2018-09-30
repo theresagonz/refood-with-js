@@ -1,6 +1,4 @@
 <% if @requests.present? %>
-  <br>
-  <h3>My requests</h3>
   <ul class="list-group">
   <% @requests.each do |request| %>
     <li class="list-group-item">
@@ -9,4 +7,6 @@
       <span class="small grey-text">requested <%= time_ago(request) %> ago</span></li>
   <% end %>
   </ul>
+<% else %>
+  <h5>No open requests</h5>
 <% end %>
