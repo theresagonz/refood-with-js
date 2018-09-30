@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_30_194517) do
+ActiveRecord::Schema.define(version: 2018_09_30_230239) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "giver_id"
@@ -52,9 +52,8 @@ ActiveRecord::Schema.define(version: 2018_09_30_194517) do
     t.string "requestor_phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "completed", default: false
-    t.boolean "giver_point"
-    t.boolean "requestor_point"
+    t.boolean "completed_requestor", default: false
+    t.boolean "completed_giver", default: false
   end
 
   create_table "users", force: :cascade do |t|

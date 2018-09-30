@@ -9,6 +9,6 @@ class WelcomeController < ApplicationController
 
   def index
     @offers = current_user.offers.select { |o| !o.closed && !o.deleted }
-    @requests = current_user.requests.select { |r| !r.completed }
+    @requests = current_user.requests.select { |r| !r.completed_requestor }
   end
 end

@@ -12,7 +12,7 @@
     <% end %>
 
     <b>Requested: </b><%= format_date(@request.created_at.localtime) %><br>
-    <b>Completed: </b><%= @request.completed ? "yes" : "no" %>
+    <b>Completed: </b><%= @request.completed_requestor ? "yes" : "no" %>
   </div>
     
   <br>
@@ -36,6 +36,6 @@
     <% end %>
 
     <b>Requested: </b><%= format_date(@request.created_at.localtime) %><br>
-    <b>Completed: </b><%= @request.completed ? "yes" : "no" %>
+    <b>Completed: </b><%= @request.completed_requestor ? "yes" : "no" %>
   </div>
 <% end %>

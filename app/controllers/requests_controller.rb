@@ -32,17 +32,16 @@ class RequestsController < ApplicationController
 
   def index
     @offer = Offer.find_by(id: params[:offer_id])
-    @requests = @offer.requests.select { |r| r.completed == false }
-    @comment = Comment.new
+    @requests = @offer.requests.select { |r| r.completed_requestor == false }
   end
 
   def offer_completed
     @offer = Offer.find_by(id: params[:offer_id])
-    @requests = @offer.requests.select { |r| r.completed == true }
+    @requests = @offer.requests.select { |r| r.completed_requestor == true }
   end
 
   def completed
-    @requests = current_user.requests.select { |r| r.completed == true}
+    @requests = current_user.requests.select { |r| r.completed_requestor == true}
   end
 
   def edit
@@ -81,10 +80,6 @@ class RequestsController < ApplicationController
   private
 
     def request_params
-      params.require(:request).permit(:message, :requestor_email, :requestor_phone, :completed, :offer_id, :completed, :requestor_point, :giver_point)
-    end
-
-    def comment_params
-      params.require(:comment).permit(:comment_for_requestor, :comment_for_giver, :offer_id)
+      params.require(:request).permit(:message, :requestor_email, :requestor_phone, :offer_id, :completed_requestor, :completed_giver)
     end
 end
