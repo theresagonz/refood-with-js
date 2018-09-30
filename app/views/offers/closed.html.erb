@@ -2,7 +2,7 @@
 
 <h1>Closed offers</h1>
 
-<% if @offers %>
+<% if @offers.present? %>
   <ul class="list-group">
     <% @offers.each do |offer| %>
       <li class="list-group-item">
@@ -14,7 +14,7 @@
 
 <% else %>
   <br>
-  <h5 class="left-padding">Currently no closed offers</h5>
+  <h5>Currently no closed offers</h5>
 <% end %>
 
 <br>

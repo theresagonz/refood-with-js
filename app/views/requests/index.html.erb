@@ -20,13 +20,12 @@
         <b>Request date: </b><%= format_date(request.created_at.localtime) %><br>
 
         <br>
+
+        Successful pickup?<br>
         <%= form_for request, url: "/request/#{request.id}" do |f| %>
           <%= f.hidden_field :completed, value: true %>
-          <%= fields_for @comment do |ff| %>
-            <%= ff.text_field :comment_for_requestor, class: "form-control", placeholder: "Leave a comment for #{request.user.name} (optional)" %>
-            <%= ff.hidden_field :offer_id, value: @offer.id.to_i %>
-          <% end %>
-          <%= f.submit "Mark request completed", :class => "btn btn-outline-success" %>
+          <%= f.hidden_field :requestor_point, value: true %>
+        <%= f.submit "Give #{request.user.name} a point", class: "btn btn-outline-success" %>
         <% end %>
       </li>
     <% end %>

@@ -18,20 +18,6 @@
           <b>Phone: </b><%= format_phone(request.requestor_phone) %><br>
         <% end %>
         <b>Request date: </b><%= format_date(request.created_at.localtime) %><br>
-        <br>
-        <% if @offer.comments.find {|c| c.requestor_id == request.user.id} %>
-          <% comment = @offer.comments.find {|c| c.requestor_id == request.user.id} %>
-          <b>Your comment: </b><%= comment.comment_for_requestor %>
-        <% else %>
-          <%= form_for request, url: "/request/#{request.id}" do |f| %>
-            <%= f.hidden_field :completed, value: true %>
-            <%= fields_for @comment do |ff| %>
-              <%= ff.text_field :comment_for_requestor, class: "form-control", placeholder: "Leave a comment for #{request.user.name}" %>
-              <%= ff.hidden_field :offer_id, value: @offer.id.to_i %>
-            <% end %>
-            <%= f.submit "Submit", :class => "btn btn-outline-success" %>
-          <% end %>
-        <% end %>
       </li>
     <% end %>
   </ul>

@@ -65,19 +65,9 @@ class RequestsController < ApplicationController
   def complete
     request = Request.find_by(id: params[:id])
     request.update(request_params)
-    offer = Offer.find_by(id: params[:comment][:offer_id])
 
-    if params[:comment][:comment_for_requestor].present?
-      comment = Comment.new(comment_params)
-      comment.giver_id = current_user.id
-      comment.requestor_id = request.user.id
-      comment.save
-      flash[:message] = "Offer marked completed. Thanks for leaving a comment!"
-      redirect_to offer_requests_path(offer)
-    else
-      flash[:message] = "Offer marked completed!"
-      redirect_to offer_requests_path(offer)
-    end
+    flash[:message] = "Thanks for being an awesome human!"
+    redirect_to offer_requests_path(request.offer)
   end
 
   def destroy
@@ -91,7 +81,7 @@ class RequestsController < ApplicationController
   private
 
     def request_params
-      params.require(:request).permit(:message, :requestor_email, :requestor_phone, :completed, :offer_id)
+      params.require(:request).permit(:message, :requestor_email, :requestor_phone, :completed, :offer_id, :completed, :requestor_point, :giver_point)
     end
 
     def comment_params
