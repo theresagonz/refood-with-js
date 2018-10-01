@@ -1,8 +1,12 @@
 <% if @requests.present? %>
   <ul class="list-group">
   <% @requests.each do |request| %>
-    <li class="list-group-item">
+      <li class="list-group-item">
+    <% if request.completed_requestor %>
+      <%= link_to request.offer.headline, offer_request_path(request.offer, request) %> <span class="badge badge-warning">New activity</span><br>
+    <% else %>
       <%= link_to request.offer.headline, offer_request_path(request.offer, request) %><br>
+    <% end %>
       <%= request.user.city %>, <%= request.user.state %><br>
       <span class="small grey-text">requested <%= time_ago(request) %> ago</span></li>
   <% end %>

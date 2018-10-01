@@ -20,12 +20,15 @@
         <b>Request date: </b><%= format_date(request.created_at.localtime) %><br>
 
         <br>
-
-        Successful pickup?<br>
-        <%= form_for request, url: "/request/#{request.id}" do |f| %>
-          <%= f.hidden_field :completed_requestor, value: true %>
-          <%= f.submit "Give #{request.user.name} karma", class: "btn btn-outline-success" %>
+        <% if request.completed_giver %>
+          <%= request.user.name %> marked picked up! <span class="badge badge-warning">New</span>
+        <% else %>
+          Successful pickup?<br>
         <% end %>
+          <%= form_for request, url: "/request/#{request.id}" do |f| %>
+            <%= f.hidden_field :completed_requestor, value: true %>
+            <%= f.submit "Give #{request.user.name} karma", class: "btn btn-outline-success" %>
+          <% end %>
       </li>
     <% end %>
   </ul>

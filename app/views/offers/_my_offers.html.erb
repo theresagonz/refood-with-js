@@ -1,7 +1,7 @@
 <% if @offers.present? %>
   <ul class="list-group">
   <% @offers.each do |offer| %>
-    <li class="list-group-item"><%= link_to offer.headline, offer_path(offer) %><br>
+    <li class="list-group-item"><%= link_to offer.headline, offer_path(offer) %> <span class="badge badge-secondary"><%= offer.requests.select { |r| !r.completed_requestor }.count%> open requests</span><br>
     <span class="small grey-text">posted <%= time_ago(offer) %> ago</span></li>
   <% end %>
   </ul>

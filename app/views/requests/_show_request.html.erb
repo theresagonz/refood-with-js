@@ -12,15 +12,18 @@
     <% end %>
 
     <b>Requested: </b><%= format_date(@request.created_at.localtime) %><br>
-    <b>Giver marked picked up: </b><%= @request.completed_requestor ? "yes" : "no" %><br>
-
+    <br>
     <% if !@request.completed_giver %>
-      <br>
-      Successful pickup?<br>
+      <% if @request.completed_requestor %>
+        <%= @request.offer.user.name %> marked picked up! <span class="badge badge-warning">New</span><br>
+      <% else %>
+        Successful pickup?<br>
+      <% end %>
       <%= form_for @request, url: "/request/#{@request.id}" do |f| %>
         <%= f.hidden_field :completed_giver, value: true %>
         <%= f.submit "Give #{@request.offer.user.name} karma", class: "btn btn-outline-success" %>
       <% end %>
+
     <% end %>
 
   </div>
