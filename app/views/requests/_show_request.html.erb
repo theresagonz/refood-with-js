@@ -17,7 +17,7 @@
     <% if !@request.completed_giver %>
       <br>
       Successful pickup?<br>
-      <%= form_for request, url: "/request/#{request.id}" do |f| %>
+      <%= form_for @request, url: "/request/#{@request.id}" do |f| %>
         <%= f.hidden_field :completed_giver, value: true %>
         <%= f.submit "Give #{@request.offer.user.name} a point", class: "btn btn-outline-success" %>
       <% end %>
