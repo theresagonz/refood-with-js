@@ -12,14 +12,26 @@
     <% end %>
 
     <b>Requested: </b><%= format_date(@request.created_at.localtime) %><br>
-    <b>Completed: </b><%= @request.completed_requestor ? "yes" : "no" %>
+    <b>Giver marked picked up: </b><%= @request.completed_requestor ? "yes" : "no" %><br>
+
+    <% if !@request.completed_giver %>
+      <br>
+      Successful pickup?<br>
+      <%= form_for request, url: "/request/#{request.id}" do |f| %>
+        <%= f.hidden_field :completed_giver, value: true %>
+        <%= f.submit "Give #{@request.offer.user.name} a point", class: "btn btn-outline-success" %>
+      <% end %>
+    <% end %>
+
   </div>
-    
-  <br>
-  <div class="btn-group">
-    <%= link_to "Edit request", edit_offer_request_path, class: "btn btn-primary" %>
-    <%= button_to "Delete request", offer_request_path(@request), class: "btn btn-outline-danger btn_left-margin", method: "delete", data: { confirm: "Are you sure you want to delete this request?"} %>
-  </div>
+  
+  <% if !@request.completed_giver %>
+    <br>
+    <div class="btn-group">
+      <%= link_to "Edit request", edit_offer_request_path(@offer, @request), class: "btn btn-primary" %>
+      <%= button_to "Delete request", offer_request_path(@request), class: "btn btn-outline-danger btn_left-margin", method: "delete", data: { confirm: "Are you sure you want to delete this request?"} %>
+    </div>
+  <% end %>
 
 <% else %>
   <div class="lt-grey-box">
@@ -36,6 +48,6 @@
     <% end %>
 
     <b>Requested: </b><%= format_date(@request.created_at.localtime) %><br>
-    <b>Completed: </b><%= @request.completed_requestor ? "yes" : "no" %>
+    <b>Giver marked completed: </b><%= @request.completed_requestor ? "yes" : "no" %>
   </div>
 <% end %>

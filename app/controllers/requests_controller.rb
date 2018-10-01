@@ -41,7 +41,7 @@ class RequestsController < ApplicationController
   end
 
   def completed
-    @requests = current_user.requests.select { |r| r.completed_requestor == true}
+    @requests = current_user.requests.select { |r| r.completed_giver == true}
   end
 
   def edit
@@ -50,6 +50,7 @@ class RequestsController < ApplicationController
   end
 
   def update
+    binding.pry
     @offer = Offer.find_by(id: params[:offer_id])
     @request = Request.find_by(id: params[:id])
     if @request.update(request_params)
@@ -64,6 +65,7 @@ class RequestsController < ApplicationController
   def complete
     request = Request.find_by(id: params[:id])
     request.update(request_params)
+    binding.pry
 
     flash[:message] = "Thanks for giving!"
     redirect_to offer_requests_path(request.offer)
