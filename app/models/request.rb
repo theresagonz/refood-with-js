@@ -8,6 +8,11 @@ class Request < ApplicationRecord
   validates :message, presence: true
   validate :email_or_phone
 
+
+  def self.recently_completed
+    Request.where("completed_requestor = ?", true).or(Request.where("completed_giver = ?", true)).order(updated_at: :desc).limit(10)
+  end
+
   private
 
     def email_or_phone

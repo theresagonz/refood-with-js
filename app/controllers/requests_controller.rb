@@ -44,6 +44,10 @@ class RequestsController < ApplicationController
     @requests = current_user.requests.select { |r| r.completed_giver == true}
   end
 
+  def recently_completed
+    @requests = Request.recently_completed
+  end
+
   def edit
     @offer = Offer.find_by(id: params[:offer_id])
     @request = Request.find_by(id: params[:id])
