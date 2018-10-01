@@ -24,7 +24,7 @@
         Successful pickup?<br>
         <%= form_for request, url: "/request/#{request.id}" do |f| %>
           <%= f.hidden_field :completed_requestor, value: true %>
-          <%= f.submit "Give #{request.user.name} a point", class: "btn btn-outline-success" %>
+          <%= f.submit "Give #{request.user.name} karma", class: "btn btn-outline-success" %>
         <% end %>
       </li>
     <% end %>

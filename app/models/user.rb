@@ -16,4 +16,8 @@ class User < ApplicationRecord
     message: "only allows numbers" }
   validates :password, presence: true, allow_nil: true
   validates :password_confirmation, presence: true, allow_nil: true
+
+  def karma
+    self.giver.requests.select { |r| r.completed_giver }.count + self.requestor.requests.select { |r| r.completed_requestor }.count
+  end
 end
