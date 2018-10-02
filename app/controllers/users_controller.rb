@@ -52,6 +52,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    @user = User.find_by(id: params[:id])
+  end
+
   def destroy
     current_user.delete
     session.delete :user_id

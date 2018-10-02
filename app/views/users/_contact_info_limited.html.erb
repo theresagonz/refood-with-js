@@ -1,0 +1,10 @@
+  <div>
+    <h3>Pick up from:</h3>
+    <b>Name: </b><%= @user.name %><br>
+    
+    <%= render 'users/address' %>
+    <% if @user.city.present? && @user.state.present? && @user.address.blank? %>
+      <b>City: </b><%= @user.city %>, <%= @user.state %><br>
+    <% end %>
+  </div>
+  

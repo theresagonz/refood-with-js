@@ -1,0 +1,14 @@
+  <div>
+    <h3>Contact Info</h3>
+    <b>Name: </b><%= @user.name %><br>
+    <b>Email: </b><%= link_to @user.email, "mailto:#{@user.email}" %><br>
+
+    <% if @user.phone.present? %>
+      <b>Phone: </b><%= format_phone(@user.phone) %><br>
+    <% end %>
+    <%= render 'users/address' %>
+    <% if @user.city.present? && @user.state.present? && @user.address.blank? %>
+      <b>City: </b><%= @user.city %>, <%= @user.state %><br>
+    <% end %>
+  </div>
+  

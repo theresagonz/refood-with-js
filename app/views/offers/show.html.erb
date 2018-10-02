@@ -17,14 +17,16 @@
   <% if has_request(current_user, @offer) %>
     <br>
       <div class="lt-grey-box">
-      <%= render "contact_info" %>
+      <% @user = @offer.user %>
+      <%= render "users/contact_info" %>
     </div>
     <br>
     <%= link_to "View your request for this item", offer_request_path(@offer, @request) %>
   <% else %>
     <br>
     <div class="lt-grey-box">
-      <%= render "contact_info_limited" %>
+      <% @user = @offer.user %>
+      <%= render "users/contact_info_limited" %>
     </div>
       <br>
     <%= link_to "Make request", new_offer_request_path(@offer), class: "btn btn-success" %>

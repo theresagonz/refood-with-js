@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md">
+      <h1><%= @user.name %></h1>
+      <h5><b>Karma: </b><%= @user.karma %></h5>
+      <h6><b>Member since: </b><%= format_date(@user.created_at) %></h6>
+      <br>
+    </div>
+    <div class="col-md center">
+      <%= render 'contact_info' %>
+    </div>
+  </div>
+</div>
+
+<br>
+<h3>Current offers</h3>
+  <ul class="list-group">
+    <% @user.offers.each do |offer| %>
+      <li class="list-group-item">
+        <%= link_to offer.headline, offer_path(offer) %>
+        <div class="small grey-text">posted <%= time_ago(offer) %> ago</div>
+        </li>
+    <% end %>
+  </ul>

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'welcome#home'
   
-  resources :users, except: [:new, :create, :edit]
+  resources :users, only: [:update, :show, :destroy]
   get '/add-info' => 'users#add_info'
   get '/edit-profile' => 'users#edit'
   get '/signup' => 'users#new'
