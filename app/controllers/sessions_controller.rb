@@ -28,9 +28,8 @@ class SessionsController < ApplicationController
     else
       @user = User.new(email: auth[:email], name: auth[:first_name], password: SecureRandom.urlsafe_base64(n=6))
       if @user.save
-        @user.build_giver
-        @user.build_requestor
-        @user.save
+        @user.build_giver.save
+        @user.build_requestor.save
 
         session[:user_id] = @user.try(:id)
         flash.now[:message] = "Welcome to Refood!"
