@@ -31,13 +31,12 @@ class SessionsController < ApplicationController
         @user.build_giver.save
         @user.build_requestor.save
 
-        session[:user_id] = @user.try(:id)
+        session[:user_id] = @user.id
         flash.now[:message] = "Welcome to Refood!"
         render :'users/add_info'
       else
-        flash.now[:error] = ["There was a problem with your Google login"
-        ]
-        render :'users/new'
+        flash.now[:error] = ["There was a problem with your Google login"]
+        render :signup
       end
     end
   end

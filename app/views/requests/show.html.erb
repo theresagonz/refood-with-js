@@ -2,7 +2,11 @@
 <%= render 'layouts/flash_message' %>
 
 <h1><%= @offer.closed ? "Closed" : "Open" %> Offer</h1>
-<h3><%= link_to @offer.headline, offer_path(@offer) %></h3>
+<% if User.find_by(id: @offer.giver_id) %>
+  <h3><%= link_to @offer.headline, offer_path(@offer) %></h3>
+<% else %>
+  <h3><%= @offer.headline %></h3>
+<% end %>
 <div class="small">Posted on <%= format_date(@offer.created_at.localtime) %></div>
 
 <br>

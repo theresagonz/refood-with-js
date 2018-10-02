@@ -58,7 +58,7 @@ class RequestsController < ApplicationController
     @request = Request.find_by(id: params[:id])
     if @request.update(request_params)
       flash[:message] = 'Request successfully updated'
-      redirect_to offer_request_path(@offer, @request)
+      redirect_to '/index'
     else
       flash.now[:error] = @request.errors.full_messages.uniq
       render :edit
@@ -69,7 +69,7 @@ class RequestsController < ApplicationController
     request = Request.find_by(id: params[:id])
     request.update(request_params)
     flash[:message] = "Thanks for giving!"
-    redirect_to '/index'
+    redirect_to offer_requests_path(request.offer)
   end
 
   def destroy

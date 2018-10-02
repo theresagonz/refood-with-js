@@ -5,6 +5,7 @@ class UsersController < ApplicationController
     redirect_to_index_if_not_authorized('id', 'profile')
   end
   before_action :redirect_to_index_if_logged_in, only: [:new]
+  before_destroy 
 
   def index
   end

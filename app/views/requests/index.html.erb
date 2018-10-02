@@ -9,28 +9,36 @@
   <ul class="list-group">
     <% @requests.each do |request| %>
       <li class="list-group-item lt-grey-box">
-        <b>From: </b><%= link_to request.user.name, user_path(request.user) %><br>
-        <% if request.requestor_email.present? %>
-          <b>Email: </b><%= link_to request.requestor_email, "mailto:#{request.requestor_email}" %><br>
-        <% end %>
-        <% if request.requestor_phone.present? %>
-          <b>Phone: </b><%= format_phone(request.requestor_phone) %><br>
+        <% if request.requestor.user %>
+          <b>From: </b><%= link_to request.user.name, user_path(request.user) %><br>
+          <% if request.requestor_email.present? %>
+            <b>Email: </b><%= link_to request.requestor_email, "mailto:#{request.requestor_email}" %><br>
+          <% end %>
+          <% if request.requestor_phone.present? %>
+            <b>Phone: </b><%= format_phone(request.requestor_phone) %><br>
+          <% end %>
+        <% else %>
+          <b>From: </b>Deleted account<br>
         <% end %>
         <b>Message: </b><%= request.message %><br>
-        <b>Request date: </b><%= format_date(request.created_at.localtime) %><br>
+        <b>Request date: </b><%= format_date(request.created_at.localtime) %>
 
         <br>
-        <% if request.completed_giver %>
-          <%= request.user.name %> marked picked up! <span class="badge badge-warning">New</span>
-        <% else %>
-          Successful pickup?<br>
-        <% end %>
-          <%= form_for request, url: "/request/#{request.id}" do |f| %>
-            <%= f.hidden_field :completed_requestor, value: true %>
-            <%= f.submit "Give #{request.user.name} karma", class: "btn btn-outline-success" %>
+        <% if request.requestor.user %>
+          <% if request.completed_giver %>
+            <br>
+            <%= request.user.name %> marked picked up! <span class="badge badge-warning">New</span>
+          <% else %>
+            Successful pickup?<br>
           <% end %>
-      </li>
-    <% end %>
+            <%= form_for request, url: "/request/#{request.id}" do |f| %>
+              <%= f.hidden_field :completed_requestor, value: true %>
+              <%= f.submit "Give #{request.user.name} karma", class: "btn btn-outline-success" %>
+            <% end %>
+          <% end %>
+        </li>
+      <% end %>
+
   </ul>
 
 

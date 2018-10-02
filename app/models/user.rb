@@ -5,8 +5,6 @@ class User < ApplicationRecord
   has_one :requestor
   has_many :offers, through: :giver
   has_many :requests, through: :requestor
-  has_many :comments, through: :givers
-  has_many :comments, through: :requestors
   has_secure_password
   # accepts_nested_attributes_for :requests
 
