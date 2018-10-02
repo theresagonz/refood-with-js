@@ -2,11 +2,14 @@
   <ul class="list-group">
   <% @requests.each do |request| %>
       <li class="list-group-item">
-    <% if request.completed_requestor %>
-      <%= link_to request.offer.headline, offer_request_path(request.offer, request) %> <span class="badge badge-warning">New activity</span><br>
-    <% else %>
-      <%= link_to request.offer.headline, offer_request_path(request.offer, request) %><br>
+      <%= link_to request.offer.headline, offer_request_path(request.offer, request) %>
+    <% if request.offer.closed %>
+      <span class="badge badge-info">Closed offer</span>
     <% end %>
+    <% if request.completed_requestor %>
+      <span class="badge badge-warning">New activity</span>
+    <% end %>
+    <br>
       <%= request.user.city %>, <%= request.user.state %><br>
       <span class="small grey-text">requested <%= time_ago(request) %> ago</span></li>
   <% end %>
