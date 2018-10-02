@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md">
       <h1><%= @user.name %></h1>
-      <h5><b>Karma: </b><%= @user.karma %></h5>
+      <h6><b>Karma: </b><%= @user.karma %></h6>
       <h6><b>Member since: </b><%= format_date(@user.created_at) %></h6>
       <br>
     </div>
@@ -12,8 +12,9 @@
   </div>
 </div>
 
-<br>
-<h3>Current offers</h3>
+<% if @user.offers.present? %>
+  <br>
+  <h3>Current offers</h3>
   <ul class="list-group">
     <% @user.offers.each do |offer| %>
       <li class="list-group-item">
@@ -22,3 +23,4 @@
         </li>
     <% end %>
   </ul>
+<% end %>

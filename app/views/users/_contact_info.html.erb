@@ -1,6 +1,6 @@
   <div>
     <h3>Contact Info</h3>
-    <b>Name: </b><%= @user.name %><br>
+    <b>Name: </b><%= link_to @user.name, user_path(@user) %><br>
     <b>Email: </b><%= link_to @user.email, "mailto:#{@user.email}" %><br>
 
     <% if @user.phone.present? %>

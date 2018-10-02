@@ -1,16 +1,15 @@
 <% if @request.user == current_user %>
   <div class="lt-grey-box">
     <h3>Your Request</h3>
-    <b>Message: </b><%= @request.message %><br>
-    
     <% if @request.requestor_email.present? %>
-      <b>Email: </b><%= link_to @request.requestor_email, "mailto:#{@request.requestor_email}" %><br>
+      <b>Email: </b><%= @request.requestor_email %><br>
     <% end %>
     
     <% if @request.requestor_phone.present? %>
       <b>Phone: </b><%= format_phone(@request.requestor_phone) %><br>
     <% end %>
 
+    <b>Message: </b><%= @request.message %><br>
     <b>Requested: </b><%= format_date(@request.created_at.localtime) %><br>
     <br>
     <% if !@request.completed_giver %>
