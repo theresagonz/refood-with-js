@@ -1,26 +1,36 @@
 <%= render 'layouts/flash_error' %>
 <%= render 'layouts/flash_message' %>
 
-<h1><%= @offer.headline %></h1>
-<h4><%= @offer.description %></h4>
-<div class="small">Posted on <%= format_date(@offer.created_at.localtime) %></div><br>
+<h1><%= @offer.closed ? "Closed" : "Open" %> Offer</h1>
+<br>
+<h3><%= @offer.headline %></h3>
+<h5><%= @offer.description %></h5>
+<div class="small grey-text">Posted on <%= format_date(@offer.created_at.localtime) %></div><br>
 
-<div class="left-padding">
+<div>
   <% if @offer.availability.present? %>
-    <b>Availability: </b><%= @offer.availability %><br>
+    <b>Availability for pickup: </b><%= @offer.availability %><br>
   <% end %>
-  <b>Open: </b><%= @offer.closed ? "no" : "yes" %><br>
 </div>
 
  <% if @offer.user != current_user %>
-  <br>
-  <div class="lt-grey-box">
-    <%= render "contact_info" %>
-  </div>
-<% end %>
-
-<% if @offer.user == current_user %>
-  <br>
+  <% if has_request(current_user, @offer) %>
+    <br>
+      <div class="lt-grey-box">
+      <%= render "contact_info" %>
+    </div>
+    <br>
+    <%= link_to "View your request for this item", offer_request_path(@offer, @request) %>
+  <% else %>
+    <br>
+    <div class="lt-grey-box">
+      <%= render "contact_info_limited" %>
+    </div>
+      <br>
+    <%= link_to "Make request", new_offer_request_path(@offer), class: "btn btn-success" %>
+    <%= link_to "Cancel", '/index', class: "btn btn-secondary" %>
+  <% end %>
+<% else %>
   <% if @requests.count == 0 %>
     <h3><%= link_to "No open requests", offer_requests_path(@offer) %></h3>
   <% elsif @requests.count == 1 %>
@@ -29,16 +39,10 @@
     <h3><%= link_to "#{@requests.count} open requests", offer_requests_path(@offer) %></h3>
   <% end %>
 
-<%= link_to "Completed requests", offer_completed_path(@offer) %>
+  <%= link_to "Completed requests", offer_completed_path(@offer) %>
   <br></br>
   <div class="btn-group">
     <%= link_to "Edit offer", edit_offer_path(@offer), class: "btn btn-primary" %>
     <%= button_to "Delete offer", offer_path(@offer), method: "delete", class: "btn btn-outline-danger btn-left-margin", data: { confirm: "Are you sure you want to delete this offer?"} %>
   </div>
-<% elsif has_request(current_user, @offer) %>
-  <br>
-   <%= link_to "View your request for this item", offer_request_path(@offer, @request) %>
-<% else %>
-  <br>
-  <%= link_to "Make request", new_offer_request_path(@offer), class: "btn btn-success" %>
 <% end %>

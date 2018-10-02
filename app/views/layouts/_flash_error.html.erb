@@ -1,13 +1,9 @@
 <% if flash[:error] %>
-  <div class="alert alert-danger">
-    <ul>
-      <% flash[:error].each do |error| %>
-        <li>
-          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-          <span class="sr-only">Error:</span>
-          <%= error %>
-        </li>
-      <% end %>
-    </ul>
+  <div class="alert alert-danger" role="alert">
+    <% flash[:error].each do |error| %>
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Error:</span>
+        <%= error %><br>
+    <% end %>
   </div>
 <% end %>
