@@ -43,6 +43,3 @@
   <%= f.submit "Update profile", class: "btn btn-primary" %>
   <%= link_to "Cancel", '/index', class: "btn btn-secondary" %>
 <% end %>
-
-<br>
-<%= button_to "Remove account", user_path(@user), method: "delete", class: "btn btn-outline-danger btn-left-margin", data: { confirm: "Are you sure you want to delete your account? This cannot be undone."} %>

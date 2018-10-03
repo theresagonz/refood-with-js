@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     redirect_to_index_if_not_authorized('id', 'profile')
   end
   before_action :redirect_to_index_if_logged_in, only: [:new]
-  before_destroy 
+  # before_destroy 
 
   def index
   end
@@ -57,12 +57,12 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id])
   end
 
-  def destroy
-    current_user.delete
-    session.delete :user_id
-    flash[:message] = "Account successfully removed. Come back anytime!"
-    redirect_to root_path
-  end
+  # def destroy
+  #   current_user.delete
+  #   session.delete :user_id
+  #   flash[:message] = "Account successfully removed. Come back anytime!"
+  #   redirect_to root_path
+  # end
 
   private
 
