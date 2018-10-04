@@ -1,12 +1,11 @@
 <%= render 'layouts/flash_message' %>
 
-<h1 class="slab-font sm-margin-bottom">Completed requests</h1>
+<h1 class="slab-font sm-margin-bottom">Completed Requests</h1>
 
 <% if @requests.present? %>
   <ul class="list-group">
     <% @requests.each do |request| %>
       <li class="list-group-item">
-        <h4 class="slab-font sm-margin-bottom">Request</h4>
         <h4><%= link_to request.offer.headline, offer_request_path(request.offer, request) %></h4>
         <div class="small">Requested <%= format_date(request.created_at.localtime) %></div>
       </li>

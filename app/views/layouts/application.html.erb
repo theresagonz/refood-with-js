@@ -19,7 +19,7 @@
   <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="navbar-left nav-item-left">
-      <a href="/index"><%= image_tag "refood-logo-light.png" %></a>
+      <a href="/index"><%= image_tag "refood-logo-light.png", alt: "Refood logo" %></a>
     </div>
     <div>
       <div class="name-dropdown nav-item-right">
@@ -31,7 +31,7 @@
           <li><%= link_to "Log out", logout_path, method: "delete" %></li>
         </ul>
       </div>
-      <div class="small green-text">
+      <div class="small green-text slab-font">
         KARMA <b><%= current_user.karma %></b>
       </div>
     </div>

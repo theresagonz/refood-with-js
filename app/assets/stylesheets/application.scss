@@ -30,11 +30,11 @@
 }
 
 .nav-item-left {
-  margin: 7px 82px;
+  margin: 7px 32px;
 }
 
 .nav-item-right {
-  margin: 0 95px 0 0;
+  margin: 0 35px 0 0;
 }
 
 .grey-text {
@@ -80,4 +80,10 @@ body {
 
 .sm-margin-bottom {
   margin: 0 0 1.2rem 0;
+}
+
+.home-img {
+  width: 100%;
+  height: auto;
+  border: 1px solid black;
 }
