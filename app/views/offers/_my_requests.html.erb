@@ -2,7 +2,7 @@
   <ul class="list-group">
     <% @requests.each do |request| %>
       <li class="list-group-item">
-        <h4><%= link_to request.offer.headline, offer_request_path(request.offer, request) %></h4>
+        <h5><%= link_to request.offer.headline, offer_request_path(request.offer, request) %></h5>
         <% if request.offer.closed %>
           <span class="badge badge-info">Closed offer</span>
         <% end %>

@@ -2,7 +2,7 @@
   <ul class="list-group">
   <% @offers.each do |offer| %>
     <li class="list-group-item">
-      <h4><%= link_to offer.headline, offer_path(offer) %></h4>
+      <h5><%= link_to offer.headline, offer_path(offer) %></h5>
       <% if offer.requests.any? { |r| r.completed_giver == true && r.completed_requestor == false } %>
         <span class="badge badge-warning">New activity</span>
       <% end %>

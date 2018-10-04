@@ -69,8 +69,12 @@ class ApplicationController < ActionController::Base
   end
 
   def format_date(date)
-    date.strftime('%A, %B %d, %Y @%l:%M %P')
+    date.strftime('%A, %B %e, %Y @%l:%M %P')
+  end
+
+  def format_date_no_time(date)
+    date.strftime('%B %e, %Y')
   end
  
-  helper_method :current_user, :logged_in, :require_login, :format_date, :convert_string_to_date
+  helper_method :current_user, :logged_in, :require_login, :format_date, :format_date_no_time, :convert_string_to_date
 end

@@ -5,7 +5,8 @@
     <% @requests.each do |request| %>
       <li class="list-group-item">
         <%= request.user.name %> picked up <%= link_to request.offer.headline, offer_path(request.offer) %> from <%= request.giver.user.name %><br>
-        <div class="small grey-text"><%= request.offer.user.city %>, <%= request.offer.user.state %></div>
+        <div class="small grey-text left-padding"><%= request.offer.user.city %>, <%= request.offer.user.state %></div>
+        <div class="small grey-text left-padding"><%= format_date_no_time(request.updated_at) %></div>
       </li>
     <% end %>
   </ul>

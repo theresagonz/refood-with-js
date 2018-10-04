@@ -16,7 +16,7 @@ class RequestsController < ApplicationController
 
     if request.save
       offer = Offer.find(params[:offer_id])
-      flash[:message] = "Thanks for making a new request! #{offer.user.name} has been notified"
+      flash[:message] = "Request successfully created. #{offer.user.name} has been notified."
       redirect_to offer_request_path(offer, request)
     else
       flash.now[:error] = request.errors.full_messages
@@ -68,7 +68,7 @@ class RequestsController < ApplicationController
   def complete
     request = Request.find_by(id: params[:id])
     request.update(request_params)
-    flash[:message] = "Thanks for giving!"
+    flash[:message] = "Thanks for being an awesome human!"
     redirect_to '/'
   end
 

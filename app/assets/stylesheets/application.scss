@@ -55,6 +55,9 @@
 .lt-grey-box {
   background-color: rgb(230, 230, 230);
   padding: 20px 27px;
+  box-shadow: 2px 5px 16px -3px rgba(0,0,0,0.42);
+  border-radius: 6px
+
 }
 
 .lt-green-box {
@@ -86,4 +89,8 @@ body {
   width: 100%;
   height: auto;
   border: 1px solid black;
+}
+
+.list-spacing {
+  margin: 0 0 20px 0;
 }

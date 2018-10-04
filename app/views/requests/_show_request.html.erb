@@ -1,6 +1,6 @@
 <% if @request.user == current_user %>
   <div class="lt-grey-box">
-    <h3 class="slab-font">Your Request</h3>
+    <h4 class="slab-font">Your Request</h4>
     <% if @request.requestor_email.present? %>
       <b>Email: </b><%= @request.requestor_email %><br>
     <% end %>
@@ -23,6 +23,8 @@
         <%= f.hidden_field :completed_giver, value: true %>
         <%= f.submit "Give #{@request.offer.user.name} karma", class: "btn btn-outline-success" %>
       <% end %>
+    <% else %>
+      <div class="slab-font green-text">You marked picked up!</div>
     <% end %>
   </div>
   

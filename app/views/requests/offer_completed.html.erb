@@ -2,14 +2,14 @@
 
 <h1 class="slab-font sm-margin-bottom">Completed requests for:</h1>
 <h3><%= link_to @offer.headline, offer_path(@offer) %></h3>
-<div class="small">You posted on <%= format_date(@offer.created_at.localtime) %></div>
+<div class="small grey-text">Posted on <%= format_date(@offer.created_at.localtime) %></div>
 
 <br>
 <% if @requests.present? %>
   <ul class="list-group">
     <% @requests.each do |request| %>
-      <li class="list-group-item lt-grey-box">
-        <h4 class="slab-font sm-margin-bottom">Request</h4>
+      <li class="list-group-item lt-grey-box list-spacing">
+        <h4 class="slab-font">Request from <%= request.user.name %></h4>
         <b>From: </b><%= link_to request.user.name, user_path(request.user) %><br>
         <% if request.requestor_email.present? %>
           <b>Email: </b><%= link_to request.requestor_email, "mailto:#{request.requestor_email}" %><br>
@@ -19,6 +19,8 @@
         <% end %>
         <b>Message: </b><%= request.message %><br>
         <b>Request date: </b><%= format_date(request.created_at.localtime) %><br>
+        <br>
+        <div class="green-text slab-font">You marked picked up!</div>
       </li>
     <% end %>
   </ul>

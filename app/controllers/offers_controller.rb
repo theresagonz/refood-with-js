@@ -54,7 +54,7 @@ class OffersController < ApplicationController
     else
       @offer.closed = true
       @offer.save
-      flash[:message] = "Offer closed. Thanks for being an awesome human!"
+      flash[:message] = "Offer successfully closed. Thanks for giving!"
       redirect_to '/index'
     end
   end

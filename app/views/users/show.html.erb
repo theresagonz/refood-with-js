@@ -3,7 +3,7 @@
     <div class="col-md">
       <h1 class="slab-font"><%= @user.name %></h1>
       <h5><b>Karma: </b><%= @user.karma %></h5>
-      <h6><b>Member since: </b><%= format_date(@user.created_at) %></h6>
+      <h6><b>Member since: </b><%= format_date_no_time(@user.created_at) %></h6>
       <br>
     </div>
     <div class="col-md center">
