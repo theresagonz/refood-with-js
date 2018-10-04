@@ -12,6 +12,8 @@
 
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab" rel="stylesheet">
   </head>
 
   <body>
@@ -20,8 +22,8 @@
       <a href="/index"><%= image_tag "refood-logo-light.png" %></a>
     </div>
     <div>
-      <div class="name-dropdown navbar-right nav-item-right">
-        <a class="dropdown-toggle navbar-right" data-toggle="dropdown" href="#">Hi <%= current_user.name %>!
+      <div class="name-dropdown nav-item-right">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Hi <%= current_user.name %>!
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><%= link_to "View profile", user_path(current_user) %></li>
@@ -29,8 +31,10 @@
           <li><%= link_to "Log out", logout_path, method: "delete" %></li>
         </ul>
       </div>
-        <div class="small green-text">KARMA <b><%= current_user.karma %></b></div>
+      <div class="small green-text">
+        KARMA <b><%= current_user.karma %></b>
       </div>
+    </div>
   </nav>
 
   <div class="page-content">

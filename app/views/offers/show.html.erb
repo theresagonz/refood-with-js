@@ -1,16 +1,16 @@
 <%= render 'layouts/flash_error' %>
 <%= render 'layouts/flash_message' %>
 
-<h1><%= @offer.closed ? "Closed" : "Open" %> Offer</h1>
-<br>
-<h3><%= @offer.headline %></h3>
+<h1 class="slab-font sm-margin-bottom"><%= @offer.closed ? "Closed" : "Open" %> Offer</h1>
+<h2 class="sm-margin-bottom"><%= @offer.headline %></h2>
 <h5><%= @offer.description %></h5>
-<div>
+<h5 class="sm-margin-bottom"><%= @offer.user.city %>, <%= @offer.user.state %></h5>
+<h6>
   <% if @offer.availability.present? %>
-    <b>Availability for pickup: </b><%= @offer.availability %><br>
+    <h6>Availability: <%= @offer.availability %></h6>
   <% end %>
-</div>
-<div class="small grey-text">Posted on <%= format_date(@offer.created_at.localtime) %></div>
+  <h6 class="small grey-text">Posted on <%= format_date(@offer.created_at.localtime) %></h6>
+</iv>
 
 
  <% if @offer.user != current_user %>

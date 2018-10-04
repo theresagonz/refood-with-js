@@ -1,6 +1,6 @@
 <%= render 'layouts/flash_message' %>
 
-<h1>Completed requests for:</h1>
+<h1 class="slab-font sm-margin-bottom">Completed requests for:</h1>
 <h3><%= link_to @offer.headline, offer_path(@offer) %></h3>
 <div class="small">You posted on <%= format_date(@offer.created_at.localtime) %></div>
 
@@ -9,6 +9,7 @@
   <ul class="list-group">
     <% @requests.each do |request| %>
       <li class="list-group-item lt-grey-box">
+        <h4 class="slab-font sm-margin-bottom">Request</h4>
         <b>From: </b><%= link_to request.user.name, user_path(request.user) %><br>
         <% if request.requestor_email.present? %>
           <b>Email: </b><%= link_to request.requestor_email, "mailto:#{request.requestor_email}" %><br>
@@ -28,5 +29,5 @@
 <% end %>
 
 <br>
-<%= link_to "Open requests", offer_requests_path(@offer) %><br>
-<%= link_to "Back to index", '/index' %>
+<div class="slab-font"><%= link_to "Open requests", offer_requests_path(@offer) %></div>
+<div class="slab-font"><%= link_to "Back to index", '/index' %></div>

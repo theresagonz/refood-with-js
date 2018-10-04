@@ -1,21 +1,32 @@
 <%= render 'layouts/flash_error' %>
 <%= render 'layouts/flash_message' %>
 
-<h1 class="center"><%= link_to "Create new food offer", new_offer_path %></h1>
+<h1 class="slab-font center margin-bottom"><strong><%= link_to "Create New Food Offer", new_offer_path %></strong></h1>
 
-<h1 class="center"><%= link_to "Find food", offers_path %></h1>
-
-<br>
-<h3>My open offers</h3>
-<%= render 'offers/my_offers' %>
-<br>
-<h6><%= link_to "Closed offers", offers_closed_path %></h6>
-<br>
-
-<h3>My open requests</h3>
-<%= render 'offers/my_requests' %>
-<br>
-<h6><%= link_to "Completed requests", requests_completed_path %></h6>
+<h1 class="slab-font center margin-bottom"><strong><%= link_to "Find Food Now", offers_path %></strong></h1>
 
 <br>
-<h4 class="center"><%= link_to "Recent community exchanges", requests_recently_completed_path %></h4>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="slab-font">My Open Offers</h3>
+      <%= render 'offers/my_offers' %>
+      <br>
+    </div>
+    <div class="col-md-6">
+      <h3 class="slab-font">My Open Requests</h3>
+      <%= render 'offers/my_requests' %>
+      <br>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h6 class="slab-font"><%= link_to "Closed Offers", offers_closed_path %></h6>
+    </div>
+    <div class="col-md-6">
+      <h6 class="slab-font"><%= link_to "Completed Requests", requests_completed_path %></h6>
+    </div>
+  </div>
+</div>
+<br></br>
+<h4 class="slab-font center"><%= link_to "Recent Community Exchanges", requests_recently_completed_path %></h4>

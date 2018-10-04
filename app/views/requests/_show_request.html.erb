@@ -1,6 +1,6 @@
 <% if @request.user == current_user %>
   <div class="lt-grey-box">
-    <h3>Your Request</h3>
+    <h3 class="slab-font">Your Request</h3>
     <% if @request.requestor_email.present? %>
       <b>Email: </b><%= @request.requestor_email %><br>
     <% end %>
@@ -11,13 +11,13 @@
 
     <b>Message: </b><%= @request.message %><br>
     <b>Requested: </b><%= format_date(@request.created_at.localtime) %><br>
-    
+
     <br>
     <% if !@request.completed_giver %>
       <% if @request.completed_requestor %>
-        <%= @request.offer.user.name %> marked picked up! <span class="badge badge-warning">New</span><br>
+        <h6 class="slab-font"><%= @request.offer.user.name %> marked picked up! <span class="badge badge-warning">New</span></h6>
       <% else %>
-        Successful pickup?<br>
+        <h6 class="slab-font">Successful pickup?</h6>
       <% end %>
       <%= form_for @request, url: "/request/#{@request.id}" do |f| %>
         <%= f.hidden_field :completed_giver, value: true %>
@@ -36,7 +36,7 @@
 
 <% else %>
   <div class="lt-grey-box">
-    <h3>Request Info</h3>
+    <h3 class="slab-font">Request Info</h3>
     <b>Message: </b><%= @request.message %><br>
     <b>From: </b><%= @request.user.name %><br>
 
