@@ -12,10 +12,10 @@
     <%= password_field_tag :password, "", class: "form-control" %>
   </div>
   <%= submit_tag "Go!", class: "btn btn-primary" %>
-  <span class="left-padding">
-    <%= link_to "Or sign up", signup_path %>
-  </span>
 <% end %>
-
 <br>
-<%= link_to "Log in with Google", "/auth/google_oauth2" %>
+
+<div class="slab-font">No account?</div>
+<%= link_to "Sign up with your email", signup_path %>
+<br>
+<%= link_to "Or log in with Google", "/auth/google_oauth2" %>
