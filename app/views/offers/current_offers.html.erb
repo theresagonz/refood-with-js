@@ -1,0 +1,20 @@
+<h1 class="slab-font sm-margin-bottom">Current Offers</h1>
+
+<% if @offers.present? %>
+  <ul class="list-group">
+  <% @offers.each do |offer| %>
+    <li class="list-group-item">
+      <div><%= link_to offer.headline, offer %></div>
+      <div><%= offer.user.city %>, <%= offer.user.state %></div>
+      <div class="small grey-text">posted <%= time_ago(offer) %> ago</div>
+    </li>
+  <% end %>
+
+<% else %>
+  <br>
+  <h3>Sorry, no current offers. Check back soon!</h3>
+<% end %>
+
+<br>
+<h4 class="slab-font"><%= link_to "Sign up for an account to get started", signup_path %></h4>
+<h5 class="slab-font"><%= link_to "Already have an account? Log in", login_path %></h5>

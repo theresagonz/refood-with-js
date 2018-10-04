@@ -1,5 +1,6 @@
 class OffersController < ApplicationController
-  before_action :require_login
+  layout 'application_no_login_link', only: [:current_offers]
+  before_action :require_login, except: [:current_offers]
   before_action :redirect_to_index_if_not_authorized_to_edit_offer, only: [:edit, :update, :destroy]
 
   def new
@@ -22,6 +23,10 @@ class OffersController < ApplicationController
 
   def closed
     @offers = Offer.select { |o| o.giver_id == current_user.id && o.closed }
+  end
+
+  def current_offers
+    @offers = Offer.select { |o| !o.deleted && !o.closed }
   end
     
   def show

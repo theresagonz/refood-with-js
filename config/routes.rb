@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   
   get '/offers/closed' => 'offers#closed'
   
+  get '/current-offers' => 'offers#current_offers'
+
   resources :offers do
     resources :requests
     get '/completed' => 'requests#offer_completed'
