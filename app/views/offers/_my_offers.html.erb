@@ -2,12 +2,12 @@
   <ul class="list-group">
   <% @offers.each do |offer| %>
     <li class="list-group-item">
-      <%= link_to offer.headline, offer_path(offer) %><br>
+      <h4><%= link_to offer.headline, offer_path(offer) %></h4>
       <% if offer.requests.any? { |r| r.completed_giver == true && r.completed_requestor == false } %>
-        <span class="badge badge-warning">New activity</span><br>
+        <span class="badge badge-warning">New activity</span>
       <% end %>
-      <%= link_to "#{offer.requests.select { |r| !r.completed_requestor }.count} open requests", offer_requests_path(offer) %><br>
-      <span class="small grey-text">posted <%= time_ago(offer) %> ago</span>
+      <h6><%= link_to "#{offer.requests.select { |r| !r.completed_requestor }.count} open requests", offer_requests_path(offer) %></h6>
+      <div class="small grey-text">posted <%= time_ago(offer) %> ago</div>
     </li>
   <% end %>
   </ul>
