@@ -10,6 +10,7 @@ class OffersController < ApplicationController
   def create
     offer = current_user.giver.offers.build(offer_params)
     if offer.save
+      flash[:message] = "Offer successfully created"
       redirect_to offer_path(offer)
     else
       flash.now[:error] = user.errors.full_messages
@@ -54,7 +55,7 @@ class OffersController < ApplicationController
     else
       @offer.closed = true
       @offer.save
-      flash[:message] = "Offer successfully closed. Thanks for giving!"
+      flash[:message] = "Offer successfully closed"
       redirect_to '/index'
     end
   end

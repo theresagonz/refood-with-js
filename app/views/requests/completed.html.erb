@@ -5,7 +5,7 @@
 <% if @requests.present? %>
   <ul class="list-group">
     <% @requests.each do |request| %>
-      <li class="list-group-item  list-spacing">
+      <li class="list-group-item list-spacing">
         <h4><%= link_to request.offer.headline, offer_request_path(request.offer, request) %></h4>
         <div class="small">Requested <%= format_date(request.created_at.localtime) %></div>
       </li>
@@ -13,7 +13,7 @@
   </ul>
 
 <% else %>
-  <h5 class="left-padding">No completed requests</h5>
+  <h5>No completed requests</h5>
 <% end %>
 
 <br>

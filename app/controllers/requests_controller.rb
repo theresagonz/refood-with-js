@@ -45,7 +45,7 @@ class RequestsController < ApplicationController
   end
 
   def recently_completed
-    @requests = Request.recently_completed
+    @requests = Request.recently_completed.take(10)
   end
 
   def edit
