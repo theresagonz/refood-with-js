@@ -16,7 +16,7 @@ class RequestsController < ApplicationController
 
     if request.save
       offer = Offer.find(params[:offer_id])
-      flash[:message] = "Request successfully created. #{offer.user.name} has been notified."
+      flash[:message] = "Request successfully created"
       redirect_to offer_request_path(offer, request)
     else
       flash.now[:error] = request.errors.full_messages

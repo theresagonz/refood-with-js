@@ -44,7 +44,7 @@
 <% end %>
 
 <br>
-<%= button_to "Close offer", offer_path(@offer), method: "patch", class: "btn btn-primary" %>
+<%= button_to "Close offer", offer_path(@offer), method: "patch", class: "btn btn-secondary", data: { confirm: "Are you sure you want to close this offer?"} %>
 
 <br>
 <div class="slab-font"><%= link_to "Completed requests", offer_completed_path %></div>
