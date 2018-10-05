@@ -19,7 +19,7 @@ class OffersController < ApplicationController
   end
 
   def index
-    @offers = Offer.select { |o| !o.deleted && !o.closed && o.giver_id != current_user.id }
+    @offers = Offer.select { |o| !o.deleted && !o.closed && o.giver_id != current_user.id }.reverse
   end
 
   def closed
@@ -27,7 +27,7 @@ class OffersController < ApplicationController
   end
 
   def current_offers
-    @offers = Offer.select { |o| !o.deleted && !o.closed }
+    @offers = Offer.select { |o| !o.deleted && !o.closed }.reverse
   end
     
   def show

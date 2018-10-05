@@ -5,10 +5,10 @@
 
         <span class="h5-size"><%= link_to request.offer.headline, offer_request_path(request.offer, request) %></span>
         <% if request.completed_requestor %>
-          <span class="badge badge-warning badge-shift">New activity</span>
+          <span class="badge badge-warning badge-shift slab-font">New karma</span>
         <% end %>
         <% if request.offer.closed %>
-          <span class="badge badge-info badge-shift">Closed offer</span>
+          <span class="badge badge-info badge-shift slab-font">Closed</span>
         <% end %>
         <% if request.offer.user.city %>
           <div><%= request.offer.user.city %>, <%= request.offer.user.state %></div>

@@ -34,12 +34,12 @@
 <% else %>
   <% if !@offer.closed %>
     <br>
-    <% if @completed_requests.count == 0 %>
+    <% if @requests.count == 0 %>
       <h3><%= link_to "No open requests", offer_requests_path(@offer) %></h3>
-    <% elsif @completed_requests.count == 1 %>
+    <% elsif @requests.count == 1 %>
       <h3><%= link_to "1 open request", offer_requests_path(@offer) %></h3>
     <% else %>
-      <h3><%= link_to "#{@completed_requests.count} open requests", offer_requests_path(@offer) %></h3>
+      <h3><%= link_to "#{@requests.count} open requests", offer_requests_path(@offer) %></h3>
     <% end %>
 
     <%= link_to "Completed requests", offer_completed_path(@offer) %>
@@ -58,14 +58,14 @@
   <% else %>
       <br>
     <% if @completed_requests.count == 0 %>
-      <h3><%= link_to "No completed requests", offer_requests_path(@offer) %></h3>
+      <h3><%= link_to "No completed requests", offer_completed_path(@offer) %></h3>
     <% elsif @completed_requests.count == 1 %>
-      <h3><%= link_to "1 completed request", offer_requests_path(@offer) %></h3>
+      <h3><%= link_to "1 completed request", offer_completed_path(@offer) %></h3>
     <% else %>
-      <h3><%= link_to "#{@completed_requests.count} completed requests", offer_requests_path(@offer) %></h3>
+      <h3><%= link_to "#{@completed_requests.count} completed requests", offer_completed_path(@offer) %></h3>
     <% end %>
     <div><%= link_to "Open requests", offer_requests_path(@offer) %></div>
   <% end %>
 <% end %>
 <br></br>
-<%= link_to "Back to index", '/' %>
+<div class="slab-font"><%= link_to "Back to index", '/' %></div>

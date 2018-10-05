@@ -20,7 +20,12 @@
         <b>Message: </b><%= request.message %><br>
         <b>Request date: </b><%= format_date(request.created_at.localtime) %><br>
         <br>
-        <div class="green-text slab-font">You marked picked up!</div>
+        <div class="green-text left-padding slab-font">
+          <div>You marked picked up!</div>
+          <% if request.completed_giver %>
+            <div><%= request.user.name %> marked picked up!</div>
+          <% end %>
+        </div>
       </li>
     <% end %>
   </ul>
@@ -31,5 +36,5 @@
 <% end %>
 
 <br>
-<h4><%= link_to "Open requests", offer_requests_path(@offer) %></h4>
-<div><%= link_to "Back to index", '/index' %></div>
+<h4 class="slab-font"><%= link_to "Open requests", offer_requests_path(@offer) %></h4>
+<div class="slab-font"><%= link_to "Back to index", '/index' %></div>

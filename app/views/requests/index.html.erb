@@ -21,10 +21,14 @@
         <b>Message: </b><%= request.message %><br>
         <b>Requested: </b><%= format_date(request.created_at.localtime) %><br>
 
+        <% if request.completed_requestor %>
+          <br>
+          <div class="slab-font left-padding">You marked picked up!</div>
+        <% end %>
         <% if request.completed_giver %>
           <br>
-          <div class="slab-font left-padding"><%= request.user.name %> marked picked up!
-          <span class="badge badge-warning">New</span></div>
+          <div class="slab-font green-text left-padding"><%= request.user.name %> marked picked up!
+          <span class="badge badge-warning badge-shift">New</span></div>
         <% else %>
           <br>
           <div class="slab-font left-padding"><b>Successful pickup?</b></div>
@@ -44,6 +48,5 @@
 <% end %>
 
 <br>
-<h4><%= link_to "Completed requests", offer_completed_path %></h4>
-<div>
-<%= link_to "Back to index", '/index' %></div>
+<h4 class="slab-font"><%= link_to "Completed requests", offer_completed_path %></h4>
+<div class="slab-font"><%= link_to "Back to index", '/index' %></div>

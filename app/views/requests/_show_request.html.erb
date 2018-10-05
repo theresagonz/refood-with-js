@@ -15,7 +15,7 @@
     <br>
     <% if !@request.completed_giver %>
       <% if @request.completed_requestor %>
-        <h6 class="slab-font"><%= @request.offer.user.name %> marked picked up! <span class="badge badge-warning">New</span></h6>
+        <h6 class="slab-font"><%= @request.offer.user.name %> marked picked up! <span class="badge badge-warning badge-shift">New</span></h6>
       <% else %>
         <h6 class="slab-font">Successful pickup?</h6>
       <% end %>
