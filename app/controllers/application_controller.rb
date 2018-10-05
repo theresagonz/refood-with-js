@@ -64,6 +64,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def redirect_if_user_owns_offer
+    offer = Offer.find(params[:offer_id])
+    if current_user == offer.user
+      flash[:error] =["Oops, that's your offer"]
+      redirect_to offer_path(offer)
+    end
+  end
+
+
   def convert_string_to_date(string)
     Time.strptime(string, '%m/%d/%Y %H:%M %p')
   end

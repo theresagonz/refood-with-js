@@ -1,6 +1,6 @@
   <div>
     <h3>Pick up from:</h3>
-    <b>Name: </b><%= link_to @user.name, user_path(@user) %><br>
+    <b>Name: </b><%= @user.name %><br>
     
     <%= render 'users/address' %>
     <% if @user.city.present? && @user.state.present? && @user.address.blank? %>
