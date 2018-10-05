@@ -78,7 +78,7 @@ class ApplicationController < ActionController::Base
   end
 
   def format_date(date)
-    date.strftime('%A, %B %e, %Y @%l:%M %P')
+    date.strftime('%A, %B %e, %Y @ %l:%M %P')
   end
 
   def format_date_no_time(date)

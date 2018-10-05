@@ -32,16 +32,30 @@
     <%= link_to "Cancel", '/index', class: "btn btn-secondary" %>
   <% end %>
 <% else %>
+  <% if @offer.requests.any? { |r| r.completed_giver && !r.completed_requestor } %>
+    <% new_karma = true %>
+  <% end %>
   <% if !@offer.closed %>
     <br>
     <% if @requests.count == 0 %>
       <h3><%= link_to "No open requests", offer_requests_path(@offer) %></h3>
+      <% if new_karma %>
+        <span class="badge badge-warning badge-shift slab-font">New karma</span>
+        <br>
+      <% end %>
     <% elsif @requests.count == 1 %>
-      <h3><%= link_to "1 open request", offer_requests_path(@offer) %></h3>
+      <span class="h3-size"><%= link_to "1 open request", offer_requests_path(@offer) %></span>
+      <% if new_karma %>
+        <span class="badge badge-warning badge-shift slab-font">New karma</span></h3>
+        <br>
+      <% end %>
     <% else %>
-      <h3><%= link_to "#{@requests.count} open requests", offer_requests_path(@offer) %></h3>
+      <span class="h3-size"><%= link_to "#{@requests.count} open requests", offer_requests_path(@offer) %></span>
+      <% if new_karma %>
+        <span class="badge badge-warning badge-shift slab-font">New karma</span></h3>
+        <br>
+      <% end %>
     <% end %>
-
     <%= link_to "Completed requests", offer_completed_path(@offer) %>
     <br></br>
     <% if @offer.requests.present? %>
@@ -56,7 +70,6 @@
       </div>
     <% end %>
   <% else %>
-      <br>
     <% if @completed_requests.count == 0 %>
       <h3><%= link_to "No completed requests", offer_completed_path(@offer) %></h3>
     <% elsif @completed_requests.count == 1 %>
