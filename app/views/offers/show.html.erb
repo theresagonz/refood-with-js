@@ -32,27 +32,39 @@
     <%= link_to "Cancel", '/index', class: "btn btn-secondary" %>
   <% end %>
 <% else %>
-  <br>
-  <% if @requests.count == 0 %>
-    <h3><%= link_to "No open requests", offer_requests_path(@offer) %></h3>
-  <% elsif @requests.count == 1 %>
-    <h3><%= link_to "1 open request", offer_requests_path(@offer) %></h3>
-  <% else %>
-    <h3><%= link_to "#{@requests.count} open requests", offer_requests_path(@offer) %></h3>
-  <% end %>
+  <% if !@offer.closed %>
+    <br>
+    <% if @completed_requests.count == 0 %>
+      <h3><%= link_to "No open requests", offer_requests_path(@offer) %></h3>
+    <% elsif @completed_requests.count == 1 %>
+      <h3><%= link_to "1 open request", offer_requests_path(@offer) %></h3>
+    <% else %>
+      <h3><%= link_to "#{@completed_requests.count} open requests", offer_requests_path(@offer) %></h3>
+    <% end %>
 
-  <%= link_to "Completed requests", offer_completed_path(@offer) %>
-  <br></br>
-  <% if @offer.requests.present? %>
-    <div class="btn-group">
-      <%= link_to "Edit offer", edit_offer_path(@offer), class: "btn btn-primary" %>
-      <%= button_to "Close offer", offer_path(@offer), method: "patch", class: "btn btn-secondary btn-left-margin", data: { confirm: "Are you sure you want to close this offer?"} %>
-    </div>
+    <%= link_to "Completed requests", offer_completed_path(@offer) %>
+    <br></br>
+    <% if @offer.requests.present? %>
+      <div class="btn-group">
+        <%= link_to "Edit offer", edit_offer_path(@offer), class: "btn btn-primary" %>
+        <%= button_to "Close offer", offer_path(@offer), method: "patch", class: "btn btn-secondary btn-left-margin", data: { confirm: "Are you sure you want to close this offer?"} %>
+      </div>
+    <% else %>
+      <div class="btn-group">
+        <%= link_to "Edit offer", edit_offer_path(@offer), class: "btn btn-primary" %>
+        <%= button_to "Delete offer", offer_path(@offer), method: "delete", class: "btn btn-outline-danger btn-left-margin", data: { confirm: "Are you sure you want to delete this offer?"} %>
+      </div>
+    <% end %>
   <% else %>
-    <div class="btn-group">
-      <%= link_to "Edit offer", edit_offer_path(@offer), class: "btn btn-primary" %>
-      <%= button_to "Delete offer", offer_path(@offer), method: "delete", class: "btn btn-outline-danger btn-left-margin", data: { confirm: "Are you sure you want to delete this offer?"} %>
-    </div>
+      <br>
+    <% if @completed_requests.count == 0 %>
+      <h3><%= link_to "No completed requests", offer_requests_path(@offer) %></h3>
+    <% elsif @completed_requests.count == 1 %>
+      <h3><%= link_to "1 completed request", offer_requests_path(@offer) %></h3>
+    <% else %>
+      <h3><%= link_to "#{@completed_requests.count} completed requests", offer_requests_path(@offer) %></h3>
+    <% end %>
+    <div><%= link_to "Open requests", offer_requests_path(@offer) %></div>
   <% end %>
 <% end %>
 <br></br>

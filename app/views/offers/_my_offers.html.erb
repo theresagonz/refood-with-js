@@ -2,9 +2,9 @@
   <ul class="list-group">
   <% @offers.each do |offer| %>
     <li class="list-group-item">
-      <h5><%= link_to offer.headline, offer_path(offer) %></h5>
-      <% if offer.requests.any? { |r| r.completed_giver == true && r.completed_requestor == false } %>
-        <span class="badge badge-warning">New activity</span>
+      <span class="h5-size"><%= link_to offer.headline, offer_path(offer) %></span>
+      <% if offer.requests.any? { |r| r.completed_giver && !r.completed_requestor } %>
+        <span class="badge badge-warning badge-shift">New activity</span>
       <% end %>
       <h6><%= link_to "#{offer.requests.select { |r| !r.completed_requestor }.count} open requests", offer_requests_path(offer) %></h6>
       <div class="small grey-text">posted <%= time_ago(offer) %> ago</div>
