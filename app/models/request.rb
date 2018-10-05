@@ -3,7 +3,6 @@ class Request < ApplicationRecord
   belongs_to :offer
   has_one :user, through: :requestor
   has_one :giver, through: :offer
-  has_one :comment
 
   validates :message, presence: true
   validate :email_or_phone
