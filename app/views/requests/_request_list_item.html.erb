@@ -1,0 +1,41 @@
+<% if params[:offer_id] && params[:id] %>
+  <% request_label = "Your Request" %>
+ <% else %>
+  <% request_label = "Open Request" %>
+  <% name = req.user.name %>
+<% end %>
+
+<div class="lt-grey-box list-spacing">
+  <h4 class="slab-font"><%= request_label %></h4>
+
+  <b>From: </b><%= link_to req.user.name, user_path(req.user) %><br>
+  <% if req.requestor_email.present? %>
+    <b>Email: </b><%= link_to req.requestor_email, "mailto:#{req.requestor_email}" %><br>
+  <% end %>
+  <% if req.requestor_phone.present? %>
+    <b>Phone: </b><%= format_phone(req.requestor_phone) %><br>
+  <% end %>
+
+  <b>Message: </b><%= req.message %><br>
+  <b>Requested: </b><%= format_date(req.created_at.localtime) %><br>
+
+  <% if req.completed_requestor %>
+    <br>
+    <div class="slab-font left-padding">You marked picked up!</div>
+  <% end %>
+  <% if req.completed_giver %>
+    <br>
+    <div class="slab-font left-padding"><span><%= req.user.name %> marked picked up!</span>
+      <span class="badge badge-warning badge-shift">New</span>
+    </div>
+  <% else %>
+    <br>
+    <div class="slab-font left-padding"><b>Successful pickup?</b></div>
+  <% end %>
+    <div class="left-padding">
+    <%= form_for req, url: "/request/#{req.id}" do |f| %>
+      <%= f.hidden_field :completed_requestor, value: true %>
+      <%= f.submit "Give #{req.user.name} karma", class: "btn btn-outline-success" %>
+    <% end %>
+    </div>
+  </div>

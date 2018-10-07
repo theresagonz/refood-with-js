@@ -1,16 +1,19 @@
 <%= render 'layouts/flash_error' %>
 <%= render 'layouts/flash_message' %>
 
+
 <h1 class="slab-font"><%= @offer.closed ? "Closed" : "Open" %> Offer</h1>
-<% if User.find_by(id: @offer.giver_id) %>
-  <h3><%= link_to @offer.headline, offer_path(@offer) %></h3>
-<% else %>
-  <h3><%= @offer.headline %></h3>
-<% end %>
-<div class="small grey-text">Posted on <%= format_date(@offer.created_at.localtime) %></div>
+
+<%= render 'offers/headline' %>  
 
 <br>
-<%= render 'show_request' %>
+<% req = @request %>
+<%= render 'request_list_item', :req => req %>
+
+<div class="btn-group">
+      <%= link_to "Edit request", edit_offer_request_path(@offer, @request), class: "btn btn-primary" %>
+      <%= button_to "Delete request", offer_request_path(@request), class: "btn btn-outline-danger btn-left-margin", method: "delete", data: { confirm: "Are you sure you want to delete this request?"} %>
+    </div>
 
 <br></br>
 <div class="slab-font"><%= link_to "Back to index", '/index' %></div>
