@@ -1,4 +1,4 @@
-<%= form_for [@offer, @request] do |f| %>
+<%= form_for [@offer, @offer.requests.build] do |f| %>
   <div class="form-group">
     <b><%= f.label :message, "Leave a message for #{@offer.user.name}" %></b>
     <%= f.text_area :message, class: 'form-control', placeholder: 'Provide a message about when you can pick up or ask a question' %>
