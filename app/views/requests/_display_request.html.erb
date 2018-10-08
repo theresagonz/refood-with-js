@@ -1,6 +1,9 @@
 <% if params[:offer_id] && params[:id] %>
   <% request_label = "Your Request" %>
- <% else %>
+ <% elsif req.completed_requestor %>
+  <% request_label = "Closed Request" %>
+    <% name = req.user.name %>
+<% else %>
   <% request_label = "Open Request" %>
   <% name = req.user.name %>
 <% end %>
@@ -35,11 +38,11 @@
     <div class="slab-font left-padding">You marked picked up!</div>
   <% else %>
     <% if !they_marked %>
-      <div class="slab-font left-padding">
+      <div class="slab-font left-padding margin-bottom">
         <b>Successful pickup?</b>
       </div>
     <% else %>
-      <div class="slab-font left-padding">
+      <div class="slab-font left-padding margin-bottom">
         <%= req.giver.user.name %> marked picked up!
         <span class="badge badge-warning badge-shift">New</span>
       </div>

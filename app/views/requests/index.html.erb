@@ -7,7 +7,7 @@
 <br>
 <% if @requests.present? %>
   <% @requests.each do |req| %>
-    <%= render 'request_list_item', :req => req %>
+    <%= render 'display_request', :req => req %>
   <% end %>
 
 <% else %>

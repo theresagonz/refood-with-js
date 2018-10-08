@@ -1,40 +1,19 @@
 <%= render 'layouts/flash_message' %>
 
-<h1 class="slab-font sm-margin-bottom">Completed requests for:</h1>
+<h1 class="slab-font margin-bottom">Open Offer</h1>
 <h3><%= link_to @offer.headline, offer_path(@offer) %></h3>
 <div class="small grey-text">Posted on <%= format_date(@offer.created_at.localtime) %></div>
 
 <br>
 <% if @requests.present? %>
-  <ul class="list-group">
-    <% @requests.each do |request| %>
-      <li class="list-group-item lt-grey-box list-spacing">
-        <h4 class="slab-font">Request from <%= request.user.name %></h4>
-        <b>From: </b><%= link_to request.user.name, user_path(request.user) %><br>
-        <% if request.requestor_email.present? %>
-          <b>Email: </b><%= link_to request.requestor_email, "mailto:#{request.requestor_email}" %><br>
-        <% end %>
-        <% if request.requestor_phone.present? %>
-          <b>Phone: </b><%= format_phone(request.requestor_phone) %><br>
-        <% end %>
-        <b>Message: </b><%= request.message %><br>
-        <b>Request date: </b><%= format_date(request.created_at.localtime) %><br>
-        <br>
-        <div class="green-text left-padding slab-font">
-          <div>You marked picked up!</div>
-          <% if request.completed_giver %>
-            <div><%= request.user.name %> marked picked up!</div>
-          <% end %>
-        </div>
-      </li>
-    <% end %>
-  </ul>
-
+  <% @requests.each do |req| %>
+    <%= render 'display_request', :req => req %>
+  <% end %>
 <% else %>
   <br>
   <h5>No completed requests</h5>
 <% end %>
 
 <br>
-<h4 class="slab-font"><%= link_to "Open requests", offer_requests_path(@offer) %></h4>
+<h4 class="slab-font"><%= link_to "Open Requests", offer_requests_path(@offer) %></h4>
 <div class="slab-font"><%= link_to "Back to index", '/index' %></div>

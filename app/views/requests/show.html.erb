@@ -1,14 +1,14 @@
 <%= render 'layouts/flash_error' %>
 <%= render 'layouts/flash_message' %>
 
-
 <h1 class="slab-font"><%= @offer.closed ? "Closed" : "Open" %> Offer</h1>
 
 <%= render 'offers/headline' %>  
 
 <br>
+
 <% req = @request %>
-<%= render 'request_list_item', :req => req %>
+<%= render 'display_request', :req => req %>
 
 <div class="btn-group">
       <%= link_to "Edit request", edit_offer_request_path(@offer, @request), class: "btn btn-primary" %>
