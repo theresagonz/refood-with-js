@@ -26,37 +26,34 @@
   <% end %>
   <b>Message: </b><%= req.message %><br>
   <b>Requested: </b><%= format_date(req.created_at.localtime) %><br>
+  <br>
 
-  <% if i_marked %>
-    <br>
+  <% if i_marked && they_marked%>
     <div class="slab-font left-padding">You marked picked up!</div>
-  <% end %>
-  <% if they_marked %>
-    <br>
-    <div class="slab-font left-padding"><span><%= req.giver.user.name %> marked picked up!</span>
-      <span class="badge badge-warning badge-shift">New</span>
-    </div>
-  <% end %>
-  <% if !i_marked && !they_marked %>
-    <br>
-    <div class="slab-font left-padding">
-      <b>Successful pickup?</b>
-    </div>
+    <div class="slab-font left-padding"><%= req.giver.user.name %> marked picked up!</div>
+  <% elsif i_marked && !they_marked %>
+    <div class="slab-font left-padding">You marked picked up!</div>
+  <% else %>
+    <% if !they_marked %>
+      <div class="slab-font left-padding">
+        <b>Successful pickup?</b>
+      </div>
+    <% else %>
+      <div class="slab-font left-padding">
+        <%= req.giver.user.name %> marked picked up!
+        <span class="badge badge-warning badge-shift">New</span>
+      </div>
     <% end %>
-  <% if !i_marked %>
-      <div class="left-padding">
-
-    <%= form_for req, url: "/request/#{req.id}" do |f| %>
-      <% if name %>
-        <%= f.hidden_field :completed_requestor, value: true %>
-      <%= f.submit "Give #{req.requestor.user.name} karma", class: "btn btn-outline-success" %>
-      <% else %>
-        <%= f.hidden_field :completed_giver, value: true %>
-        <%= f.submit "Give #{req.giver.user.name} karma", class: "btn btn-outline-success" %>
+    <div class="left-padding">
+      <%= form_for req, url: "/request/#{req.id}" do |f| %>
+        <% if name %>
+          <%= f.hidden_field :completed_requestor, value: true %>
+          <%= f.submit "Give #{req.requestor.user.name} karma", class: "btn btn-outline-success" %>
+        <% else %>
+          <%= f.hidden_field :completed_giver, value: true %>
+          <%= f.submit "Give #{req.giver.user.name} karma", class: "btn btn-outline-success" %>
+        <% end %>
       <% end %>
-    <% end %>
-    </div>
-
     </div>
   <% end %>
-  
+</div>
