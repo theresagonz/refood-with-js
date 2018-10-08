@@ -1,7 +1,5 @@
 <%= render 'layouts/flash_message' %>
 
-<h1 class="slab-font">Open Requests for:</h1>
-
 <%= render 'offers/headline' %>
 
 <br>
@@ -9,7 +7,6 @@
   <% @requests.each do |req| %>
     <%= render 'display_request', :req => req %>
   <% end %>
-
 <% else %>
   <h5 class="slab-font">No open requests</h5>
 <% end %>
