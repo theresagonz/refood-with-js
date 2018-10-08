@@ -43,18 +43,29 @@ a:hover, a:visited, a:link, a:active {
 }
 
 .grey-text {
-  color: #b4b4b4;
+  color: #6d747d8a;
   font-family: 'Pontano Sans', sans-serif;
-  margin: -2px 0 0 0;
+  margin: -3px 0 0 0;
   font-size: 75%;
-
 }
+
+.darker-grey-text {
+  color: #6d747db8;
+  font-family: 'Pontano Sans', sans-serif;
+  margin: -1px 0 0 0;
+  font-size: 75%;
+}
+
+.darker-grey-text-normal {
+  color: #6c757e;
+}
+
 .green-text {
   color: #38a82f;
 }
 
 .left-padding {
-  padding: 0 0 0 1em;
+  padding: 0 0 0 .8em;
 }
 
 .btn-left-margin {
@@ -62,7 +73,7 @@ a:hover, a:visited, a:link, a:active {
 }
 
 .lt-grey-box {
-  background-color: rgb(230, 230, 230);
+  background-color: #6c757e2b;
   padding: 20px 27px;
   box-shadow: -1px 2px 12px -3px rgba(0,0,0,0.42);
   border-radius: 16px;
@@ -82,10 +93,6 @@ a:hover, a:visited, a:link, a:active {
 .lg-margin-bottom {
   margin: 0 0 2rem 0;
 }
-
-// body {
-//   font-family: 'Open Sans', sans-serif;
-// }
 
 .slab-font {
   font-family: 'Pontano Sans', sans-serif;
@@ -129,4 +136,21 @@ a:hover, a:visited, a:link, a:active {
 
 .badge {
   font-family: 'Zilla Slab', cursive;
+}
+
+.top-margin {
+  margin: 1.8rem 0 0 0;
+}
+
+.sm-top-margin {
+  margin: 3px 0 0 0;
+}
+
+.sm-left-margin {
+  margin: 0 0 0 0.2rem;
+}
+
+ul {
+  list-style-image: url('beet-grey.png');
+  padding-left: 20px;
 }
