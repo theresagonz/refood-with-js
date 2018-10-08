@@ -3,9 +3,9 @@
 <h1 class="slab-font sm-margin-bottom">Closed Offers</h1>
 
 <% if @offers.present? %>
-  <ul class="list-group">
+  <ul class="margin-bottom">
     <% @offers.each do |offer| %>
-      <li class="list-group-item">
+      <li class="list-obj left-padding">
         <h4><%= link_to offer.headline, offer_path(offer) %></h4>
         <div class="small">Posted <%= format_date(offer.created_at.localtime) %></div
       </li>
@@ -14,7 +14,7 @@
 
 <% else %>
   <br>
-  <h5>No closed offers</h5>
+  <h5 class="slab-font">No closed offers</h5>
 <% end %>
 
 <br>

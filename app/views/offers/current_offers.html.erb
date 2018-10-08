@@ -1,9 +1,9 @@
 <h1 class="slab-font sm-margin-bottom">Current Offers</h1>
 
 <% if @offers.present? %>
-  <ul class="list-group">
+  <ul class="margin-bottom">
   <% @offers.each do |offer| %>
-    <li class="list-group-item">
+    <li class="list-obj left-padding">
       <div><%= link_to offer.headline, offer %></div>
       <% if offer.user.city %>
         <div><%= offer.user.city %>, <%= offer.user.state %></div>

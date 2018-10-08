@@ -1,12 +1,12 @@
-<h1 class="slab-font sm-margin-bottom">Recent community exchanges</h1>
+<h1 class="slab-font sm-margin-bottom">Recent Community Exchanges</h1>
 
 <% if @requests.present? %>
-  <ul class="list-group">
+  <ul class="margin-bottom">
     <% @requests.each do |request| %>
-      <li class="list-group-item">
+      <li class="list-obj left-padding">
         <%= request.user.name %> picked up <%= link_to request.offer.headline, offer_path(request.offer) %> from <%= request.giver.user.name %><br>
-        <div class="small grey-text left-padding"><%= request.offer.user.city %>, <%= request.offer.user.state %></div>
-        <div class="small grey-text left-padding"><%= format_date_no_time(request.updated_at) %></div>
+        <div class="small"><%= request.offer.user.city %>, <%= request.offer.user.state %></div>
+        <div class="small"><%= format_date_no_time(request.updated_at) %></div>
       </li>
     <% end %>
   </ul>

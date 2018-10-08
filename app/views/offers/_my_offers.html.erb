@@ -1,7 +1,7 @@
 <% if @offers.present? %>
   <ul class="margin-bottom">
   <% @offers.each do |offer| %>
-    <li class="top-margin left-padding">
+    <li class="list-obj left-padding">
       <span class="h5-size"><%= link_to offer.headline, offer_path(offer) %></span>
       <% if offer.requests.any? { |r| r.completed_giver && !r.completed_requestor } %>
         <span class="badge badge-warning badge-shift slab-font">New karma</span>
@@ -24,6 +24,5 @@
   <% end %>
   </ul>
 <% else %>
-  <br>
   <h5 class="slab-font">No open offers</h5>
 <% end %>

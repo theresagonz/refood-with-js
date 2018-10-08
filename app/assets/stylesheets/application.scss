@@ -138,8 +138,12 @@ a:hover, a:visited, a:link, a:active {
   font-family: 'Zilla Slab', cursive;
 }
 
-.top-margin {
-  margin: 1.8rem 0 0 0;
+.list-obj {
+  margin: 0 0 1.9rem 0;
+}
+
+li:last-of-type {
+  margin: 0 0 0 0;
 }
 
 .sm-top-margin {
