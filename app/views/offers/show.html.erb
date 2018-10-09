@@ -2,73 +2,10 @@
 <%= render 'layouts/flash_message' %>
 
 <%= render 'offer_info', :offer => @offer %>
-
 <% if @offer.user != current_user %>
-  <% @user = @offer.user %>
-  <% if has_request(current_user, @offer) %>
-    <br>
-    <div class="lt-grey-box">
-      <%= render "users/contact_info" %>
-    </div>
-    <br></br>
-    <h4 class="slab-font"><%= link_to "Your request", offer_request_path(@offer, @request) %></h4>
-  <% else %>
-    <br>
-    <div class="lt-grey-box">
-      <%= render "users/contact_info_limited" %>
-    </div>
-    <br>
-    <%= link_to "Make request", new_offer_request_path(@offer), class: "btn btn-success" %>
-    <%= link_to "Cancel", '/index', class: "btn btn-secondary" %>
-  <% end %>
+  <%= render 'offer_options_not_owner' %>
 <% else %>
-  <% if @offer.requests.any? { |r| r.completed_giver && !r.completed_requestor } %>
-    <% new_karma = true %>
-  <% end %>
-  <% if !@offer.closed %>
-    <br>
-    <% if @requests.count == 0 %>
-      <h3><%= link_to "No open requests", offer_requests_path(@offer) %></h3>
-      <% if new_karma %>
-        <span class="badge badge-warning badge-shift slab-font">New karma</span>
-        <br>
-      <% end %>
-    <% elsif @requests.count == 1 %>
-      <span class="h3-size"><%= link_to "1 open request", offer_requests_path(@offer) %></span>
-      <% if new_karma %>
-        <span class="badge badge-warning badge-shift slab-font">New karma</span></h3>
-        <br>
-      <% end %>
-    <% else %>
-      <span class="h3-size"><%= link_to "#{@requests.count} open requests", offer_requests_path(@offer) %></span>
-      <% if new_karma %>
-        <span class="badge badge-warning badge-shift slab-font">New karma</span></h3>
-        <br>
-      <% end %>
-    <% end %>
-    <%= link_to "Completed requests", offer_completed_path(@offer) %>
-    <br></br>
-    <% if @offer.requests.present? %>
-      <div class="btn-group">
-        <%= link_to "Edit offer", edit_offer_path(@offer), class: "btn btn-primary" %>
-        <%= button_to "Close offer", offer_path(@offer), method: "patch", class: "btn btn-secondary btn-left-margin", data: { confirm: "Are you sure you want to close this offer?"} %>
-      </div>
-    <% else %>
-      <div class="btn-group">
-        <%= link_to "Edit offer", edit_offer_path(@offer), class: "btn btn-primary" %>
-        <%= button_to "Delete offer", offer_path(@offer), method: "delete", class: "btn btn-outline-danger btn-left-margin", data: { confirm: "Are you sure you want to delete this offer?"} %>
-      </div>
-    <% end %>
-  <% else %>
-    <% if @completed_requests.count == 0 %>
-      <h3><%= link_to "No completed requests", offer_completed_path(@offer) %></h3>
-    <% elsif @completed_requests.count == 1 %>
-      <h3><%= link_to "1 completed request", offer_completed_path(@offer) %></h3>
-    <% else %>
-      <h3><%= link_to "#{@completed_requests.count} completed requests", offer_completed_path(@offer) %></h3>
-    <% end %>
-    <div><%= link_to "Open requests", offer_requests_path(@offer) %></div>
-  <% end %>
+  <%= render 'offer_options_owner' %>
 <% end %>
 
 <br></br>

@@ -1,5 +1,5 @@
 <h1 class="slab-font sm-margin-bottom"><%= @offer.closed ? "Closed" : "Open" %> Offer</h1>
-<% if @offer.user = current_user %>
+<% if @offer.user == current_user %>
   <h3><%= @offer.headline %></h3>
 <% else %>
   <h3><%= link_to @offer.headline, offer_path(@offer) %></h3>

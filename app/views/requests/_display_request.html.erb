@@ -1,18 +1,18 @@
 <% if params[:offer_id] && params[:id] %>
   <% request_label = "Your Request" %>
- <% elsif req.completed_requestor %>
-  <% request_label = "Completed Request" %>
-    <% name = req.user.name %>
 <% else %>
-  <% request_label = "Open Request" %>
   <% name = req.user.name %>
+  <% if req.completed_requestor %>
+    <% request_label = "Completed Request" %>
+  <% else %>
+  <% request_label = "Open Request" %>
 <% end %>
 
 <% if req.user == current_user %>
   <% i_marked = req.completed_giver %>
   <% they_marked = req.completed_requestor %>
 <% else %>
-    <% i_marked = req.completed_requestor %>
+  <% i_marked = req.completed_requestor %>
   <% they_marked = req.completed_giver %>
 <% end %>
 
