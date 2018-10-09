@@ -1,5 +1,5 @@
-<h3><%= offer.headline %></h3>
-<h6 class="small grey-text">Posted on <%= format_date(offer.created_at.localtime) %></h6>
+<%= render 'offers/headline' %>
+
 <% if offer.description %>
 <br>
   <h6><b>Description: </b><%= offer.description %></h6>
@@ -7,6 +7,6 @@
 <% if offer.user.city %>
   <h6><b>City: </b><%= offer.user.city %>, <%= offer.user.state %></h6>
 <% end %>
-<% if offer.availability %>
+<% if offer.availability.present? %>
   <h6><b>Pickup availability: </b><%= offer.availability %></h6>
 <% end %>

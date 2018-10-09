@@ -1,3 +1,7 @@
-<h1 class="slab-font"><%= @offer.closed ? "Closed" : "Open" %> Offer</h1>
-<h3><%= link_to @offer.headline, offer_path(@offer) %></h3>
+<h1 class="slab-font sm-margin-bottom"><%= @offer.closed ? "Closed" : "Open" %> Offer</h1>
+<% if @offer.user = current_user %>
+  <h3><%= @offer.headline %></h3>
+<% else %>
+  <h3><%= link_to @offer.headline, offer_path(@offer) %></h3>
+<% end %>
 <div class="small grey-text">Posted on <%= format_date(@offer.created_at.localtime) %></div>

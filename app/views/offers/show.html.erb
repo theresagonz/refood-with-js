@@ -1,15 +1,13 @@
 <%= render 'layouts/flash_error' %>
 <%= render 'layouts/flash_message' %>
 
-<h1 class="slab-font sm-margin-bottom"><%= @offer.closed ? "Closed" : "Open" %> Offer</h1>
-
 <%= render 'offer_info', :offer => @offer %>
 
 <% if @offer.user != current_user %>
+  <% @user = @offer.user %>
   <% if has_request(current_user, @offer) %>
     <br>
     <div class="lt-grey-box">
-      <% @user = @offer.user %>
       <%= render "users/contact_info" %>
     </div>
     <br></br>
@@ -17,10 +15,9 @@
   <% else %>
     <br>
     <div class="lt-grey-box">
-      <% @user = @offer.user %>
       <%= render "users/contact_info_limited" %>
     </div>
-      <br>
+    <br>
     <%= link_to "Make request", new_offer_request_path(@offer), class: "btn btn-success" %>
     <%= link_to "Cancel", '/index', class: "btn btn-secondary" %>
   <% end %>
@@ -73,4 +70,6 @@
     <div><%= link_to "Open requests", offer_requests_path(@offer) %></div>
   <% end %>
 <% end %>
-<div class="slab-font"><%= link_to "Back to index", '/' %></div>
+
+<br></br>
+<%= render 'welcome/link_to_home' %>

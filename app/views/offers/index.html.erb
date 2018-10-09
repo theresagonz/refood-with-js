@@ -10,7 +10,7 @@
       <% else %>
         <div>Ask for location info</div>
       <% end %>
-      <div class="small grey-text">posted <%= time_ago(offer) %> ago</div>
+      <div class="small grey-text">Posted <%= time_ago(offer) %> ago</div>
     </li>
   <% end %>
 
@@ -18,5 +18,6 @@
   <br>
   <h3>Sorry, no current offers. Check back soon!</h3>
 <% end %>
-<br>
-<div class="slab-font"><%= link_to "Back to index", '/' %></div>
+
+
+<%= render 'welcome/link_to_home' %>

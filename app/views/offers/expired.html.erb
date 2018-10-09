@@ -5,7 +5,7 @@
   <% @offers.each do |offer| %>
     <li class="list-obj left-padding">
       <%= link_to offer.headline, offer %><br>
-      posted <%= time_ago(offer) %> ago
+      Posted <%= time_ago(offer) %> ago
     </li>
   <% end %>
 
