@@ -1,16 +1,16 @@
-<h1 class="slab-font sm-margin-bottom">Current Offers</h1>
+<h1 class="slab-font sm-margin-bottom">Current offers</h1>
 
 <% if @offers.present? %>
   <ul class="margin-bottom">
   <% @offers.each do |offer| %>
     <li class="list-obj left-padding">
       <div><%= link_to offer.headline, offer %></div>
+      <div class="small grey-text">Posted <%= time_ago(offer) %> ago</div>
       <% if offer.user.city %>
         <div><%= offer.user.city %>, <%= offer.user.state %></div>
       <% else %>
         <div>Ask for location info</div>
       <% end %>
-      <div class="small grey-text">Posted <%= time_ago(offer) %> ago</div>
     </li>
   <% end %>
 
@@ -19,5 +19,5 @@
   <h3>Sorry, no current offers. Check back soon!</h3>
 <% end %>
 
-
+<br>
 <%= render 'welcome/link_to_home' %>

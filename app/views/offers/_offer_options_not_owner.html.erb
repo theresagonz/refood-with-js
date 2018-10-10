@@ -4,7 +4,7 @@
   <div class="lt-grey-box">
     <%= render "users/contact_info" %>
   </div>
-  <br>
+  <br></br>
   <h4 class="slab-font"><%= link_to "Your request", offer_request_path(@offer, @request) %></h4>
 <% else %>
   <div class="lt-grey-box">
@@ -13,4 +13,6 @@
   <br>
   <%= link_to "Make request", new_offer_request_path(@offer), class: "btn btn-success" %>
   <%= link_to "Cancel", '/index', class: "btn btn-secondary" %>
+  <br></br>
 <% end %>
+

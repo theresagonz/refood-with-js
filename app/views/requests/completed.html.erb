@@ -7,13 +7,14 @@
     <% @requests.each do |request| %>
       <li class="list-obj left-padding">
         <h4><%= link_to request.offer.headline, offer_request_path(request.offer, request) %></h4>
-        <div class="small">Requested <%= format_date(request.created_at.localtime) %></div>
+        <div class="small grey-text">Requested <%= format_date(request.created_at.localtime) %></div>
       </li>
     <% end %>
   </ul>
 
 <% else %>
-  <h5>No completed requests</h5>
+  <br>
+  <h5 class="slab-font">No completed requests</h5>
 <% end %>
 
 <br>

@@ -1,4 +1,4 @@
-<h1 class="slab-font"><%= @offer.closed ? "Closed" : "Open" %> Offer</h1>
+<h1 class="slab-font"><%= @offer.closed ? "Closed" : "Open" %> offer</h1>
 
 <% if params[:offer_id] %>
   <h3><%= link_to @offer.headline, offer_path(@offer) %></h3>
