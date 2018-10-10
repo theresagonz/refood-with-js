@@ -22,6 +22,7 @@ class RequestsController < ApplicationController
     else
       flash.now[:error] = request.errors.full_messages
       @offer = Offer.find_by(id: params[:offer_id])
+      @request = @offer.requests.build
       render :new
     end
   end
@@ -59,7 +60,7 @@ class RequestsController < ApplicationController
     @request = Request.find_by(id: params[:id])
     if @request.update(request_params)
       flash[:message] = 'Request successfully updated'
-      redirect_to '/index'
+      redirect_to offer_request_path(@offer, @request)
     else
       flash.now[:error] = @request.errors.full_messages.uniq
       render :edit
