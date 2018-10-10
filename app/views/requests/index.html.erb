@@ -8,10 +8,10 @@
     <%= render 'display_request', :req => req %>
   <% end %>
 <% else %>
-  <h5 class="slab-font">No open requests</h5>
+  <h3 class="slab-font">No open requests</h3>
 <% end %>
 
 <br>
-<h4 class="slab-font"><%= link_to "Completed requests", offer_completed_path %></h4>
+<h5 class="slab-font"><%= link_to "Completed requests", offer_completed_path %></h5>
 
 <%= render 'welcome/link_to_home' %>

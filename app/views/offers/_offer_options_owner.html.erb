@@ -14,11 +14,11 @@
         <%= button_to "Delete offer", offer_path(@offer), method: "delete", class: "btn btn-outline-danger btn-left-margin", data: { confirm: "Are you sure you want to delete this offer?"} %>
       </div>
     <% end %>
+    
+    <h5 class="slab-font">
     <br>
-    <div class="slab-font">
       <%= link_to "Completed requests", offer_completed_path(@offer) %>
-    </div>
-    <br>
+    </h5>
   <% else %>
     <h3 class="slab-font"><%= link_to number_of_items(@completed_requests, "completed request"), offer_completed_path(@offer) %></h3>
     <h5 class="slab-font"><%= link_to "Open requests", offer_requests_path(@offer) %></h5>

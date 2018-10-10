@@ -9,10 +9,10 @@
   <% end %>
 <% else %>
   <br>
-  <h5>No completed requests</h5>
+  <h3 class="slab-font">No completed requests</h3>
 <% end %>
 
 <br>
-<h4 class="slab-font"><%= link_to "Open Requests", offer_requests_path(@offer) %></h4>
+<h5 class="slab-font"><%= link_to "Open Requests", offer_requests_path(@offer) %></h5>
 
 <%= render 'welcome/link_to_home' %>

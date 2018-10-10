@@ -1,14 +1,12 @@
 <% @user = @offer.user %>
 
 <% if has_request(current_user, @offer) %>
-  <br>
   <div class="lt-grey-box">
     <%= render "users/contact_info" %>
   </div>
-  <br></br>
+  <br>
   <h4 class="slab-font"><%= link_to "Your request", offer_request_path(@offer, @request) %></h4>
 <% else %>
-  <br>
   <div class="lt-grey-box">
     <%= render "users/contact_info_limited" %>
   </div>
