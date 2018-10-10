@@ -7,6 +7,7 @@ class RequestsController < ApplicationController
 
   def new
     @offer = Offer.find_by(id: params[:offer_id])
+    @request = @offer.requests.build
   end
 
   def create
