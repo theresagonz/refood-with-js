@@ -1,0 +1,7 @@
+  <% new_karma = true if @offer.requests.any? { |r| r.completed_giver && !r.completed_requestor } %>
+  
+  <span class="h3-size"><%= link_to number_of_items(@requests, "open request"), offer_requests_path(@offer) %></span>
+  <% if new_karma %>
+    <span class="badge badge-warning badge-shift slab-font">New karma</span>
+  <% end %>
+  <br>

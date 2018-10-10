@@ -2,11 +2,12 @@
 <%= render 'layouts/flash_message' %>
 
 <%= render 'offer_info', :offer => @offer %>
+
 <% if @offer.user != current_user %>
   <%= render 'offer_options_not_owner' %>
 <% else %>
   <%= render 'offer_options_owner' %>
 <% end %>
 
-<br></br>
+<br>
 <%= render 'welcome/link_to_home' %>

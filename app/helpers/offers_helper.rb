@@ -5,4 +5,14 @@ module OffersHelper
       offer.requests.include?(request)
     end
   end
+
+  def number_of_items(collection, thing_string)
+    if collection.count == 0
+      "No #{thing_string}s"
+    elsif collection.count == 1
+      "1 #{thing_string}"
+    else
+      "#{collection.count} #{thing_string}s"
+    end
+  end
 end
