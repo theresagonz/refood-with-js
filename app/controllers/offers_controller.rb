@@ -23,7 +23,7 @@ class OffersController < ApplicationController
   end
 
   def by_location
-    @offers = Offer.open_offers.group_by_location.select { |o| o.giver_id != current_user.id }
+    @offers = Offer.group_by_location
   end
 
   def closed

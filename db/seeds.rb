@@ -57,16 +57,16 @@ offers = [
     giver_id: 1,
     headline: 'Box of apples',
     description: 'Around 20 fuji apples from a happy little tree',
-    city: 'Brooklyn',
-    state: 'NY',
+    city: 'Denver',
+    state: 'CO',
     availability: 'Anytime this weekend'
   },
   {
     giver_id: 3,
     headline: 'Pan of veg lasagna from catered lunch',
     description: 'One large pan of spinach lasagna, hot n ready',
-    city: 'New York',
-    state: 'NY'
+    city: 'Chicago',
+    state: 'IL'
   },
   {
     giver_id: 2,

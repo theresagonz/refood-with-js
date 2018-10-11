@@ -6,7 +6,7 @@ class Offer < ApplicationRecord
 
   validates :headline, presence: true
 
-  scope :group_by_location, -> { order(state: :asc).order(city: :asc).where(closed: false) }
+  scope :group_by_location, -> { where(closed: false).order(state: :asc).order(city: :asc) }
 
   def city_state
     "#{city}, #{state}"
