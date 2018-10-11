@@ -57,20 +57,23 @@ offers = [
     giver_id: 1,
     headline: 'Box of apples',
     description: 'Around 20 fuji apples from a happy little tree',
-    location: '',
+    city: 'Brooklyn',
+    state: 'NY',
     availability: 'Anytime this weekend'
   },
   {
     giver_id: 3,
     headline: 'Pan of veg lasagna from catered lunch',
     description: 'One large pan of spinach lasagna, hot n ready',
-    location: '1 Wall St'
+    city: 'New York',
+    state: 'NY'
   },
   {
     giver_id: 2,
     headline: 'Five boxes mac n cheese, blue box',
     description: 'Gluten free now, cheesy mac needs new home',
-    location: '241 W 113th St, New York, NY 10026',
+    city: 'New York',
+    state: 'NY',
     availability: 'evenings after 7'
   }
 ]
