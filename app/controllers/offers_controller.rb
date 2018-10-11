@@ -4,7 +4,7 @@ class OffersController < ApplicationController
   before_action :redirect_to_index_if_not_authorized_to_edit_offer, only: [:edit, :update, :destroy]
 
   def new
-    @offer = Offer.new
+    @offer = current_user.giver.offers.build
   end
 
   def create
@@ -78,6 +78,6 @@ class OffersController < ApplicationController
   private
 
   def offer_params
-    params.require(:offer).permit(:headline, :description, :availability, :expiration, :closed)
+    params.require(:offer).permit(:headline, :description, :availability, :expiration, :closed, :city, :state)
   end
 end

@@ -14,6 +14,8 @@
     <%= f.text_area :availability, placeholder: "Describe your availability for exchanging the food", class: 'form-control' %>
   </div>
 
+  <%= f.hidden_field :city, value: @offer.user.city %>
+  <%= f.hidden_field :state, value: @offer.user.state %>
   <%= f.submit class: "btn btn-primary" %>
   <%= link_to "Cancel", '/index', class: "btn btn-secondary" %>
 <% end %>
