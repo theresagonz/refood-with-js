@@ -1,0 +1,12 @@
+<h1 class="slab-font sm-margin-bottom">Open offers by location</h1>
+
+<% if @offers.present? %>
+  <%= render 'list_of_offers' %>
+<% else %>
+  <br>
+  <h5 class="slab-font">No open offers</h3>
+<% end %>
+
+<br>
+<h5 class="slab-font"><%= link_to "Open offers", offers_path %></h5>
+<%= render 'welcome/link_to_home' %>

@@ -1,23 +1,12 @@
-<h1 class="slab-font sm-margin-bottom">Current offers</h1>
+<h1 class="slab-font sm-margin-bottom">Open offers</h1>
 
 <% if @offers.present? %>
-  <ul class="margin-bottom">
-  <% @offers.each do |offer| %>
-    <li class="list-obj left-padding">
-      <div><%= link_to offer.headline, offer %></div>
-      <div class="small grey-text">Posted <%= time_ago(offer) %> ago</div>
-      <% if offer.user.city %>
-        <div><%= offer.user.city %>, <%= offer.user.state %></div>
-      <% else %>
-        <div>Ask for location info</div>
-      <% end %>
-    </li>
-  <% end %>
-
+  <%= render 'list_of_offers' %> 
 <% else %>
   <br>
-  <h3>Sorry, no current offers. Check back soon!</h3>
+  <h3>Sorry, no open offers. Check back soon!</h3>
 <% end %>
 
 <br>
+<h5 class="slab-font"><%= link_to 'Open offers by location', offers_by_location_path %></h5>
 <%= render 'welcome/link_to_home' %>
