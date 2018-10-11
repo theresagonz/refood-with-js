@@ -19,7 +19,11 @@ class OffersController < ApplicationController
   end
 
   def index
-    @offers = Offer.select { |o| !o.deleted && !o.closed && o.giver_id != current_user.id }.reverse
+    @offers = Offer.open_offers.select { |o| o.giver_id != current_user.id }.reverse
+  end
+
+  def by_location
+    @offers = Offer.open_offers.group_by_location.select { |o| o.giver_id != current_user.id }
   end
 
   def closed
