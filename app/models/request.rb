@@ -8,9 +8,11 @@ class Request < ApplicationRecord
   validate :email_or_phone
 
 
-  def self.recently_completed
-    Request.where("completed_requestor = ?", true).or(Request.where("completed_giver = ?", true)).order(updated_at: :desc).limit(10)
-  end
+  # def self.recently_completed
+  #   Request.where("completed_requestor = ?", true).or(Request.where("completed_giver = ?", true)).order(updated_at: :desc).limit(10)
+  # end
+
+  scope :recently_completed, -> { order(updated_at: :desc).where(completed_requestor: true).where(completed_giver: true) }
 
   private
 
