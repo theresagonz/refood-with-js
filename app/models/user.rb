@@ -17,6 +17,10 @@ class User < ApplicationRecord
   validates :password, presence: true, allow_nil: true
   validates :password_confirmation, presence: true, allow_nil: true
 
+  def city_state
+    "#{city}, #{state}"
+  end
+  
   def karma
     # number of requests marked completed by other users' givers and requestors
     giver.requests.select { |r| r.completed_giver }.count + requestor.requests.select { |r| r.completed_requestor }.count
