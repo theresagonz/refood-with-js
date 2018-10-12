@@ -4,6 +4,7 @@ class RequestsController < ApplicationController
   before_action :redirect_to_index_if_not_authorized_to_edit_offer, only: [:index]
   before_action :redirect_to_existing_request, only: [:new, :create]
   before_action :redirect_if_user_owns_offer, only: [:new, :create]
+  before_action :redirect_if_offer_and_request_not_associated, only: [:show, :edit, :update, :destroy]
 
   def new
     @offer = Offer.find(params[:offer_id])
@@ -71,7 +72,7 @@ class RequestsController < ApplicationController
     request = Request.find(params[:id])
     request.update(request_params)
     flash[:message] = "Thanks for being an awesome human!"
-    redirect_to '/'
+    redirect_to '/index'
   end
 
   def destroy

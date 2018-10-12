@@ -17,10 +17,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def auth_redirect(resource)
+    flash[:error] = ["Hey, that's not your #{resource}"]
+    redirect_to index_path
+  end
+
   def redirect_to_index_if_not_authorized(params_id, resource)
     if params[params_id].to_i != current_user.id
-      flash[:error] = ["Hey, that's not your #{resource}"]
-      redirect_to index_path
+      auth_redirect(resource)
     end
   end
 
@@ -34,15 +38,14 @@ class ApplicationController < ActionController::Base
     end
     
     if offer && offer.user != current_user
-      flash[:error] = ["Hey, that's not your offer"]
-      redirect_to index_path
+      auth_redirect('offer')
     end
   end
 
   def redirect_to_index_if_not_authorized_to_edit_request
-    if Request.find(params[:id]).user != current_user
-      flash[:error] = ["Hey, that's not your request"]
-      redirect_to index_path
+    request = Request.find_by(id: params[:id])
+    if !request || request.user != current_user
+      auth_redirect('request')
     end
   end
 
@@ -71,6 +74,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def redirect_if_offer_and_request_not_associated
+    offer = Offer.find_by(id: params[:offer_id])
+    request = Request.find_by(id: params[:id])
+    if !offer || !request || !offer.requests.include?(request)
+      flash[:error] = ["Hmm, something's not quite right"]
+      redirect_to offer_path(offer)
+    end
+  end
 
   def convert_string_to_date(string)
     Time.strptime(string, '%m/%d/%Y %H:%M %p')
