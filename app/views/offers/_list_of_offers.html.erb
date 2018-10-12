@@ -3,12 +3,12 @@
     <li class="list-obj left-padding">
       <h5><%= link_to offer.headline, offer %></h5>
       <div class="small grey-text">Posted <%= time_ago(offer) %> ago</div>
-      <% if offer.user.city %>
-        <div><%= offer.user.city_state %></div>
+      <% if offer.city %>
+        <div><%= offer.city_state %></div>
       <% else %>
         <div>Ask for location info</div>
       <% end %>
     </li>
   <% end %>
-  </ul>
+</ul>
  

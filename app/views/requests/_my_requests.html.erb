@@ -1,7 +1,7 @@
 <% if @requests.present? %>
   <ul class="margin-bottom">
     <% @requests.each do |request| %>
-      <li class="top-margin left-padding">
+      <li class="left-padding lg-margin-bottom">
         <span class="h5-size"><%= link_to request.offer.headline, offer_request_path(request.offer, request) %></span>
         <% if request.completed_requestor %>
           <span class="badge badge-warning badge-shift slab-font">New karma</span>
@@ -10,8 +10,8 @@
           <span class="badge badge-info badge-shift slab-font">Closed</span>
         <% end %>
         <div class="small darker-grey-text">Requested <%= time_ago(request) %> ago</div>
-        <% if request.offer.user.city %>
-          <div class="sm-top-margin darker-grey-text-normal"><%= request.offer.user.city %>, <%= request.offer.user.state %></div>
+        <% if request.offer.city %>
+          <div class="sm-top-margin darker-grey-text-normal"><%= request.offer.city_state %></div>
         <% end %>
       </li>
     <% end %>

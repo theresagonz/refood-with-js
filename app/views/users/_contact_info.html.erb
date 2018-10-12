@@ -7,8 +7,8 @@
       <b>Phone: </b><%= format_phone(@user.phone) %><br>
     <% end %>
     <%= render 'users/address' %>
-    <% if @user.city.present? && @user.state.present? && @user.address.blank? %>
-      <b>City: </b><%= @user.city %>, <%= @user.state %><br>
+    <% if @user.address.blank? && @offer.city.present? %>
+      <b>Location: </b><%= @offer.city_state %><br>
     <% end %>
   </div>
   

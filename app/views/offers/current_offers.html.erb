@@ -1,12 +1,12 @@
-<h1 class="slab-font sm-margin-bottom">Current Offers</h1>
+<h1 class="slab-font sm-margin-bottom">Open offers</h1>
 
 <% if @offers.present? %>
   <ul class="margin-bottom">
   <% @offers.each do |offer| %>
     <li class="list-obj left-padding">
       <div><%= link_to offer.headline, offer %></div>
-      <% if offer.user.city %>
-        <div><%= offer.user.city %>, <%= offer.user.state %></div>
+      <% if offer.city %>
+        <div><%= offer.city_state %></div>
       <% else %>
         <div>Ask for location info</div>
       <% end %>
@@ -16,7 +16,7 @@
 
 <% else %>
   <br>
-  <h3>Sorry, no current offers. Check back soon!</h3>
+  <h3 class="slab-font">No open offers. Check back soon!</h3>
 <% end %>
 
 <br>

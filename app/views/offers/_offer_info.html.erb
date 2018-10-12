@@ -4,8 +4,8 @@
 <br>
   <h6><b>Description: </b><%= offer.description %></h6>
 <% end %>
-<% if offer.user.city %>
-  <h6><b>City: </b><%= offer.user.city %>, <%= offer.user.state %></h6>
+<% if offer.city %>
+  <h6><b>Location: </b><%= offer.city_state %></h6>
 <% end %>
 <% if offer.availability.present? %>
   <h6><b>Pickup availability: </b><%= offer.availability %></h6>
