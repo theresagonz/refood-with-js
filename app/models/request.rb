@@ -13,7 +13,7 @@ class Request < ApplicationRecord
   # end
 
   scope :recently_completed, -> { order(updated_at: :desc).where(completed_requestor: true).where(completed_giver: true) }
-
+  
   private
 
     def email_or_phone

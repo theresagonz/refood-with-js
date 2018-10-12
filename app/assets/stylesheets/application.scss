@@ -90,10 +90,6 @@ a:hover, a:visited, a:link, a:active {
   text-align: center;
 }
 
-.lg-margin-bottom {
-  margin: 0 0 2rem 0;
-}
-
 .slab-font {
   font-family: 'Pontano Sans', sans-serif;
 }
@@ -104,6 +100,10 @@ a:hover, a:visited, a:link, a:active {
 
 .margin-bottom {
   margin: 0 0 0.3rem 0;
+}
+
+.lg-margin-bottom {
+  margin: 0 0 2rem 0;
 }
 
 .home-img {
@@ -142,12 +142,16 @@ a:hover, a:visited, a:link, a:active {
   margin: 0 0 1.9rem 0;
 }
 
+li.lg-margin-bottom {
+  margin: 0 0 1.3rem 0;
+}
+
 li:last-of-type {
-  margin: 0 0 0 0;
+  margin: 0 0 3px 0;
 }
 
 .sm-top-margin {
-  margin: 3px 0 0 0;
+  margin: 5px 0 0 0;
 }
 
 .sm-left-margin {
