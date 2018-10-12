@@ -6,7 +6,7 @@ class RequestsController < ApplicationController
   before_action :redirect_if_user_owns_offer, only: [:new, :create]
 
   def new
-    @offer = Offer.find_by(id: params[:offer_id])
+    @offer = Offer.find(params[:offer_id])
     @request = @offer.requests.build
   end
 
@@ -21,24 +21,24 @@ class RequestsController < ApplicationController
       redirect_to offer_request_path(offer, request)
     else
       flash.now[:error] = request.errors.full_messages
-      @offer = Offer.find_by(id: params[:offer_id])
+      @offer = Offer.find(params[:offer_id])
       @request = @offer.requests.build
       render :new
     end
   end
 
   def show
-    @offer = Offer.find_by(id: params[:offer_id])
-    @request = Request.find_by(id: params[:id])
+    @offer = Offer.find(params[:offer_id])
+    @request = Request.find(params[:id])
   end
 
   def index
-    @offer = Offer.find_by(id: params[:offer_id])
+    @offer = Offer.find(params[:offer_id])
     @requests = @offer.requests.select { |r| r.completed_requestor == false }
   end
 
   def offer_completed
-    @offer = Offer.find_by(id: params[:offer_id])
+    @offer = Offer.find(params[:offer_id])
     @requests = @offer.requests.select { |r| r.completed_requestor == true }
   end
 
@@ -51,13 +51,13 @@ class RequestsController < ApplicationController
   end
 
   def edit
-    @offer = Offer.find_by(id: params[:offer_id])
-    @request = Request.find_by(id: params[:id])
+    @offer = Offer.find(params[:offer_id])
+    @request = Request.find(params[:id])
   end
 
   def update
-    @offer = Offer.find_by(id: params[:offer_id])
-    @request = Request.find_by(id: params[:id])
+    @offer = Offer.find(params[:offer_id])
+    @request = Request.find(params[:id])
     if @request.update(request_params)
       flash[:message] = 'Request successfully updated'
       redirect_to offer_request_path(@offer, @request)
@@ -68,14 +68,14 @@ class RequestsController < ApplicationController
   end
 
   def complete
-    request = Request.find_by(id: params[:id])
+    request = Request.find(params[:id])
     request.update(request_params)
     flash[:message] = "Thanks for being an awesome human!"
     redirect_to '/'
   end
 
   def destroy
-    request = Request.find_by(id: params[:id])
+    request = Request.find(params[:id])
     request.delete
     flash[:message] = "Request successfully deleted"
     redirect_to '/index'

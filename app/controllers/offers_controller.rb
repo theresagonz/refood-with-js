@@ -35,18 +35,18 @@ class OffersController < ApplicationController
   end
     
   def show
-    @offer = Offer.find_by(id: params[:id])
+    @offer = Offer.find(params[:id])
     @request = Request.select { |r| r.offer == @offer && r.requestor == current_user.requestor }.first
     @requests = @offer.requests.select { |r| r.completed_requestor == false }
     @completed_requests = @offer.requests.select { |r| r.completed_requestor }
   end
 
   def edit
-    @offer = Offer.find_by(id: params[:id])
+    @offer = Offer.find(params[:id])
   end
 
   def update
-    @offer = Offer.find_by(id: params[:id])
+    @offer = Offer.find(params[:id])
     # if params are coming from the offer edit form
     if params[:offer]
       if @offer.update(offer_params)
@@ -66,7 +66,7 @@ class OffersController < ApplicationController
   end
 
   def destroy
-    offer = Offer.find_by(id: params[:id])
+    offer = Offer.find(params[:id])
     if offer.requests.present?
       offer.deleted = true
       offer.save
