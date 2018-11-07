@@ -10,14 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_11_173017) do
-
-  create_table "comments", force: :cascade do |t|
-    t.integer "giver_id"
-    t.integer "request_id"
-    t.text "comment_for_giver"
-    t.text "comment_for_requestor"
-  end
+ActiveRecord::Schema.define(version: 2018_09_15_151021) do
 
   create_table "givers", force: :cascade do |t|
     t.integer "user_id"
@@ -28,16 +21,14 @@ ActiveRecord::Schema.define(version: 2018_10_11_173017) do
   create_table "offers", force: :cascade do |t|
     t.integer "giver_id"
     t.string "headline"
-    t.string "location"
-    t.text "description"
-    t.string "availability"
-    t.string "expiration"
-    t.boolean "closed", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "deleted", default: false
     t.string "city"
     t.string "state"
+    t.text "description"
+    t.string "availability"
+    t.boolean "closed", default: false
+    t.boolean "deleted", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "requestors", force: :cascade do |t|
@@ -52,27 +43,22 @@ ActiveRecord::Schema.define(version: 2018_10_11_173017) do
     t.text "message"
     t.string "requestor_email"
     t.string "requestor_phone"
+    t.boolean "completed_giver", default: false
+    t.boolean "completed_requestor", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "completed_requestor", default: false
-    t.boolean "completed_giver", default: false
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
-    t.string "username"
-    t.string "password_digest"
-    t.string "type"
     t.string "name"
-    t.string "business_name"
+    t.string "password_digest"
     t.string "address"
     t.string "address2"
     t.string "city"
     t.string "state"
     t.string "zip_code"
     t.string "phone"
-    t.boolean "show_address"
-    t.boolean "show_phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
