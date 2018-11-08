@@ -1,12 +1,15 @@
 <%= render 'layouts/flash_error' %>
 <%= render 'layouts/flash_message' %>
 
-<%= render 'offer_info', :offer => @offer %>
+<h1 id="offer-status"></h1>
+<br>
+<b><h6 id="offer-description"></h6></b>
 
 <% if @offer.user != current_user %>
-  <%= render 'offer_options_not_owner' %>
-<% else %>
-  <%= render 'offer_options_owner' %>
+  <a href="#" id="show-request-form">Make a request</a>
 <% end %>
 
+<div id="place-for-form"></div>
+
+<br>
 <%= render 'welcome/link_to_home' %>

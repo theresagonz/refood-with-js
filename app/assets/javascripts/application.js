@@ -22,5 +22,6 @@
 //= require offers
 //= require offer
 //= require OffersAdapter
+//= require OfferAdapter
 
 $('.dropdown-toggle').dropdown()
