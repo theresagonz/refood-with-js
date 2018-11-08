@@ -19,5 +19,8 @@
 //= require jquery_ujs
 //= require tempusdominus-bootstrap-4.js
 //= require bootstrap
+//= require offers
+//= require offer
+//= require OffersAdapter
 
 $('.dropdown-toggle').dropdown()

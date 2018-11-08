@@ -1,7 +1,8 @@
 <h1 class="slab-font sm-margin-bottom">Open offers</h1>
 
 <% if @offers.present? %>
-  <%= render 'list_of_offers' %> 
+   <ul id="offers-list" class="margin-bottom"></ul>
+
 <% else %>
   <br>
   <h3 class="slab-font">No open offers. Check back soon!</h3>
