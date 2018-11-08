@@ -11,4 +11,14 @@ class Offer {
     this.deleted = offerJSON.deleted;
     this.created_at = offerJSON.created_at;
   }
+
+  renderLi() {
+    return `
+        <li class="list-obj left-padding">
+          <h5><a href="offers/${this.id}">${this.headline}</a></h5>
+          <div class="small grey-text">Posted a while ago</div>
+          <div>${this.city}, ${this.state}</div>
+        </li>
+    `;
+  }
 }

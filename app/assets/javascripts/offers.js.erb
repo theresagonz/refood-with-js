@@ -2,8 +2,12 @@ class Offers {
   constructor() {
     this.offers = [];
     this.adapter = new OffersAdapter();
-
+    this.initBindingsAndEventListeners();
     this.fetchAndLoadOffers();
+  }
+
+  initBindingsAndEventListeners() {
+    this.offersList = document.querySelector('#offers-list')
   }
 
   fetchAndLoadOffers() {
@@ -13,25 +17,13 @@ class Offers {
           this.offers.push(new Offer(offer));
         });
       })
-      .then(() => this.render());
+      .then(() => this.render())
+      .catch(error => console.error(error));
   }
 
   render() {
-    const offersList = document.querySelector('#offers-list');
-    let html = this.offers.map(offer => {
-      console.log(offer)
-      return `
-        <li class="list-obj left-padding">
-          <h5><a href="offers/${offer.id}">${offer.headline}</a></h5>
-          <div class="small grey-text">Posted a while ago</div>
-          <div>${offer.city}, ${offer.state}</div>
-        </li>`;
-    }).join('');
-
-  // console.log('html', html)
-  offersList.innerHTML = html
+    this.offersList.innerHTML = this.offers.map(offer => offer.renderLi()).join('');
   }
 }
 
 const offers = new Offers();
-
