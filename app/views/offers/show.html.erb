@@ -1,9 +1,13 @@
 <%= render 'layouts/flash_error' %>
 <%= render 'layouts/flash_message' %>
 
-<h1 id="offer-status"></h1>
+<h1 id="offer-status"><%= @offer.closed ? "Closed" : "Open" %> offer</h1>
 <br>
-<b><h6 id="offer-description"></h6></b>
+
+<h3 id="offer-headline"><%= @offer.headline %></h3>
+<h6 id="offer-description"><b>Description: </b><%= @offer.description %></h6>
+
+<a href="#" class="js-next" data-id="<%= @offer.id %>">Next Offer</a>
 
 <% if @offer.user != current_user %>
   <a href="#" id="show-request-form">Make a request</a>
@@ -13,3 +17,21 @@
 
 <br>
 <%= render 'welcome/link_to_home' %>
+
+<script type="text/javascript" charset="utf-8">
+  $(function(e) {
+    $(".js-next").on("click", (e) => {
+      const nextId = parseInt($(".js-next").attr("data-id")) + 1;
+      
+      $.get(`/offers/${nextId}.json`, (data) => {
+      console.log(data);
+        const offerStatus = data["closed"] ? "Closed offer" : "Open offer";
+        $("#offer-status").text(offerStatus)
+        $("#offer-headline").text(data["headline"])
+        $("#offer-description").text(data["description"])
+        $(".js-next").attr("data-id", data["id"])
+      });
+    e.preventDefault();
+    });
+  })
+</script>
