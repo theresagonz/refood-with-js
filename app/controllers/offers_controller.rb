@@ -45,6 +45,11 @@ class OffersController < ApplicationController
     @request = Request.select { |r| r.offer == @offer && r.requestor == current_user.requestor }.first
     @requests = @offer.requests.select { |r| r.completed_requestor == false }
     @completed_requests = @offer.requests.select { |r| r.completed_requestor }
+
+    respond_to do |format|
+      format.html { render :show }
+      format.json { render json: @offer }
+    end    
   end
 
   def edit
