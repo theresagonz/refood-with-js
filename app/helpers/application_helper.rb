@@ -49,4 +49,8 @@ module ApplicationHelper
       time_units_string(seconds_away, 'second')
     end
   end
+
+  def city_state
+    "#{city}, #{state}"
+  end
 end

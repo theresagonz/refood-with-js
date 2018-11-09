@@ -5,7 +5,10 @@
 
 <h3 id="offer-headline"><%= @offer.headline %></h3>
 <div id="offer-post-date" class="small grey-text">Posted on <%= format_date(@offer.created_at.localtime) %></div>
+<br>
 <h6 id="offer-description"><b>Description: </b><%= @offer.description %></h6>
+<h6 id="offer-location"><b>Location: </b><%= @offer.city_state %></h6>
+<h6 id="offer-availability"><b>Pickup availability: </b><%= @offer.availability %></h6>
 
 <a href="#" class="js-next" data-id="<%= @offer.id %>">Next Offer</a>
 
@@ -29,7 +32,10 @@
         $('#offer-status').text(offerStatus);
         $('#offer-headline').text(data['headline']);
         $('#offer-post-date').text(`Posted on ${data['created_date']}`);
-        $('#offer-description').text(data['description']);
+        $('#offer-description').html(`<b>Description: </b>${data['description']}`);
+        $('#offer-location').html(`<b>Location: </b>${data['city_state']}`);
+        $('#offer-availability').html(`<b>Pickup availability: </b>${data['availability']}`);
+
         $('.js-next').attr('data-id', data['id']);
       });
     e.preventDefault();
