@@ -10,8 +10,17 @@
 <h6 id="offer-location"><b>Location: </b><%= @offer.city_state %></h6>
 <h6 id="offer-availability"><b>Pickup availability: </b><%= @offer.availability %></h6>
 
+<br>
+<h4 class="slab-font" id="requests-count"><a href="#" class="js-requests" data-id="<%= @offer.id %>"><%= @offer.requests.count %> requests</a></h4>
+
+<% if @offer.id != current_user.id %>
+  <div id="offer-requests"></div>
+<% end %>
+
+<br>
 <a href="#" class="js-next" data-id="<%= @offer.id %>">Next Offer</a>
 
+<br>
 <% if @offer.user != current_user %>
   <a href="#" id="show-request-form">Make a request</a>
 <% end %>
@@ -27,7 +36,6 @@
       const nextId = parseInt($('.js-next').attr('data-id')) + 1;
       
       $.get(`/offers/${nextId}.json`, (data) => {
-      console.log(data);
         const offerStatus = data['closed'] ? 'Closed offer' : 'Open offer';
         $('#offer-status').text(offerStatus);
         $('#offer-headline').text(data['headline']);
@@ -40,5 +48,33 @@
       });
     e.preventDefault();
     });
+  })
+  $('.js-requests').on('click', e => {
+    e.preventDefault();
+    const id = parseInt($('.js-next').attr('data-id'));
+    $('#requests-count').empty();
+
+    const requestsHtml = $.get(`/offers/${id}.json`, data => {
+      let htmlArray = data.requests.map(request => {
+        const status = request.completed_requestor && request.completed_giver ? "Closed request" : "Open request";
+        const phone = request.requestor_phone ? request.formatted_phone : "Phone not given"
+        const email = request.requestor_email ? request.requestor_email : "Email not given"
+
+
+        return `
+          <div class="lt-grey-box list-spacing">
+            <h4 class="slab-font">${status}</h4>
+            <b>From: </b>${request.requestor_name}<br>
+            <b>Email: </b><a href="mailto:${email}">${email}</a><br>
+            <b>Phone: </b>${phone}<br>
+            <b>Message: </b>${request.message}<br>
+          </div>
+        ` 
+        }).join('');
+
+    $('#offer-requests').html(htmlArray);
+    })
+
+
   })
 </script>

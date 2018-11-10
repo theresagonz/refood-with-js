@@ -14,6 +14,23 @@ class Request < ApplicationRecord
 
   scope :recently_completed, -> { order(updated_at: :desc).where(completed_requestor: true).where(completed_giver: true) }
   
+  def requestor_name
+    self.user.name
+  end
+
+  def created_date
+    self.created_at.strftime('%A, %B %e, %Y @ %l:%M %P')
+  end
+
+  def formatted_phone
+    if self.requestor_phone
+      phone = self.requestor_phone
+      phone.insert(3, "-")
+      phone.insert(7, "-")
+    end
+  end
+
+
   private
 
     def email_or_phone
