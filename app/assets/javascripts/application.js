@@ -13,14 +13,11 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-//= require_tree .
 //= require moment
 //= require jquery
 //= require jquery_ujs
 //= require tempusdominus-bootstrap-4.js
 //= require bootstrap
-//= require offers
-//= require offer
-//= require OffersAdapter
+//= require_tree .
 
 $('.dropdown-toggle').dropdown()
