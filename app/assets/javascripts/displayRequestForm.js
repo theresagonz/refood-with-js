@@ -1,6 +1,9 @@
 $(document).on('turbolinks:load', () => {
   $('#show-request-form').on('click', e => {
     e.preventDefault();
+    $('#show-request-form').empty();
+    $('#show-request-form').append('<h3>New request</h3>')
+
     const id = parseInt($('.js-next').attr('data-id'), 10);
     console.log('id', id)
     const formContent = `
