@@ -7,7 +7,8 @@ $(document).on('turbolinks:load', () => {
     const id = parseInt($('.js-next').attr('data-id'), 10);
     console.log('id', id)
     const formContent = `
-    <form id="request-form" action="/offers/${id}/requests" method="POST">
+    <form id="request-form">
+    <div id="request-form-wrapper">
       <div class="form-group">
         <label for="request-message">Message</label>
         <input type="text" id="request-message" class="form-control">
@@ -23,6 +24,7 @@ $(document).on('turbolinks:load', () => {
       </div>
       <input type="submit" class="btn btn-primary">
       <a href="/index" class="btn btn-secondary">Cancel</a>
+      </div>
     </form>
     `;
 
