@@ -24,7 +24,7 @@ $(document).on('turbolinks:load', () => {
       </div>
     `;
     debugger
-    $.post('/offers/2/requests', data, function(returnedData){
+    $.post(`/offers/${id}/requests`, data, function(returnedData){
          console.log('data', returnedData);
       }).fail(function(){
       console.log("error");

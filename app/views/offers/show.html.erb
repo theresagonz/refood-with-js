@@ -1,6 +1,12 @@
 <%= render 'layouts/flash_error' %>
 <%= render 'layouts/flash_message' %>
 
+<div class="slab-font">
+  <a href="#" class="js-previous" data-id="<%= @offer.id %>">Previous offer</a>
+  <span> | </span>
+  <a href="#" class="js-next" data-id="<%= @offer.id %>">Next offer</a>
+</div>
+<br>
 <h1 id="offer-status" class="slab-font"><%= @offer.closed ? "Closed" : "Open" %> offer</h1>
 
 <h3 id="offer-headline"><%= @offer.headline %></h3>
@@ -18,9 +24,6 @@
 <% if @offer.id != current_user.id %>
   <div id="offer-requests"></div>
 <% end %>
-
-<br>
-<a href="#" class="js-next" data-id="<%= @offer.id %>">Next Offer</a>
 
 <br>
 <% if @offer.user != current_user %>
