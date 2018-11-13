@@ -5,27 +5,29 @@ class RequestsController < ApplicationController
   before_action :redirect_to_existing_request, only: [:new, :create]
   before_action :redirect_if_user_owns_offer, only: [:new, :create]
   before_action :redirect_if_offer_and_request_not_associated, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token
 
   def new
     @offer = Offer.find(params[:offer_id])
     @request = @offer.requests.build
   end
 
-  def create
-    request = Request.new(request_params)
-    request.offer_id = params[:offer_id]
-    request.requestor = current_user.requestor
+  def create    
+    binding.pry
+    # request = Request.new(request_params)
+    # request.offer_id = params[:offer_id]
+    # request.requestor = current_user.requestor
 
-    if request.save
-      offer = Offer.find(params[:offer_id])
-      flash[:message] = "Request successfully created"
-      redirect_to offer_request_path(offer, request)
-    else
-      flash.now[:error] = request.errors.full_messages
-      @offer = Offer.find(params[:offer_id])
-      @request = @offer.requests.build
-      render :new
-    end
+    # if request.save
+    #   offer = Offer.find(params[:offer_id])
+    #   flash[:message] = "Request successfully created"
+    #   redirect_to offer_request_path(offer, request)
+    # else
+    #   flash.now[:error] = request.errors.full_messages
+    #   @offer = Offer.find(params[:offer_id])
+    #   @request = @offer.requests.build
+    #   render :new
+    # end
   end
 
   def show

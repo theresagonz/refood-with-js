@@ -1,9 +1,10 @@
-$(function() {
+$(document).on('turbolinks:load',function() {
   $('#requests-count').on('click', '.js-requests', (e) => {
     e.preventDefault();
     
     $('#requests-count').empty();
     
+    // better way to get id?
     const id = parseInt($('.js-next').attr('data-id'), 10);
     const requestsHtml = $.get(`/offers/${id}.json`, (data) => {
       const htmlString = data.requests.map(request => {

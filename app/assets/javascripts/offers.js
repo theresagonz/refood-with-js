@@ -13,6 +13,8 @@ class Offers {
   fetchAndLoadOffers() {
     this.adapter.getOffers()
       .then(offers => {
+        console.log('offers', offers);
+        
         offers.forEach(offer => {
           this.offers.push(new Offer(offer));
         });

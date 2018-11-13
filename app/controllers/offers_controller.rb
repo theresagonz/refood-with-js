@@ -21,7 +21,6 @@ class OffersController < ApplicationController
   def index
     @offers = Offer.open_offers.select { |o| o.giver_id != current_user.id }.reverse
 
-
     respond_to do |format|
       format.html { render :index }
       format.json { render json: @offers }

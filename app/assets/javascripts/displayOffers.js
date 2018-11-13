@@ -1,7 +1,6 @@
-$(() => {
+$(document).on('turbolinks:load', () => {
   $('.js-next').on('click', (e) => {
     e.preventDefault();
-
     $('#offer-requests').empty();
 
     const nextId = parseInt($('.js-next').attr('data-id'), 10) + 1;

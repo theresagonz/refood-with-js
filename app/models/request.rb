@@ -23,13 +23,17 @@ class Request < ApplicationRecord
   end
 
   def formatted_phone
-    if self.requestor_phone
+    if self.requestor_phone.present?
       phone = self.requestor_phone
       phone.insert(3, "-")
       phone.insert(7, "-")
     end
   end
 
+  # def user
+  #   binding.pry
+  #   # self.user.name
+  # end
 
   private
 

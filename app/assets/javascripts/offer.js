@@ -1,8 +1,7 @@
 class Offer {
   constructor(offerJSON) {
-    console.log('offerjson', offerJSON)
     this.adapter = new OffersAdapter();
-    this.initBindingsAndEventListeners();
+    // this.initBindingsAndEventListeners();
 
     // this.adapter.getOffer(id).then(fetchOffer(id));
 
@@ -54,10 +53,3 @@ class Offer {
     `
   }
 }
-
-// const offer = new Offer();
-
-// $(function() {
-//   // this.fetchOffer(1);
-//   alert('hi!')
-// })
