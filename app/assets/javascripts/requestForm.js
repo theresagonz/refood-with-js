@@ -1,5 +1,6 @@
 $(document).on('turbolinks:load', () => {
-  $('#request-form').on('submit', '#request-form-wrapper', (e) => {
+  
+  $('#request-form').on('submit', (e) => {
     debugger
     e.preventDefault();
     
@@ -17,11 +18,11 @@ $(document).on('turbolinks:load', () => {
     const phone = data.request.requestor_phone ? data.request.formatted_phone : 'Phone not given';
     const email = data.request.requestor_email ? data.request.requestor_email : 'Email not given';
 
-    // $.post(`/offers/${id}/requests`, data, function(returnedData){
-    //      console.log('data', returnedData);
-    //   }).fail(function(){
-    //   console.log("error");
-    // });
+    $.post(`/offers/${id}/requests`, data, function(returnedData){
+         console.log('data', returnedData);
+      }).fail(function(){
+      console.log("error");
+    });
   //   $.ajax({
   //     type: 'POST',
   //     url: '/offers/2/requests',
@@ -37,5 +38,5 @@ $(document).on('turbolinks:load', () => {
   //   });
   // $.post('/offers/${id}/requests', data, postData);
   // console.log(data);
-  // });
+  });
 });

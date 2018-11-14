@@ -1,7 +1,7 @@
-$(document).on('turbolinks:load', () => {
+// $(document).on('turbolinks:load', () => {
   
-  $('h1').transition({ x: 210 });
-});
+//   $('h1').transition({ x: 210 });
+// });
 
 // const transition = () => {
 
