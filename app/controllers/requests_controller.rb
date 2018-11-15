@@ -13,21 +13,21 @@ class RequestsController < ApplicationController
   end
 
   def create
-    binding.pry
-    # request = Request.new(request_params)
-    # request.offer_id = params[:offer_id]
-    # request.requestor = current_user.requestor
+    request = Request.new(request_params)
+    request.offer_id = params[:offer_id]
+    request.requestor = current_user.requestor
 
-    # if request.save
-    #   offer = Offer.find(params[:offer_id])
-    #   flash[:message] = "Request successfully created"
-    #   redirect_to offer_request_path(offer, request)
-    # else
-    #   flash.now[:error] = request.errors.full_messages
-    #   @offer = Offer.find(params[:offer_id])
-    #   @request = @offer.requests.build
-    #   render :new
-    # end
+    if request.save
+      @offer = Offer.find(params[:offer_id])
+      flash.now[:message] = "Request successfully created"
+      render :show
+      # redirect_to offer_request_path(offer, request)
+    else
+      flash.now[:error] = request.errors.full_messages
+      @offer = Offer.find(params[:offer_id])
+      @request = @offer.requests.build
+      render :new
+    end
   end
 
   def show
