@@ -18,11 +18,9 @@ $(document).on('turbolinks:load', () => {
     const phone = data.request.requestor_phone ? data.request.formatted_phone : 'Phone not given';
     const email = data.request.requestor_email ? data.request.requestor_email : 'Email not given';
 
-    $.post(`/offers/${id}/requests`, data, function(returnedData){
+    $.post(`/offers/${id}/requests`, data, (returnedData) => {
          console.log('data', returnedData);
-      }).fail(function(){
-      console.log("error");
-    });
+      }).fail(() => console.log("error"));
   //   $.ajax({
   //     type: 'POST',
   //     url: '/offers/2/requests',

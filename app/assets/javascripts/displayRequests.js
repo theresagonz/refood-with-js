@@ -1,4 +1,4 @@
-$(document).on('turbolinks:load',function() {
+$(document).on('turbolinks:load', () => {
   $('#requests-count').on('click', '.js-requests', (e) => {
     e.preventDefault();
     
