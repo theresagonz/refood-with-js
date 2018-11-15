@@ -12,7 +12,7 @@ class RequestsController < ApplicationController
     @request = @offer.requests.build
   end
 
-  def create    
+  def create
     binding.pry
     # request = Request.new(request_params)
     # request.offer_id = params[:offer_id]

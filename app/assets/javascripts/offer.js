@@ -17,12 +17,12 @@ class Offer {
     // const id = parseInt($('.js-next').attr('data-id'), 10);
   }
 
-    displayRequestForm() {
+  displayRequestForm() {
     $('#show-request-form').on('click', (e) => {
       e.preventDefault();
-      console.log('you clicked make request')
-      $('#place-for-request-form').html(this.renderForm());
+
       $('#show-request-form').html('<h3>New request</h3>')
+      $('#place-for-request-form').html(this.renderForm());
 
       this.attachFormSubmitListener();
     });
@@ -31,7 +31,7 @@ class Offer {
   attachFormSubmitListener() {
     $('#request-form').on('submit', (e) => {
       e.preventDefault();
-      console.log('ayayay')
+      this.submitForm();
       $('#place-for-request-form').empty();
     })
   }
@@ -82,11 +82,16 @@ class Offer {
 
   submitForm() {
     const id = parseInt($('.js-next').attr('data-id'), 10);
-    console.log('submit form id', id)
-    $.post(`/offers/${id}/requests`, data, function(returnedData){
+    const data = {
+      request: {
+        message: $('#request-message')[0].value,
+        requestor_email: $('#requestor-email')[0].value,
+        requestor_phone: $('#requestor-phone')[0].value
+      }
+    };
+
+    $.post(`/offers/${id}/requests`, data, (returnedData) => {
       console.log('data', returnedData);
-   }).fail(function(){
-   console.log("error");
- });
-  }
+   }, 'json').fail(() => console.error('error'));
+ }
 }
