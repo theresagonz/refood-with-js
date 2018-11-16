@@ -1,25 +1,23 @@
 class Offer {
   constructor(offerJSON) {
-      console.log(offerJSON)
-      this.id = offerJSON.id;
-      this.giverId = offerJSON.giver_id;
-      this.headline = offerJSON.headline;
-      this.city = offerJSON.city;
-      this.state = offerJSON.state;
-      this.description = offerJSON.description;
-      this.availability = offerJSON.availability;
-      this.closed = offerJSON.closed;
-      this.deleted = offerJSON.deleted;
-      this.createdAt = offerJSON.created_at;
-      
-      this.adapter = new OffersAdapter();
-      this.addShowRequestFormListener();
-    }
+    this.id = offerJSON.id;
+    this.giverId = offerJSON.giver_id;
+    this.headline = offerJSON.headline;
+    this.city = offerJSON.city;
+    this.state = offerJSON.state;
+    this.description = offerJSON.description;
+    this.availability = offerJSON.availability;
+    this.closed = offerJSON.closed;
+    this.deleted = offerJSON.deleted;
+    this.createdAt = offerJSON.created_at;
+    
+    this.adapter = new OffersAdapter();
+    this.addShowRequestFormListener();
+  }
 
   addShowRequestFormListener () {
     $('#request-form').on('click', (e) => {
       e.preventDefault();
-      debugger
 
       $('#request-form').html('<h3>New request</h3>')
       $('#place-for-request-form').html(this.renderForm());
@@ -54,7 +52,6 @@ class Offer {
   }
 
   renderForm() {
-    console.log('im in render form')
     return `
     <form id="request-form">
     <div id="request-form-wrapper">

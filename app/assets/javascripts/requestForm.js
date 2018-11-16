@@ -20,20 +20,5 @@ $(document).on('turbolinks:load', () => {
     $.post(`/offers/${id}/requests`, data, (returnedData) => {
          console.log('data', returnedData);
       }).fail(() => console.log("error"));
-  //   $.ajax({
-  //     type: 'POST',
-  //     url: '/offers/2/requests',
-  //     data: data,
-  //     success: () => {
-  //       alert('hey it worked maybe')
-  //       debugger
-  //       // $('#offer-requests').append(html)
-  //     },
-  //     error: () => {
-  //       alert('there\'s an error')
-  //     }
-  //   });
-  // $.post('/offers/${id}/requests', data, postData);
-  // console.log(data);
   });
 });
