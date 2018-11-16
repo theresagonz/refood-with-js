@@ -1,7 +1,6 @@
 $(document).on('turbolinks:load', () => {
   
   $('#request-form').on('submit', (e) => {
-    debugger
     e.preventDefault();
     
     const id = parseInt($('.js-next').attr('data-id'), 10);

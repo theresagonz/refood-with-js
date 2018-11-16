@@ -26,8 +26,8 @@
 <% end %>
 
 <% if @offer.user != current_user && !current_user.requestor.offers.include?(Offer.find(params[:id])) %>
-  <a href="#" id="show-request-form" class="slab-font">Make a request</a>
-<% end %>
+  <a href="#" id="request-form" class="slab-font">Make a request</a>
+<% end %> 
 
 <div id="place-for-request-form">
 </div>
@@ -36,5 +36,6 @@
 <%= render 'welcome/link_to_home' %>
 
 <script>
+  debugger
   new Offer();
 </script>

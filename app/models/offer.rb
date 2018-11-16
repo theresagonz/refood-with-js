@@ -8,6 +8,11 @@ class Offer < ApplicationRecord
 
   scope :group_by_location, -> { where(closed: false).order(state: :asc).order(city: :asc) }
 
+  def giver_name
+    self.user.name
+    # `${}`
+  end
+
   def city_state
     "#{city}, #{state}"
   end

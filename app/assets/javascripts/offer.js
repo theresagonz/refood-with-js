@@ -1,31 +1,35 @@
 class Offer {
   constructor(offerJSON) {
-    // this.adapter = new OffersAdapter();
-    // this.adapter.getOffer(id).then(offerJSON => {     
-    //   this.id = offerJSON.id;
-    //   this.giverId = offerJSON.giver_id;
-    //   this.headline = offerJSON.headline;
-    //   this.city = offerJSON.city;
-    //   this.state = offerJSON.state;
-    //   this.description = offerJSON.description;
-    //   this.availability = offerJSON.availability;
-    //   this.closed = offerJSON.closed;
-    //   this.deleted = offerJSON.deleted;
-    //   this.createdAt = offerJSON.created_at;
-    // });
-    this.displayRequestForm();
-    // const id = parseInt($('.js-next').attr('data-id'), 10);
-  }
+      console.log(offerJSON)
+      this.id = offerJSON.id;
+      this.giverId = offerJSON.giver_id;
+      this.headline = offerJSON.headline;
+      this.city = offerJSON.city;
+      this.state = offerJSON.state;
+      this.description = offerJSON.description;
+      this.availability = offerJSON.availability;
+      this.closed = offerJSON.closed;
+      this.deleted = offerJSON.deleted;
+      this.createdAt = offerJSON.created_at;
+      
+      this.adapter = new OffersAdapter();
+      this.addShowRequestFormListener();
+    }
 
-  displayRequestForm() {
-    $('#show-request-form').on('click', (e) => {
+  addShowRequestFormListener () {
+    $('#request-form').on('click', (e) => {
       e.preventDefault();
+      debugger
 
-      $('#show-request-form').html('<h3>New request</h3>')
+      $('#request-form').html('<h3>New request</h3>')
       $('#place-for-request-form').html(this.renderForm());
 
       this.attachFormSubmitListener();
     });
+  }
+
+  makeSentence() {
+    return `${this.giver_name} is offering ${this.headline} in ${this.location}`
   }
 
   attachFormSubmitListener() {
@@ -34,12 +38,6 @@ class Offer {
       this.submitForm();
       $('#place-for-request-form').empty();
     })
-  }
-
-  fetchOffer(id) {
-    this.adapter.getOffer(id)
-      .then(offer => offer.json())
-      .then(data => new Offer(data));
   }
 
   renderLi() {
@@ -89,7 +87,6 @@ class Offer {
         requestor_phone: $('#requestor-phone')[0].value
       }
     };
-
     $.post(`/offers/${id}/requests`, data, (returnedData) => {
       console.log('data', returnedData);
    }, 'json').fail(() => console.error('error'));
