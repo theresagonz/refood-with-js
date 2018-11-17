@@ -10,7 +10,6 @@ class Offer < ApplicationRecord
 
   def giver_name
     self.user.name
-    # `${}`
   end
 
   def city_state

@@ -14,15 +14,16 @@ class Offer {
     this.adapter = new OffersAdapter();
     this.attachShowRequestsListener();
     this.attachNextPreviousRequestListener();
-    this.attachShowRequestFormListener();
+    this.conditionalRenderRequestForm();
   }
 
   attachShowRequestsListener() {
     $('#requests-count').on('click', '.js-requests', (e) => {
       e.preventDefault();
       $('#requests-count').empty();
-      
-      const requestsHtml = $.get(`/offers/${id}.json`, (data) => {
+      const currId = parseInt($('.js-next').attr('data-id'), 10);
+      $('#offer-requests').empty();
+      const requestsHtml = $.get(`/offers/${currId}.json`, (data) => {
         const htmlString = data.requests.map(request => {
           const status = request.completed_requestor && request.completed_giver ? 'Closed request' : 'Open request';
           const phone = request.requestor_phone ? request.formatted_phone : 'Phone not given';
@@ -58,6 +59,19 @@ class Offer {
     });
   }
 
+  conditionalRenderRequestForm() {
+    // if current user already has a request don't show link to request form
+    this.adapter.getOffer(this.id)
+    .then(offer => {
+      if (offer.requests.some(req => req.requestor_id === offer.current_user.id )) {
+        $('#show-request-form').empty();
+      } else {
+        $('#show-request-form').text('Make a request')
+        this.attachShowRequestFormListener();
+      }
+    })
+  }
+
   changeRenderOffer(id) {
     $.get(`/offers/${id}.json`, (data) => {
       const requestsCountHtml = `<a href="/offers/${id}" class="js-requests" data-id="${data.id}">${data.requests.length} requests</a>`;
@@ -76,8 +90,7 @@ class Offer {
     });
   }
 
-
-  attachShowRequestFormListener () {
+  attachShowRequestFormListener() {
     $('#show-request-form').on('click', (e) => {
       e.preventDefault();
       $('#show-request-form').html('<h3>New request</h3>')

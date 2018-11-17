@@ -25,9 +25,7 @@
   <div id="offer-requests"></div>
 <% end %>
 
-<% if @offer.user != current_user && !current_user.requestor.offers.include?(Offer.find(params[:id])) %>
-  <a href="#" id="show-request-form" class="slab-font">Make a request</a>
-<% end %> 
+<a href="#" id="show-request-form" class="slab-font"></a>
 
 <div id="place-for-request-form">
 </div>
