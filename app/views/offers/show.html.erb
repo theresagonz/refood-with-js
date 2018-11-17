@@ -26,7 +26,7 @@
 <% end %>
 
 <% if @offer.user != current_user && !current_user.requestor.offers.include?(Offer.find(params[:id])) %>
-  <a href="#" id="request-form" class="slab-font">Make a request</a>
+  <a href="#" id="show-request-form" class="slab-font">Make a request</a>
 <% end %> 
 
 <div id="place-for-request-form">
@@ -36,7 +36,7 @@
 <%= render 'welcome/link_to_home' %>
 
 <script>
-  const id = '<%= @offer.id %>'
+  const id = <%= @offer.id %>
   adapter = new OffersAdapter()
   adapter.getOffer(id).then(offerJson => new Offer(offerJson))
 </script>

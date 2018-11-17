@@ -16,45 +16,27 @@ class Offer {
   }
 
   addShowRequestFormListener () {
-    $('#request-form').on('click', (e) => {
+    $('#show-request-form').on('click', (e) => {
       e.preventDefault();
-
-      $('#request-form').html('<h3>New request</h3>')
+      $('#show-request-form').html('<h3>New request</h3>')
       $('#place-for-request-form').html(this.renderForm());
 
       this.attachFormSubmitListener();
     });
   }
 
-  makeSentence() {
-    return `${this.giver_name} is offering ${this.headline} in ${this.location}`
-  }
-
   attachFormSubmitListener() {
     $('#request-form').on('submit', (e) => {
       e.preventDefault();
       this.submitForm();
+      $('#show-request-form').empty();
       $('#place-for-request-form').empty();
     })
-  }
-
-  renderLi() {
-    return `
-      <li class="list-obj left-padding">
-        <h5><a href="offers/${this.id}">${this.headline}</a></h5>
-        <div>${this.city}, ${this.state}</div>
-      </li>
-    `;
-  }
-
-  renderInfo() {
-    $('#offer-description').innerHTML = this.renderLi();
   }
 
   renderForm() {
     return `
     <form id="request-form">
-    <div id="request-form-wrapper">
     <div class="form-group">
       <label for="request-message">Message</label>
       <input type="text" id="request-message" class="form-control">
@@ -70,13 +52,11 @@ class Offer {
     </div>
     <input type="submit" class="btn btn-primary">
     <a href="/index" class="btn btn-secondary">Cancel</a>
-    </div>
     </form>
     `
   }
 
   submitForm() {
-    const id = parseInt($('.js-next').attr('data-id'), 10);
     const data = {
       request: {
         message: $('#request-message')[0].value,
@@ -84,8 +64,24 @@ class Offer {
         requestor_phone: $('#requestor-phone')[0].value
       }
     };
-    $.post(`/offers/${id}/requests`, data, (returnedData) => {
+    $.post(`/offers/${this.id}/requests`, data, (returnedData) => {
       console.log('data', returnedData);
    }, 'json').fail(() => console.error('error'));
- }
-}
+  }
+
+  makeSentence() {
+    return `${this.giver_name} is offering ${this.headline} in ${this.location}`
+  }
+
+  // renderLi() {
+  //   return `
+  //     <li class="list-obj left-padding">
+  //       <h5><a href="offers/${this.id}">${this.headline}</a></h5>
+  //       <div>${this.city}, ${this.state}</div>
+  //     </li>
+  //   `;
+  // }
+
+  // renderInfo() {
+  //   $('#offer-description').innerHTML = this.renderLi();
+  }
