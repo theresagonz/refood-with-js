@@ -12,10 +12,92 @@ class Offer {
     this.createdAt = offerJSON.created_at;
     
     this.adapter = new OffersAdapter();
-    this.addShowRequestFormListener();
+    this.attachShowRequestsListener();
+    this.attachNextPreviousRequestListener();
+    this.attachShowRequestFormListener();
   }
 
-  addShowRequestFormListener () {
+  attachShowRequestsListener() {
+    $('#requests-count').on('click', '.js-requests', (e) => {
+      e.preventDefault();
+      $('#requests-count').empty();
+      
+      const requestsHtml = $.get(`/offers/${id}.json`, (data) => {
+        const htmlString = data.requests.map(request => {
+          const status = request.completed_requestor && request.completed_giver ? 'Closed request' : 'Open request';
+          const phone = request.requestor_phone ? request.formatted_phone : 'Phone not given';
+          const email = request.requestor_email ? request.requestor_email : 'Email not given';
+  
+          return `
+            <div class="lt-grey-box list-spacing">
+              <h4 class="slab-font">${status}</h4>
+              <b>From: </b>${request.requestor_name}<br>
+              <b>Email: </b><a href="mailto:${email}">${email}</a><br>
+              <b>Phone: </b>${phone}<br>
+              <b>Message: </b>${request.message}<br>
+            </div>
+          `;
+          }).join('');
+        $('#offer-requests').html(htmlString);
+      });
+    });
+  }
+
+  attachNextPreviousRequestListener() {
+    $('.js-previous').on('click', (e) => {
+      e.preventDefault();
+      $('#offer-requests').empty();
+  
+      const nextId = parseInt($('.js-next').attr('data-id'), 10) + 1;
+  
+      $.get(`/offers/${nextId}.json`, (data) => {
+        const requestsCountHtml = `<a href="/offers/${nextId}" class="js-requests" data-id="${data.id}">${data.requests.length} requests</a>`;
+  
+        $('#requests-count').html(requestsCountHtml);
+  
+        const offerStatus = data.closed ? 'Closed offer' : 'Open offer';
+        const availability = data.availability ? data.availability : 'Not specified';
+  
+        $('#offer-status').text(offerStatus);
+  
+        $('#offer-headline').text(data.headline);
+        $('#offer-post-date').text(`Posted on ${data.created_date}`);
+        $('#offer-description').html(`<b>Description: </b>${data.description}`);
+        $('#offer-location').html(`<b>Location: </b>${data.city_state}`);
+        $('#offer-availability').html(`<b>Pickup availability: </b>${availability}`);
+  
+        $('.js-next').attr('data-id', data.id);
+      });
+    });
+  
+    $('.js-next').on('click', (e) => {
+      e.preventDefault();
+      $('#offer-requests').empty();
+  
+      const nextId = parseInt($('.js-next').attr('data-id'), 10) - 1;
+  
+      $.get(`/offers/${nextId}.json`, (data) => {
+        const requestsCountHtml = `<a href="/offers/${nextId}" class="js-requests" data-id="${data.id}">${data.requests.length} requests</a>`;
+  
+        $('#requests-count').html(requestsCountHtml);
+  
+        const offerStatus = data.closed ? 'Closed offer' : 'Open offer';
+        const availability = data.availability ? data.availability : 'Not specified';
+  
+        $('#offer-status').text(offerStatus);
+  
+        $('#offer-headline').text(data.headline);
+        $('#offer-post-date').text(`Posted on ${data.created_date}`);
+        $('#offer-description').html(`<b>Description: </b>${data.description}`);
+        $('#offer-location').html(`<b>Location: </b>${data.city_state}`);
+        $('#offer-availability').html(`<b>Pickup availability: </b>${availability}`);
+  
+        $('.js-next').attr('data-id', data.id);
+      });
+    });
+  }
+
+  attachShowRequestFormListener () {
     $('#show-request-form').on('click', (e) => {
       e.preventDefault();
       $('#show-request-form').html('<h3>New request</h3>')
@@ -66,7 +148,7 @@ class Offer {
     };
     $.post(`/offers/${this.id}/requests`, data, (returnedData) => {
       console.log('data', returnedData);
-   }, 'json').fail(() => console.error('error'));
+   }, 'json').catch(() => console.error('error'));
   }
 
   makeSentence() {
