@@ -12,9 +12,13 @@ class Offer {
     this.createdAt = offerJSON.created_at;
     
     this.adapter = new OffersAdapter();
-    this.attachShowRequestsListener();
-    this.attachNextPreviousRequestListener();
-    this.conditionalRenderRequestForm();
+
+    // if view is offers#show
+    if ($('#requests-count').length) {
+      this.attachShowRequestsListener();
+      this.attachNextPreviousRequestListener();
+      this.conditionalRenderRequestForm();
+    }
   }
 
   attachShowRequestsListener() {
@@ -91,6 +95,7 @@ class Offer {
       $('.js-next').attr('data-id', data.id);
     });
     this.conditionalRenderRequestForm(id);
+    $('#request-form').empty();
   }
 
   attachShowRequestFormListener() {
@@ -151,15 +156,16 @@ class Offer {
     return `${this.giver_name} is offering ${this.headline} in ${this.location}`
   }
 
-  // renderLi() {
-  //   return `
-  //     <li class="list-obj left-padding">
-  //       <h5><a href="offers/${this.id}">${this.headline}</a></h5>
-  //       <div>${this.city}, ${this.state}</div>
-  //     </li>
-  //   `;
-  // }
-
-  // renderInfo() {
-  //   $('#offer-description').innerHTML = this.renderLi();
+  renderLi() {
+    return `
+      <li class="list-obj left-padding">
+        <h5><a href="${this.id}">${this.headline}</a></h5>
+        <div>${this.city}, ${this.state}</div>
+      </li>
+    `;
   }
+
+  renderInfo() {
+    $('#offer-description').innerHTML = this.renderLi();
+  }
+}
