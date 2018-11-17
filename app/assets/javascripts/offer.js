@@ -59,9 +59,11 @@ class Offer {
     });
   }
 
-  conditionalRenderRequestForm() {
+  conditionalRenderRequestForm(theId) {
     // if current user already has a request don't show link to request form
-    this.adapter.getOffer(this.id)
+    const id = theId || parseInt($('.js-next').attr('data-id'), 10);
+    console.log('conditional render id', theId)
+    this.adapter.getOffer(id)
     .then(offer => {
       if (offer.requests.some(req => req.requestor_id === offer.current_user.id )) {
         $('#show-request-form').empty();
@@ -88,6 +90,7 @@ class Offer {
 
       $('.js-next').attr('data-id', data.id);
     });
+    this.conditionalRenderRequestForm(id);
   }
 
   attachShowRequestFormListener() {
