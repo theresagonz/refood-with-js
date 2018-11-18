@@ -15,9 +15,10 @@ class Offer {
 
     // if view is offers#show
     if ($('#requests-count').length) {
+      // debugger
       this.attachShowRequestsListener();
       this.attachNextPreviousRequestListener();
-      this.conditionalRenderRequestForm();
+      this.conditionalRenderRequestForm(this.id);
     }
   }
 
@@ -25,7 +26,12 @@ class Offer {
     $('#requests-count').on('click', '.js-requests', (e) => {
       e.preventDefault();
       $('#requests-count').empty();
-      const currId = parseInt($('.js-next').attr('data-id'), 10);
+      this.renderRequests();
+    });
+  }
+
+  renderRequests() {
+    const currId = parseInt($('.js-next').attr('data-id'), 10);
       $('#offer-requests').empty();
       const requestsHtml = $.get(`/offers/${currId}.json`, (data) => {
         const htmlString = data.requests.map(request => {
@@ -44,7 +50,6 @@ class Offer {
         }).join('');
         $('#offer-requests').html(htmlString);
       });
-    });
   }
 
   attachNextPreviousRequestListener() {
@@ -64,22 +69,22 @@ class Offer {
   }
 
   conditionalRenderRequestForm(theId) {
-    // if current user already has a request don't show link to request form
+    // if current user already has a request or owns the offer,don't show link to request form
     const id = theId || parseInt($('.js-next').attr('data-id'), 10);
-    console.log('conditional render id', theId)
-    this.adapter.getOffer(id)
-    .then(offer => {
-      if (offer.requests.some(req => req.requestor_id === offer.current_user.id )) {
+    this.adapter.getOffer(id).then(offer => {
+      const userHasExistingRequest = offer.requests.some(req => req.requestor_id === offer.current_user.id );
+      
+      if (userHasExistingRequest || offer.giver_id === offer.current_user.id) {
         $('#show-request-form').empty();
       } else {
-        $('#show-request-form').text('Make a request')
+        $('#show-request-form').text('Make a request');
         this.attachShowRequestFormListener();
       }
-    })
+    });
   }
 
   changeRenderOffer(id) {
-    $.get(`/offers/${id}.json`, (data) => {
+    this.adapter.getOffer(id).then(data => {
       const requestsCountHtml = `<a href="/offers/${id}" class="js-requests" data-id="${data.id}">${data.requests.length} requests</a>`;
       $('#requests-count').html(requestsCountHtml);
 
@@ -111,35 +116,38 @@ class Offer {
   attachFormSubmitListener() {
     $('#request-form').on('submit', (e) => {
       e.preventDefault();
+      console.log('submit clicked');
       this.submitForm();
       $('#show-request-form').empty();
       $('#place-for-request-form').empty();
-    })
+    });
   }
 
   renderForm() {
     return `
-    <form id="request-form">
-    <div class="form-group">
-      <label for="request-message">Message</label>
-      <input type="text" id="request-message" class="form-control">
-    </div>
-    <p><b>Contact me at (at least one is required):</b></p>
-    <div class="form-group">
-      <label for="requestor-email">Email</label>
-      <input type="text" id="requestor-email" class="form-control">
-    </div>
-    <div class="form-group">
-      <label for="requestor-phone">Phone</label>
-      <input type="text" id="requestor-phone" class="form-control">
-    </div>
-    <input type="submit" class="btn btn-primary">
-    <a href="/index" class="btn btn-secondary">Cancel</a>
-    </form>
+      <form id="request-form">
+      <div class="form-group">
+        <label for="request-message">Message</label>
+        <input type="text" id="request-message" class="form-control">
+      </div>
+      <p><b>Contact me at (at least one is required):</b></p>
+      <div class="form-group">
+        <label for="requestor-email">Email</label>
+        <input type="text" id="requestor-email" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="requestor-phone">Phone</label>
+        <input type="text" id="requestor-phone" class="form-control">
+      </div>
+      <input type="submit" class="btn btn-primary">
+      <a href="/index" class="btn btn-secondary">Cancel</a>
+      </form>
     `
   }
 
   submitForm() {
+    const id = parseInt($('.js-next').attr('data-id'), 10);
+    console.log('i.d.', id)
     const data = {
       request: {
         message: $('#request-message')[0].value,
@@ -147,25 +155,38 @@ class Offer {
         requestor_phone: $('#requestor-phone')[0].value
       }
     };
-    $.post(`/offers/${this.id}/requests`, data, (returnedData) => {
-      console.log('data', returnedData);
-    }, 'json').catch(() => console.error('error'));
+
+    $.ajax({
+     url: `/offers/${id}/requests`,
+     dataType: 'json',
+     data: data,
+     method: 'POST',
+     success: this.appendNewRequestDiv()
+    });
   }
 
   makeSentence() {
-    return `${this.giver_name} is offering ${this.headline} in ${this.location}`
+    return `${this.giver_name} is offering ${this.headline} in ${this.location}`;
+  }
+
+  appendNewRequestDiv(data) {
+    console.log('DATA', data)
+    $('#requests-count').append(`
+      <div class="lt-grey-box list-spacing">
+        <h4 class="slab-font">CLOSED OFFER</h4>
+        <b>From: </b>MEEE<br>
+      </div>
+    `)
   }
 
   renderLi() {
+    // if view is offers#show
+    const href = $('#requests-count').length ? `/${this.id}` : `/offers/${this.id}`;
     return `
       <li class="list-obj left-padding">
-        <h5><a href="${this.id}">${this.headline}</a></h5>
+        <h5><a href="${href}">${this.headline}</a></h5>
         <div>${this.city}, ${this.state}</div>
       </li>
     `;
-  }
-
-  renderInfo() {
-    $('#offer-description').innerHTML = this.renderLi();
   }
 }
