@@ -20,6 +20,7 @@
 <h4 class="slab-font" id="requests-count">
   <a href="#" class="js-requests" data-id="<%= @offer.id %>"><%= @offer.requests.count %> requests</a>
 </h4>
+<div id="new-request"></div>
 
 <% if @offer.id != current_user.id %>
   <div id="offer-requests"></div>

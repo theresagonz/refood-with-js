@@ -36,14 +36,12 @@ class Offer {
       const requestsHtml = $.get(`/offers/${currId}.json`, (data) => {
         const htmlString = data.requests.map(request => {
           const status = request.completed_requestor && request.completed_giver ? 'Closed request' : 'Open request';
-          const phone = request.requestor_phone ? request.formatted_phone : 'Phone not given';
-          const email = request.requestor_email ? request.requestor_email : 'Email not given';
           return `
             <div class="lt-grey-box list-spacing">
               <h4 class="slab-font">${status}</h4>
               <b>From: </b>${request.requestor_name}<br>
-              <b>Email: </b><a href="mailto:${email}">${email}</a><br>
-              <b>Phone: </b>${phone}<br>
+              <b>Email: </b>${request.requestor_email || 'Email not given'}<br>
+              <b>Phone: </b>${request.formatted_phone || 'Phone not given'}<br>
               <b>Message: </b>${request.message}<br>
             </div>
           `;
@@ -73,7 +71,6 @@ class Offer {
     const id = theId || parseInt($('.js-next').attr('data-id'), 10);
     this.adapter.getOffer(id).then(offer => {
       const userHasExistingRequest = offer.requests.some(req => req.requestor_id === offer.current_user.id );
-      
       if (userHasExistingRequest || offer.giver_id === offer.current_user.id) {
         $('#show-request-form').empty();
       } else {
@@ -106,7 +103,7 @@ class Offer {
   attachShowRequestFormListener() {
     $('#show-request-form').on('click', (e) => {
       e.preventDefault();
-      $('#show-request-form').html('<h3>New request</h3>')
+      $('#show-request-form').html('<h3>New request</h3>');
       $('#place-for-request-form').html(this.renderForm());
 
       this.attachFormSubmitListener();
@@ -142,12 +139,11 @@ class Offer {
       <input type="submit" class="btn btn-primary">
       <a href="/index" class="btn btn-secondary">Cancel</a>
       </form>
-    `
+    `;
   }
 
   submitForm() {
     const id = parseInt($('.js-next').attr('data-id'), 10);
-    console.log('i.d.', id)
     const data = {
       request: {
         message: $('#request-message')[0].value,
@@ -161,7 +157,7 @@ class Offer {
      dataType: 'json',
      data: data,
      method: 'POST',
-     success: this.appendNewRequestDiv()
+     success: this.appendNewRequestDiv(data)
     });
   }
 
@@ -170,13 +166,15 @@ class Offer {
   }
 
   appendNewRequestDiv(data) {
-    console.log('DATA', data)
-    $('#requests-count').append(`
+    $('#new-request').append(`
+      <br>
       <div class="lt-grey-box list-spacing">
-        <h4 class="slab-font">CLOSED OFFER</h4>
-        <b>From: </b>MEEE<br>
+        <h4 class="slab-font">Your request</h4>
+        <b>Email: </b>${data.request.requestor_email || 'Not given'}<br>
+        <b>Phone: </b>${data.request.requestor_phone || 'Not given'}<br>
+        <b>Message: </b>${data.request.message}<br>
       </div>
-    `)
+    `);
   }
 
   renderLi() {
