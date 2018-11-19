@@ -41,7 +41,7 @@ class Offer {
 
         if (this.currentUserId === request.requestor_id) {
           requestHTML += `<div class="lt-green-box list-spacing">
-          <h4 class="slab-font">Your Request</h4>`;
+          <h4 class="slab-font">Your request</h4>`;
         } else {
           requestHTML += `<div class="lt-grey-box list-spacing">
           <h4 class="slab-font">${status}</h4>`;

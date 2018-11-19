@@ -1,22 +1,23 @@
 <%= render 'layouts/flash_error' %>
 <%= render 'layouts/flash_message' %>
 
-<div class="slab-font sm-margin-bottom">
+<div class="slab-font margin-bottom">
   <a href="#" class="js-previous" data-id="<%= @offer.id %>">Previous</a>
   <span> | </span>
   <a href="#" class="js-next" data-id="<%= @offer.id %>">Next</a>
 </div>
 <h1 id="offer-status" class="slab-font"><%= @offer.closed ? "Closed" : "Open" %> offer</h1>
 
-<h3 id="offer-headline"><%= @offer.headline %></h3>
-<div id="offer-post-date" class="small grey-text">Posted on <%= format_date(@offer.created_at.localtime) %></div>
-<br>
-<h6 id="offer-name"><b>From: </b><%= @offer.user.name %></h6>
-<h6 id="offer-description"><b>Description: </b><%= @offer.description %></h6>
-<h6 id="offer-location"><b>Location: </b><%= @offer.city_state %></h6>
-<h6 id="offer-availability"><b>Pickup availability: </b><%= @offer.availability.present? ? @offer.availability : "Ask about availability" %></h6>
+<h3 id="offer-headline" class="sm-neg-margin-bottom"><%= @offer.headline %></h3>
+<div id="offer-post-date" class="small grey-text sm-margin-bottom">Posted on <%= format_date(@offer.created_at.localtime) %></div>
 
-<br>
+<div>
+  <h5 id="offer-name" class="small"><b>From: </b><%= @offer.user.name %></h5>
+  <h5 id="offer-description" class="small"><b>Description: </b><%= @offer.description %></h5>
+  <h5 id="offer-location" class="small"><b>Location: </b><%= @offer.city_state %></h5>
+  <h5 id="offer-availability" class="small sm-margin-bottom"><b>Pickup availability: </b><%= @offer.availability.present? ? @offer.availability : "Ask about availability" %></h5>
+</div>
+
 <h4 class="slab-font" id="requests-link">
   <a href="#" data-id="<%= @offer.id %>" id="requests-count" ><%= @offer.requests.count %> requests</a>
 </h4>
@@ -28,8 +29,7 @@
 <div id="request-form">
 </div>
 
-<br>
-<h5 class="slab-font">
+<h5 class="slab-font top-margin">
   <%= link_to "All offers", '/offers' %>
 </h5>
 <%= render 'welcome/link_to_home' %>
