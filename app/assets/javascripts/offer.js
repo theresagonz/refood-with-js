@@ -14,7 +14,7 @@ class Offer {
     this.adapter = new OffersAdapter();
 
     // if view is offers#show
-    if ($('#requests-count').length) {
+    if ($('#requests-link').length) {
       // debugger
       this.attachShowRequestsListener();
       this.attachNextPreviousRequestListener();
@@ -23,29 +23,30 @@ class Offer {
   }
 
   attachShowRequestsListener() {
-    $('#requests-count').on('click', '.js-requests', (e) => {
+    $(document).on('click', '#requests-link', (e) => {
       e.preventDefault();
-      $('#requests-count').empty();
+      $('#new-request').empty();
       this.renderRequests();
     });
   }
 
   renderRequests() {
     const currId = parseInt($('.js-next').attr('data-id'), 10);
-      $('#offer-requests').empty();
-      const requestsHtml = $.get(`/offers/${currId}.json`, (data) => {
-        const htmlString = data.requests.map(request => {
-          const status = request.completed_requestor && request.completed_giver ? 'Closed request' : 'Open request';
-          return `
-            <div class="lt-grey-box list-spacing">
-              <h4 class="slab-font">${status}</h4>
-              <b>From: </b>${request.requestor_name}<br>
-              <b>Email: </b>${request.requestor_email || 'Email not given'}<br>
-              <b>Phone: </b>${request.formatted_phone || 'Phone not given'}<br>
-              <b>Message: </b>${request.message}<br>
-            </div>
-          `;
+    const requestsHtml = this.adapter.getOffer(currId).then(data => {
+      const htmlString = data.requests.reverse().map(request => {
+        const status = request.completed_requestor && request.completed_giver ? 'Closed request' : 'Open request';
+        return `
+          <div class="lt-grey-box list-spacing">
+            <h4 class="slab-font">${status}</h4>
+            <b>From: </b>${request.requestor_name}<br>
+            <b>Email: </b>${request.requestor_email || 'Ask for email'}<br>
+            <b>Phone: </b>${request.formatted_phone || 'Ask for phone'}<br>
+            <b>Message: </b>${request.message}<br>
+          </div>
+        `;
         }).join('');
+
+        $('#new-request').empty();
         $('#offer-requests').html(htmlString);
       });
   }
@@ -55,20 +56,20 @@ class Offer {
       e.preventDefault();
       const prevId = parseInt($('.js-next').attr('data-id'), 10) + 1;
       $('#offer-requests').empty();
-      this.changeRenderOffer(prevId);
+      this.changeRenderedOffer(prevId);
     });
 
     $('.js-next').on('click', (e) => {
       e.preventDefault();
       $('#offer-requests').empty();
       const nextId = parseInt($('.js-next').attr('data-id'), 10) - 1;
-      this.changeRenderOffer(nextId);
+      this.changeRenderedOffer(nextId);
     });
   }
 
   conditionalRenderRequestForm(theId) {
     // if current user already has a request or owns the offer,don't show link to request form
-    const id = theId || parseInt($('.js-next').attr('data-id'), 10);
+    let id = theId || parseInt($('.js-next').attr('data-id'), 10);
     this.adapter.getOffer(id).then(offer => {
       const userHasExistingRequest = offer.requests.some(req => req.requestor_id === offer.current_user.id );
       if (userHasExistingRequest || offer.giver_id === offer.current_user.id) {
@@ -80,13 +81,14 @@ class Offer {
     });
   }
 
-  changeRenderOffer(id) {
-    this.adapter.getOffer(id).then(data => {
-      const requestsCountHtml = `<a href="/offers/${id}" class="js-requests" data-id="${data.id}">${data.requests.length} requests</a>`;
-      $('#requests-count').html(requestsCountHtml);
+  changeRenderedOffer(currId) {
+    this.adapter.getOffer(currId).then(data => {
+      console.log('DATA', data)
+      const requestsCountHtml = `<a href="#" data-id="${data.id}" id="requests-count">${data.requests.length} requests</a>`;
+      $('#requests-link').html(requestsCountHtml);
 
       const offerStatus = data.closed ? 'Closed offer' : 'Open offer';
-      const availability = data.availability ? data.availability : 'Not specified';
+      const availability = data.availability ? data.availability : 'Ask for availability';
       $('#offer-status').text(offerStatus);
       $('#offer-headline').text(data.headline);
       $('#offer-post-date').text(`Posted on ${data.created_date}`);
@@ -96,15 +98,18 @@ class Offer {
 
       $('.js-next').attr('data-id', data.id);
     });
-    this.conditionalRenderRequestForm(id);
+    this.conditionalRenderRequestForm(currId);
+    // clear form and single request
+    // (to be replaced with all requests)
     $('#request-form').empty();
+    $('#new-request').empty();
   }
 
   attachShowRequestFormListener() {
     $('#show-request-form').on('click', (e) => {
       e.preventDefault();
       $('#show-request-form').html('<h3>New request</h3>');
-      $('#place-for-request-form').html(this.renderForm());
+      $('#request-form').html(this.renderForm());
 
       this.attachFormSubmitListener();
     });
@@ -116,7 +121,7 @@ class Offer {
       console.log('submit clicked');
       this.submitForm();
       $('#show-request-form').empty();
-      $('#place-for-request-form').empty();
+      $('#request-form').empty();
     });
   }
 
@@ -166,20 +171,27 @@ class Offer {
   }
 
   appendNewRequestDiv(data) {
+    const phone = data.request.formatted_phone || 'Ask for phone';
+    const email = data.request.requestor_email || 'Ask for email';
+    const message = data.request.message;
     $('#new-request').append(`
       <br>
       <div class="lt-grey-box list-spacing">
         <h4 class="slab-font">Your request</h4>
-        <b>Email: </b>${data.request.requestor_email || 'Not given'}<br>
-        <b>Phone: </b>${data.request.requestor_phone || 'Not given'}<br>
-        <b>Message: </b>${data.request.message}<br>
+        <b>Email: </b>${email}<br>
+        <b>Phone: </b>${phone}<br>
+        <b>Message: </b>${message}<br>
       </div>
     `);
+    const thisId = parseInt($('.js-next').attr('data-id'), 10);
+    this.adapter.getOffer(thisId).then(offer => {
+      $('#requests-count').text(`${offer.requests.length} requests`);
+    });
   }
 
   renderLi() {
     // if view is offers#show
-    const href = $('#requests-count').length ? `/${this.id}` : `/offers/${this.id}`;
+    const href = $('#requests-link').length ? `/${this.id}` : `/offers/${this.id}`;
     return `
       <li class="list-obj left-padding">
         <h5><a href="${href}">${this.headline}</a></h5>

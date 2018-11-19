@@ -17,25 +17,25 @@
 <h6 id="offer-availability"><b>Pickup availability: </b><%= @offer.availability %></h6>
 
 <br>
-<h4 class="slab-font" id="requests-count">
-  <a href="#" class="js-requests" data-id="<%= @offer.id %>"><%= @offer.requests.count %> requests</a>
+<h4 class="slab-font" id="requests-link">
+  <a href="#" data-id="<%= @offer.id %>" id="requests-count" ><%= @offer.requests.count %> requests</a>
 </h4>
 <div id="new-request"></div>
-
-<% if @offer.id != current_user.id %>
-  <div id="offer-requests"></div>
-<% end %>
+<div id="offer-requests"></div>
 
 <a href="#" id="show-request-form" class="slab-font"></a>
 
-<div id="place-for-request-form">
+<div id="request-form">
 </div>
 
 <br>
+<h5 class="slab-font">
+  <%= link_to "All offers", '/offers' %>
+</h5>
 <%= render 'welcome/link_to_home' %>
 
 <script>
-  const id = <%= @offer.id %>
+  id = <%= @offer.id %>
   adapter = new OffersAdapter()
   adapter.getOffer(id).then(offerJson => new Offer(offerJson))
 </script>
