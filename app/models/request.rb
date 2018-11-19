@@ -30,10 +30,9 @@ class Request < ApplicationRecord
     end
   end
 
-  # def user
-  #   binding.pry
-  #   # self.user.name
-  # end
+  def current_user
+    current_user
+  end
 
   private
 

@@ -36,9 +36,15 @@ class Offer {
     const requestsHtml = this.adapter.getOffer(currId).then(data => {
       const htmlString = data.requests.reverse().map(request => {
         const status = request.completed_requestor && request.completed_giver ? 'Closed request' : 'Open request';
-        return `
-          <div class="lt-grey-box list-spacing">
-            <h4 class="slab-font">${status}</h4>
+        let requestHTML = '';
+        if (request.current_user.id === request.requestor_id) {
+          requestHTML += `<div class="lt-green-box list-spacing">
+          <h4 class="slab-font">Your Request</h4>`;
+        } else {
+          requestHTML += `<div class="lt-grey-box list-spacing">
+          <h4 class="slab-font">${status}</h4>`;
+        }
+        requestHTML += `
             <div class="neg-margin-bottom"><b>From: </b>${request.requestor_name}</div>
             <div class="margin-bottom"><b>Message: </b>${request.message}</div>
             <div class="small slab-font"><b>Requested on </b>${request.created_date}</div>
@@ -46,6 +52,7 @@ class Offer {
             <div class="small slab-font"><b>Phone: </b>${request.formatted_phone || 'Ask for phone'}</div>
           </div>
         `;
+        return requestHTML;
         }).join('');
 
         $('#new-request').empty();
@@ -85,12 +92,13 @@ class Offer {
 
   changeRenderedOffer(currId) {
     this.adapter.getOffer(currId).then(data => {
-      console.log('DATA', data)
+      console.log('DATA', data);
       const requestsCountHtml = `<a href="#" data-id="${data.id}" id="requests-count">${data.requests.length} requests</a>`;
       $('#requests-link').html(requestsCountHtml);
 
       const offerStatus = data.closed ? 'Closed offer' : 'Open offer';
       const availability = data.availability ? data.availability : 'Ask for availability';
+      $('#offer-name').html(`<b>From: </b>${data.giver_name}`);
       $('#offer-status').text(offerStatus);
       $('#offer-headline').text(data.headline);
       $('#offer-post-date').text(`Posted on ${data.created_date}`);
@@ -178,7 +186,7 @@ class Offer {
     const message = data.request.message;
     $('#new-request').append(`
       <br>
-      <div class="lt-grey-box list-spacing">
+      <div class="lt-green-box list-spacing">
         <h4 class="slab-font">Your request</h4>
         <b>Email: </b>${email}<br>
         <b>Phone: </b>${phone}<br>
