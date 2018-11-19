@@ -2,9 +2,9 @@
 <%= render 'layouts/flash_message' %>
 
 <div class="slab-font">
-  <a href="#" class="js-previous" data-id="<%= @offer.id %>">Previous offer</a>
+  <a href="#" class="js-previous" data-id="<%= @offer.id %>">Previous</a>
   <span> | </span>
-  <a href="#" class="js-next" data-id="<%= @offer.id %>">Next offer</a>
+  <a href="#" class="js-next" data-id="<%= @offer.id %>">Next</a>
 </div>
 <br>
 <h1 id="offer-status" class="slab-font"><%= @offer.closed ? "Closed" : "Open" %> offer</h1>

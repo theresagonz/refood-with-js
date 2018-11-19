@@ -16,13 +16,13 @@ class Offer {
     // if view is offers#show
     if ($('#requests-link').length) {
       // debugger
-      this.attachShowRequestsListener();
-      this.attachNextPreviousRequestListener();
+      this.attachShowRequestsHandler();
+      this.attachNextPreviousRequestHandler();
       this.conditionalRenderRequestForm(this.id);
     }
   }
 
-  attachShowRequestsListener() {
+  attachShowRequestsHandler() {
     $(document).on('click', '#requests-link', (e) => {
       e.preventDefault();
       $('#new-request').empty();
@@ -51,7 +51,7 @@ class Offer {
       });
   }
 
-  attachNextPreviousRequestListener() {
+  attachNextPreviousRequestHandler() {
     $('.js-previous').on('click', (e) => {
       e.preventDefault();
       const prevId = parseInt($('.js-next').attr('data-id'), 10) + 1;
@@ -75,8 +75,8 @@ class Offer {
       if (userHasExistingRequest || offer.giver_id === offer.current_user.id) {
         $('#show-request-form').empty();
       } else {
-        $('#show-request-form').text('Make a request');
-        this.attachShowRequestFormListener();
+        $('#show-request-form').text('Request this item');
+        this.attachShowRequestFormHandler();
       }
     });
   }
@@ -105,17 +105,17 @@ class Offer {
     $('#new-request').empty();
   }
 
-  attachShowRequestFormListener() {
+  attachShowRequestFormHandler() {
     $('#show-request-form').on('click', (e) => {
       e.preventDefault();
       $('#show-request-form').html('<h3>New request</h3>');
       $('#request-form').html(this.renderForm());
 
-      this.attachFormSubmitListener();
+      this.attachFormSubmitHandler();
     });
   }
 
-  attachFormSubmitListener() {
+  attachFormSubmitHandler() {
     $('#request-form').on('submit', (e) => {
       e.preventDefault();
       console.log('submit clicked');
