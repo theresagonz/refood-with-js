@@ -13,11 +13,11 @@ class Offer {
     this.createdAgo = offerJSON.created_ago;
     
     this.adapter = new OffersAdapter();
-    this.currentUserId = this.adapter.getCurrentUser().then(user => user.id);
+    this.currentUserId = '';
+    this.adapter.getCurrentUser().then(user => this.currentUserId = user.id);
 
     // if view is offers#show
     if ($('#requests-link').length) {
-      // debugger
       this.attachShowRequestsHandler();
       this.attachNextPreviousRequestHandler();
       this.conditionalRenderRequestForm(this.id);
@@ -38,6 +38,7 @@ class Offer {
       const htmlString = data.requests.reverse().map(request => {
         const status = request.completed_requestor && request.completed_giver ? 'Closed request' : 'Open request';
         let requestHTML = '';
+
         if (this.currentUserId === request.requestor_id) {
           requestHTML += `<div class="lt-green-box list-spacing">
           <h4 class="slab-font">Your Request</h4>`;
@@ -82,6 +83,7 @@ class Offer {
     let id = theId || parseInt($('.js-next').attr('data-id'), 10);
     this.adapter.getOffer(id).then(offer => {
       const userHasExistingRequest = offer.requests.some(req => req.requestor_id === this.currentUserId);
+
       if (userHasExistingRequest || offer.giver_id === this.currentUserId) {
         $('#show-request-form').empty();
       } else {
@@ -186,7 +188,6 @@ class Offer {
     const email = data.request.requestor_email || 'Ask for email';
     const message = data.request.message;
     $('#new-request').append(`
-      <br>
       <div class="lt-green-box list-spacing">
         <h4 class="slab-font">Your request</h4>
         <b>Email: </b>${email}<br>
