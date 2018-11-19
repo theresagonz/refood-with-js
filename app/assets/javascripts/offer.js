@@ -96,7 +96,9 @@ class Offer {
   changeRenderedOffer(currId) {
     this.adapter.getOffer(currId).then(data => {
       console.log('DATA', data);
-      const requestsCountHtml = `<a href="#" data-id="${data.id}" id="requests-count">${data.requests.length} requests</a>`;
+      const requestsCountHtml = `
+        <a href="#" data-id="<%= data.id %>" id="requests-count" ><span class="badge badge-pill badge-secondary">${data.requests.length}<span class="small sm-left-padding"> requests</span></span></a>
+      `;
       $('#requests-link').html(requestsCountHtml);
 
       const offerStatus = data.closed ? 'Closed offer' : 'Open offer';

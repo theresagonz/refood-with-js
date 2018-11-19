@@ -18,9 +18,9 @@
   <h5 id="offer-availability" class="small sm-margin-bottom"><b>Pickup availability: </b><%= @offer.availability.present? ? @offer.availability : "Ask about availability" %></h5>
 </div>
 
-<h4 class="slab-font" id="requests-link">
-  <a href="#" data-id="<%= @offer.id %>" id="requests-count" ><%= @offer.requests.count %> requests</a>
-</h4>
+<h2 class="sm-margin-bottom slab-font" id="requests-link">
+  <a href="#" data-id="<%= @offer.id %>" id="requests-count" ><span class="badge badge-pill badge-secondary"><%= @offer.requests.count %><span class="small sm-left-padding"> requests</span></span></a>
+</h2>
 <div class="new-request-paraphernalia">
   <div id="new-request"></div>
   <div id="offer-requests"></div>
