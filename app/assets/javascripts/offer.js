@@ -115,7 +115,7 @@ class Offer {
     // clear form and single request
     // (to be replaced with all requests)
     $('#request-form').empty();
-    $('#new-request').empty();
+    $('#show-request-form').empty();
   }
 
   attachShowRequestFormHandler() {
@@ -139,6 +139,7 @@ class Offer {
   }
 
   renderForm() {
+    this.addCancelHandler();
     return `
       <form id="request-form">
       <div class="form-group">
@@ -155,9 +156,17 @@ class Offer {
         <input type="text" id="requestor-phone" class="form-control">
       </div>
       <input type="submit" class="btn btn-primary">
-      <a href="/index" class="btn btn-secondary">Cancel</a>
+      <a href="#" id="js-cancel" class="btn btn-secondary">Cancel</a>
       </form>
     `;
+  }
+
+  addCancelHandler() {
+    $(document).on('click', '#js-cancel', (e) => {
+      e.preventDefault();
+      $('#show-request-form').text('Request this item');
+      $('#request-form').empty();
+    })
   }
 
   submitForm() {
