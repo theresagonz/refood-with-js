@@ -20,7 +20,7 @@ class Offer < ApplicationRecord
     Offer.where(closed: false).where(deleted: false)
   end
 
-  def time_ago_created
+  def created_ago
     seconds_ago = Time.now - self.created_at.localtime
     minutes_ago = (seconds_ago/60).floor
     hours_ago = (minutes_ago/60).floor
@@ -48,6 +48,6 @@ class Offer < ApplicationRecord
   end
 
   def created_date
-    self.created_at.strftime('%A, %B %e, %Y @ %l:%M %P')
+    self.created_at.localtime.strftime('%A, %B %e, %Y @ %l:%M %P')
   end
 end

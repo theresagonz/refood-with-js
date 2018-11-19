@@ -1,20 +1,20 @@
 <%= render 'layouts/flash_error' %>
 <%= render 'layouts/flash_message' %>
 
-<div class="slab-font">
+<div class="slab-font sm-margin-bottom">
   <a href="#" class="js-previous" data-id="<%= @offer.id %>">Previous</a>
   <span> | </span>
   <a href="#" class="js-next" data-id="<%= @offer.id %>">Next</a>
 </div>
-<br>
 <h1 id="offer-status" class="slab-font"><%= @offer.closed ? "Closed" : "Open" %> offer</h1>
 
 <h3 id="offer-headline"><%= @offer.headline %></h3>
 <div id="offer-post-date" class="small grey-text">Posted on <%= format_date(@offer.created_at.localtime) %></div>
 <br>
+<h6 id="offer-name"><b>From: </b><%= @offer.user.name %></h6>
 <h6 id="offer-description"><b>Description: </b><%= @offer.description %></h6>
 <h6 id="offer-location"><b>Location: </b><%= @offer.city_state %></h6>
-<h6 id="offer-availability"><b>Pickup availability: </b><%= @offer.availability %></h6>
+<h6 id="offer-availability"><b>Pickup availability: </b><%= @offer.availability.present? ? @offer.availability : "Ask about availability" %></h6>
 
 <br>
 <h4 class="slab-font" id="requests-link">

@@ -9,7 +9,8 @@ class Offer {
     this.availability = offerJSON.availability;
     this.closed = offerJSON.closed;
     this.deleted = offerJSON.deleted;
-    this.createdAt = offerJSON.created_at;
+    this.createdDate = offerJSON.created_date;
+    this.createdAgo = offerJSON.created_ago;
     
     this.adapter = new OffersAdapter();
 
@@ -38,10 +39,11 @@ class Offer {
         return `
           <div class="lt-grey-box list-spacing">
             <h4 class="slab-font">${status}</h4>
-            <b>From: </b>${request.requestor_name}<br>
-            <b>Email: </b>${request.requestor_email || 'Ask for email'}<br>
-            <b>Phone: </b>${request.formatted_phone || 'Ask for phone'}<br>
-            <b>Message: </b>${request.message}<br>
+            <div class="neg-margin-bottom"><b>From: </b>${request.requestor_name}</div>
+            <div class="margin-bottom"><b>Message: </b>${request.message}</div>
+            <div class="small slab-font"><b>Requested on </b>${request.created_date}</div>
+            <div class="small slab-font"><b>Email: </b>${request.requestor_email || 'Ask for email'}</div>
+            <div class="small slab-font"><b>Phone: </b>${request.formatted_phone || 'Ask for phone'}</div>
           </div>
         `;
         }).join('');
@@ -192,9 +194,11 @@ class Offer {
   renderLi() {
     // if view is offers#show
     const href = $('#requests-link').length ? `/${this.id}` : `/offers/${this.id}`;
+    // debugger
     return `
       <li class="list-obj left-padding">
         <h5><a href="${href}">${this.headline}</a></h5>
+        <div class="small grey-text">Posted ${this.createdAgo} ago</div>
         <div>${this.city}, ${this.state}</div>
       </li>
     `;
