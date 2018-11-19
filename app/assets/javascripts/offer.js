@@ -13,6 +13,7 @@ class Offer {
     this.createdAgo = offerJSON.created_ago;
     
     this.adapter = new OffersAdapter();
+    this.currentUserId = this.adapter.getCurrentUser().then(user => user.id);
 
     // if view is offers#show
     if ($('#requests-link').length) {
@@ -37,7 +38,7 @@ class Offer {
       const htmlString = data.requests.reverse().map(request => {
         const status = request.completed_requestor && request.completed_giver ? 'Closed request' : 'Open request';
         let requestHTML = '';
-        if (request.current_user.id === request.requestor_id) {
+        if (this.currentUserId === request.requestor_id) {
           requestHTML += `<div class="lt-green-box list-spacing">
           <h4 class="slab-font">Your Request</h4>`;
         } else {
@@ -80,8 +81,8 @@ class Offer {
     // if current user already has a request or owns the offer,don't show link to request form
     let id = theId || parseInt($('.js-next').attr('data-id'), 10);
     this.adapter.getOffer(id).then(offer => {
-      const userHasExistingRequest = offer.requests.some(req => req.requestor_id === offer.current_user.id );
-      if (userHasExistingRequest || offer.giver_id === offer.current_user.id) {
+      const userHasExistingRequest = offer.requests.some(req => req.requestor_id === this.currentUserId);
+      if (userHasExistingRequest || offer.giver_id === this.currentUserId) {
         $('#show-request-form').empty();
       } else {
         $('#show-request-form').text('Request this item');

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   layout "application_no_login_link", only: [:new, :create]
-  before_action :require_login, except: [:new, :create]
+  before_action :require_login, except: [:new, :create, :user]
   before_action only: [:update, :destroy] do
     redirect_to_index_if_not_authorized('id', 'profile')
   end
@@ -55,6 +55,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+  end
+
+  def user
+    @user = current_user
+    render json: @user.to_json(only: :id)
   end
 
   # def destroy

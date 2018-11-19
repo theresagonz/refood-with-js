@@ -15,4 +15,10 @@ class OffersAdapter {
     .then(res => res.json())
     .catch(error => console.error(error));
   }
+
+  getCurrentUser() {
+    return fetch(`${this.baseUrl}/user`)
+    .then(res => res.json())
+    .catch(error => console.error(error));
+  }
 }
