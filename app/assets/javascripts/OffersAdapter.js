@@ -1,23 +1,23 @@
 class OffersAdapter {
   // gets data from API
-  constructor() {
-    this.baseUrl = 'http://localhost:3000';
-  }
-
-  getOffers() {
-    return fetch(`${this.baseUrl}/offers.json`)
+  static getOffers() {
+    return fetch(`http://localhost:3000/offers`, {
+      headers: {
+        Accept: 'application/json'
+      }
+    })
     .then(res => res.json())
     .catch(error => console.error(error));
   }
 
-  getOffer(id) {
-    return fetch(`${this.baseUrl}/offers/${id}.json`)
+  static getOffer(id) {
+    return fetch(`http://localhost:3000/offers/${id}.json`)
     .then(res => res.json())
     .catch(error => console.error(error));
   }
 
-  getCurrentUser() {
-    return fetch(`${this.baseUrl}/user`)
+  static getCurrentUser() {
+    return fetch(`http://localhost:3000/user`)
     .then(res => res.json())
     .catch(error => console.error(error));
   }

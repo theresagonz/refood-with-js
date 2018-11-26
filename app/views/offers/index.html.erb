@@ -1,7 +1,9 @@
 <h1 class="slab-font sm-margin-bottom">Open offers</h1>
+<h5><a href="#" onclick="Offers.alphaFetchAndLoadOffers(); return false;" class="slab-font">Sort alphabetically</h5></a>
+<br>
 
 <% if @offers.present? %>
-   <ul id="offers-list" class="margin-bottom"></ul>
+  <ul id="offers-list" class="margin-bottom"></ul>
 
 <% else %>
   <br>
@@ -13,5 +15,5 @@
 <%= render 'welcome/link_to_home' %>
 
 <script>
-  new Offers();
+  Offers.fetchAndLoadOffers();
 </script>

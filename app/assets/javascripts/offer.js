@@ -12,9 +12,8 @@ class Offer {
     this.createdDate = offerJSON.created_date;
     this.createdAgo = offerJSON.created_ago;
     
-    this.adapter = new OffersAdapter();
     this.currentUserId = '';
-    this.adapter.getCurrentUser().then(user => this.currentUserId = user.id);
+    OffersAdapter.getCurrentUser().then(user => this.currentUserId = user.id);
 
     // if view is offers#show
     if ($('#requests-link').length) {
@@ -95,7 +94,6 @@ class Offer {
 
   changeRenderedOffer(currId) {
     this.adapter.getOffer(currId).then(data => {
-      console.log('DATA', data);
       const requestsCountHtml = `
         <a href="#" data-id="<%= data.id %>" id="requests-count" ><span class="badge badge-pill badge-secondary">${data.requests.length}<span class="small sm-left-padding"> requests</span></span></a>
       `;
@@ -215,7 +213,6 @@ class Offer {
   renderLi() {
     // if view is offers#show
     const href = $('#requests-link').length ? `/${this.id}` : `/offers/${this.id}`;
-    // debugger
     return `
       <li class="list-obj left-padding">
         <h5><a href="${href}">${this.headline}</a></h5>
