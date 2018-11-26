@@ -25,7 +25,7 @@ class Offer {
   }
 
   attachShowRequestsHandler() {
-    $(document).on('click', '#requests-link', (e) => {
+    $(document).on('click', '#requests-count', (e) => {
       e.preventDefault();
       $('#new-request').empty();
       this.renderRequests();
@@ -51,7 +51,7 @@ class Offer {
             <div class="margin-bottom"><b>Message: </b>${request.message}</div>
             <div class="small slab-font"><b>Requested on </b>${request.created_date}</div>
             <div class="small slab-font"><b>Email: </b>${request.requestor_email || 'Ask for email'}</div>
-            <div class="small slab-font"><b>Phone: </b>${request.formatted_phone || 'Ask for phone'}</div>
+            <div class="small slab-font"><b>Phone: </b>${request.formatted_phone}</div>
           </div>
         `;
         return requestHTML;

@@ -5,11 +5,7 @@
   <% @offers.each do |offer| %>
     <li class="list-obj left-padding">
       <div><%= link_to offer.headline, offer %></div>
-      <% if offer.city %>
-        <div><%= offer.city_state %></div>
-      <% else %>
-        <div>Ask for location info</div>
-      <% end %>
+      <div><%= offer.city_state %></div>
       <div class="small grey-text">Posted <%= time_ago(offer) %> ago</div>
     </li>
   <% end %>

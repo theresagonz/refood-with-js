@@ -13,7 +13,11 @@ class Offer < ApplicationRecord
   end
 
   def city_state
-    "#{city}, #{state}"
+    if city && state
+      "#{city}, #{state}"
+    else
+      "Ask for location"
+    end
   end
 
   def self.open_offers

@@ -27,11 +27,9 @@ class Request < ApplicationRecord
       phone = self.requestor_phone
       phone.insert(3, "-")
       phone.insert(7, "-")
+    else
+      "Ask for phone"
     end
-  end
-
-  def current_user
-    current_user
   end
 
   private
