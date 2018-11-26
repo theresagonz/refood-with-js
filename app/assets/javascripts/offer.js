@@ -23,6 +23,50 @@ class Offer {
     }
   }
 
+  static fetchAndLoadOffers() {
+    const offersArray = [];
+    OffersAdapter.getOffers()
+      .then(offers => {
+        offers.forEach(offer => {
+          offersArray.push(new Offer(offer));
+        });
+      })
+      .then(() => Offer.render(offersArray))
+      .catch(error => console.error(error));
+  }
+
+  static alphaFetchAndLoadOffers(e) {
+    e.preventDefault();
+    const offersArray = [];
+    OffersAdapter.getOffers()
+    .then(offers => {
+      offers.sort(Offer.compareOffers);
+      offers.forEach(offer => {
+        offersArray.push(new Offer(offer));
+      });
+    })
+    .then(() => {
+      Offer.render(offersArray)
+    })
+    .catch(error => console.error(error));
+  }
+
+  static compareOffers(a, b) {
+    var headlineA = a.headline.toUpperCase(); // ignore upper and lowercase
+    var headlineB = b.headline.toUpperCase(); // ignore upper and lowercase
+    if (headlineA < headlineB) {
+      return -1;
+    }
+    if (headlineA > headlineB) {
+      return 1;
+    }
+    return 0;
+  }
+
+  static render(offersArray) {
+    document.querySelector('#offers-list').innerHTML = offersArray.map(offer => offer.renderLi()).join('');
+  }
+
   attachShowRequestsHandler() {
     $(document).on('click', '#requests-count', (e) => {
       e.preventDefault();
@@ -33,7 +77,7 @@ class Offer {
 
   renderRequests() {
     const currId = parseInt($('.js-next').attr('data-id'), 10);
-    const requestsHtml = this.adapter.getOffer(currId).then(data => {
+    const requestsHtml = OffersAdapter.getOffer(currId).then(data => {
       const htmlString = data.requests.reverse().map(request => {
         const status = request.completed_requestor && request.completed_giver ? 'Closed request' : 'Open request';
         let requestHTML = '';
@@ -80,7 +124,7 @@ class Offer {
   conditionalRenderRequestForm(theId) {
     // if current user already has a request or owns the offer,don't show link to request form
     let id = theId || parseInt($('.js-next').attr('data-id'), 10);
-    this.adapter.getOffer(id).then(offer => {
+    OffersAdapter.getOffer(id).then(offer => {
       const userHasExistingRequest = offer.requests.some(req => req.requestor_id === this.currentUserId);
 
       if (userHasExistingRequest || offer.giver_id === this.currentUserId) {
@@ -93,10 +137,11 @@ class Offer {
   }
 
   changeRenderedOffer(currId) {
-    this.adapter.getOffer(currId).then(data => {
+    OffersAdapter.getOffer(currId).then(data => {
       const requestsCountHtml = `
         <a href="#" data-id="<%= data.id %>" id="requests-count" ><span class="badge badge-pill badge-secondary">${data.requests.length}<span class="small sm-left-padding"> requests</span></span></a>
       `;
+      $('#new-request').empty();
       $('#requests-link').html(requestsCountHtml);
 
       const offerStatus = data.closed ? 'Closed offer' : 'Open offer';
@@ -131,7 +176,6 @@ class Offer {
   attachFormSubmitHandler() {
     $('#request-form').on('submit', (e) => {
       e.preventDefault();
-      console.log('submit clicked');
       this.submitForm();
       $('#show-request-form').empty();
       $('#request-form').empty();
@@ -205,7 +249,7 @@ class Offer {
       </div>
     `);
     const thisId = parseInt($('.js-next').attr('data-id'), 10);
-    this.adapter.getOffer(thisId).then(offer => {
+    OffersAdapter.getOffer(thisId).then(offer => {
       $('#requests-count').text(`${offer.requests.length} requests`);
     });
   }

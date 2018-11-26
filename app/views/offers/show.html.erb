@@ -34,7 +34,6 @@
 <%= render 'welcome/link_to_home' %>
 
 <script>
-  id = <%= @offer.id %>
-  adapter = new OffersAdapter()
-  adapter.getOffer(id).then(offerJson => new Offer(offerJson))
+  const id = <%= @offer.id %>
+  OffersAdapter.getOffer(id).then(offerJson => new Offer(offerJson))
 </script>
